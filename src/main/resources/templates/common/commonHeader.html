@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="common_header(title)">
+<!--        <title th:replace="${title}">The awesome application</title>-->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 引入bootstrap插件样式 -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+    <!-- 引入dataTables插件 -->
+    <link rel="stylesheet" th:href="@{/webjars/datatables/1.9.4/media/css/jquery.dataTables.css}"></link>
+    <!-- 引入bootstrap插件 -->
+    <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+    <script th:src="@{/webjars/jquery-validation/1.17.0/jquery.validate.min.js}"></script>
+    <!-- 引入dataTables插件 -->
+    <script th:src="@{/webjars/datatables/1.9.4/media/js/jquery.dataTables.min.js}"></script>
+    <!-- 引入layui 支持多种浏览器的JS -->
+    <script th:src="@{/webjars/html5shiv/3.7.3/html5shiv.min.js}"></script>
+    <script th:src="@{/webjars/respond/1.4.2/dest/respond.min.js}"></script>
+</head>
+</html>

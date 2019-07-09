@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--驱动包路径-->
+    <classPathEntry
+            location="D:/.m2/repository/com/oracle/ojdbc8/11.2.0.1.0/ojdbc8-11.2.0.1.0.jar"/>
+    <context id="my" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressDate" value="false"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--数据库连接字符串-->
+        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@192.168.1.138:1521:ORCL" userId="curry"
+                        password="curry"/>
+        <!--实体类路径-->
+        <javaModelGenerator targetPackage="com.finesys.fine.bean"
+                            targetProject="D:\self\tao\src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--mybatis映射xml文件路径-->
+        <sqlMapGenerator targetPackage="mappers"
+                         targetProject="D:\self\tao\src\main\resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!--Mapper接口路径-->
+        <javaClientGenerator targetPackage="com.tao.hai.mappers"
+                             targetProject="D:\self\tao\src\main\java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+
+        <table tableName="SYS_USER" domainObjectName="SYS_USER"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+
+    </context>
+</generatorConfiguration>

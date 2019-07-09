@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="common_js(scripts)">
+    <!-- 引入bootstrap插件 -->
+    <script th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+    <script th:src="@{/webjars/jquery-validation/1.17.0/jquery.validate.min.js}"></script>
+    <!-- 引入layui 支持多种浏览器的JS -->
+    <script th:src="@{/webjars/html5shiv/3.7.3/html5shiv.min.js}"></script>
+    <script th:src="@{/webjars/respond/1.4.2/dest/respond.min.js}"></script>
+    <!--/* Per-page placeholder for additional links */-->
+    <th:block th:replace="${scripts}"/>
+</div>
+</html>
