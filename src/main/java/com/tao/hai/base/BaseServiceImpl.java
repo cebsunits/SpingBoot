@@ -2,14 +2,17 @@ package com.tao.hai.base;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.tao.hai.util.ExampleUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import tk.mybatis.mapper.entity.Example;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 /**
  *
  */
-public class BaseServiceImpl<M extends BaseDao<T>, T> implements BaseService<T> {
+public class BaseServiceImpl<M extends BaseDao<T>, T extends DataEntity<T>> implements BaseService<T> {
     @Autowired
     protected M mapper;
 
@@ -17,11 +20,10 @@ public class BaseServiceImpl<M extends BaseDao<T>, T> implements BaseService<T> 
      * 保存或更新方法
      */
     public void save(T t) {
-        T oldT = get(t);
-        if (oldT != null) {
-            update(t);
-        } else {
+        if (t.isNewRecord()) {
             create(t);
+        } else {
+            update(t);
         }
     }
 
@@ -73,6 +75,21 @@ public class BaseServiceImpl<M extends BaseDao<T>, T> implements BaseService<T> 
         List<T> list = mapper.select(t);
         PageInfo<T> pageInfoUser = new PageInfo<T>(list);
         return pageInfoUser;
+    }
+    @Override
+    public PageInfo<T> getList(ParameterModelBean parameterModel) {
+        PageInfo<T> pageInfo = null;
+        if (parameterModel != null) {
+            //获得超类的泛型参数的实际类型
+            Class<T> clazz = (Class<T>)((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[1];
+            Example example = ExampleUtil.getExample(clazz, parameterModel);
+            if (parameterModel.getPage() != null && parameterModel.getRows() != null) {
+                PageHelper.startPage(parameterModel.getPage(), parameterModel.getRows());
+            }
+            List<T> list = mapper.selectByExample(example);
+            pageInfo = new PageInfo<T>(list);
+        }
+        return pageInfo;
     }
 
 }

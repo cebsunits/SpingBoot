@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tao.hai.dao.DeptDao">
+    <resultMap id="BaseResultMap" type="com.tao.hai.bean.Dept">
+        <id column="dept_id" property="deptId" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="VARCHAR"/>
+        <result column="dept_code" property="deptCode" jdbcType="VARCHAR"/>
+        <result column="dept_name" property="deptName" jdbcType="VARCHAR"/>
+        <result column="dept_sort" property="deptSort" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="sqlColumns">
+		dept_id, parent_id, dept_code, dept_name, dept_sort
+	</sql>
+    <!--获取父节点信息-->
+    <select id="deptParent" resultMap="BaseResultMap" parameterType="com.tao.hai.bean.Dept">
+        select
+        <include refid="sqlColumns"></include>
+        from sys_dept
+        where parent_id is null
+        <if test="deptName!=null and deptName!=''">
+            and dept_name like
+            <if test="dbName == 'oracle'">'%'||#{deptName}||'%'</if>
+            <if test="dbName == 'mysql'">CONCAT('%', #{deptName}, '%')</if>
+        </if>
+    </select>
+</mapper>

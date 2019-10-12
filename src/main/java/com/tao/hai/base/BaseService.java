@@ -54,4 +54,9 @@ public interface BaseService<T> {
      * 查询分页数据
      */
     PageInfo<T> queryByPage(Integer page, Integer rows, T t);
+
+    /**
+     *分页查询list
+     */
+    PageInfo<T> getList(ParameterModelBean parameterModel);
 }

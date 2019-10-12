@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+	<title>登录管理</title>
+	<!-- 引入font-awesome icons CSS  -->
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" th:href="@{/webjars/font-awesome/css/fontawesome.min.css}"></link>
+	<link rel="stylesheet" th:href="@{/css/custom.css}"></link>
+	<link rel="stylesheet" th:href="@{/css/style.css}"></link>
+	<!-- 引入bootstrap插件样式 -->
+	<script th:src="@{/webjars/jquery/jquery.min.js}" ></script>
+	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+	<script th:src="@{/webjars/cryptojs/components/core-min.js}"></script>
+	<script th:src="@{/webjars/cryptojs/components/md5-min.js}"></script>
+	<script th:src="@{/webjars/jquery-validation/jquery.validate.min.js}"></script>
+	<link rel="stylesheet" th:href="@{/css/login.css}"></link>
+	<script th:src="@{/js/login.js}"></script>
+	<!--[if lt IE 9]>
+	<meta http-equiv="refresh" content="0;ie.html"/>
+	<![endif]-->
+	<script>
+		if (window.top !== window.self) {
+			window.top.location = window.location;
+		}
+	</script>
+	<script th:inline="javascript">
+		var ctx = [[@{/}]] ;
+	</script>
+</head>
+<body >
+	<div class="container">
+		<div class="row center">
+			<div class="col-sm-offset-4 col-sm-4">
+				<h3 class="text-center">用户登录</h3>
+				<input type="hidden" name="key" th:value="${key}">
+				<form class="form-horizontal form" method="post" action="login" id="loginForm">
+					<div class="form-group">
+						<label for="loginName" class="col-sm-2 control-label"style="white-space:nowrap">登录名</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="loginName" name="loginName" placeholder="请输入登录名">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="password" class="col-sm-2 control-label"style="white-space:nowrap">密  码</label>
+						<div class="col-sm-10">
+							<input type="password" class="form-control" id="password" name="password" placeholder="请输入密码">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="password" class="col-sm-2 control-label">验&nbsp;证&nbsp;码</label>
+						<div class="col-sm-10 ">
+							<input type="text" class="form-control" id="verifyCode"  name="verifyCode" placeholder="验证码"/>
+							<img class="verifyImage" id="imgVerify" alt="验证码" onclick="getVerifyCode(this)" src="">
+						</div>
+					</div>
+					<div class="form-group">
+						<button type="submit" id="btn_login" class="btn btn-success center-block">登录</button>
+					</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
+
+</body>
+</html>

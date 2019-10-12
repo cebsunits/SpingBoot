@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>部门信息</title>
+    <!-- 引入font-awesome icons CSS  -->
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/fontawesome.min.css}"></link>
+    <!-- 引入bootstrap插件样式 -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrapvalidator/css/bootstrapvalidator.min.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-glyphicons/css/bootstrap-glyphicons.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-glyphicons/css/bootstrap-glyphicons.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-treeview/css/bootstrap-treeview.css}"/>
+    <script th:src="@{/webjars/jquery/jquery.min.js}" ></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap-modal/js/bootstrap-modal.js}"></script>
+    <script th:src="@{/webjars/bootstrap-treeview/js/bootstrap-treeview.js}"></script>
+    <script th:src="@{/webjars/bootstrapvalidator/js/bootstrapvalidator.min.js}"></script>
+</head>
+<body>
+    <div class="modal fade" id="deptModal" tabindex="-1" role="dialog" aria-labelledby="myDeptModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="form-group">
+                        <label for="deptName">部门名称</label>
+                        <input type="text" name="deptName" id="deptName" class="form-control" placeholder="请输入部门名称">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn-primary" id="queryBtn" onclick="query()">查询</button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div id="deptTree">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-danger" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn-primary" id="confirmBtn" onclick="toConfirm()">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="application/javascript">
+    /**查询方法*/
+    function query() {
+        $.ajax(
+            {
+                url:"/dept/deptTree",
+                type:"post",
+                data:{
+                    deptName:$("#deptName").val()
+                },
+                success:function (data) {
+                    /**显示树结构*/
+                    $("#deptTree").treeview({
+                        data:data,
+                        highlightSelected:true,//选中项高亮
+                        multiSelect:true,//是否多选
+                        showCheckbox:true,//显示多选框
+                        highlightSearchResults:true,//高亮结果
+                        levels:5,//显示级别
+                        searchResultBackColor:"#CCC",//查找背景
+                        showIcon:false,
+                        onNodeSelected:function(event,data){
+                            $("#deptTree").treeview("toggleNodeChecked",data["nodeId"]);
+                        },
+                        onNodeUnselected:function(event,data){
+
+                        },
+                        onNodeChecked:function(event,data){
+                            //级联选取
+                            var parentId=data["parentId"];
+                            if(parentId!=undefined){
+                                $("#deptTree").treeview("checkNode",parentId);
+                            }
+                        },
+                        onNodeUnchecked:function(event,data){
+                            if(nodes!=undefined){
+                                for(var i=0;i<nodes.length;i++){
+                                    var node=nodes[i];
+                                    var state=node["state"];
+                                    if(state!=undefined && state["checked"]){
+                                        $("#deptTree").treeview("uncheckNode",node["nodeId"]);
+                                    }
+                                }
+                            }
+                        }
+                    });
+                    //显示模态框
+                    $("#deptModal").modal("show");
+                },
+                error:function () {
+                    alert("请求失败！");
+                }
+            }
+        );
+    }
+    /**选中值*/
+    function toConfirm() {
+        
+    }
+</script>
+</html>

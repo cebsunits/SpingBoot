@@ -21,31 +21,64 @@
         <oracle.version>11.2.0.1.0</oracle.version>
         <pagehelper.version>1.2.9</pagehelper.version>
         <druid.version>1.1.16</druid.version>
-        <fastjson.version>1.2.41</fastjson.version>
+        <fastjson.version>1.2.62</fastjson.version>
+        <jackson-annotations.version>2.9.9</jackson-annotations.version>
+        <shiro.version>1.4.1</shiro.version>
         <ehcache.version>2.9.1</ehcache.version>
         <log4j.version>1.2.17</log4j.version>
         <nekohtml.version>1.9.22</nekohtml.version>
+        <kaptcha.version>2.3.2</kaptcha.version>
+        <thymeleaf.extras.shiro.version>2.0.0</thymeleaf.extras.shiro.version>
         <!-- webjars start -->
+        <!-- bootstrap start -->
         <bootstrap.version>4.3.1</bootstrap.version>
         <bootstrap.table.version>1.9.1-1</bootstrap.table.version>
         <bootstrap.select.version>1.9.4</bootstrap.select.version>
         <bootstrap.treeview.version>1.2.0</bootstrap.treeview.version>
+        <bootstrap-sidebar.version>0.2.2</bootstrap-sidebar.version>
+        <bootstrap-glyphicons.version>bdd2cbfba0</bootstrap-glyphicons.version>
+        <bootstrap-modal.version>2.2.5</bootstrap-modal.version>
+        <bootstrap-datepicker.version>1.9.0</bootstrap-datepicker.version>
+        <bootstrap-datetimepicker.version>2.4.4</bootstrap-datetimepicker.version>
+        <bootstrapvalidator.version>0.5.3</bootstrapvalidator.version>
+        <!-- bootstrap end -->
+        <!-- normalize 浏览器差异 -->
+        <normalize.version>8.0.1</normalize.version>
+        <!-- less  CSS 预处理语言,它扩展了 CSS 语言,增加了变量、Mixin、函数等特性 -->
+        <less.version>3.8.1</less.version>
+
         <chartjs.version>2.7.3</chartjs.version>
         <highcharts.version>7.1.1</highcharts.version>
-        <datatables.version>1.10.15</datatables.version>
+        <datatables.version>1.10.19</datatables.version>
         <font-awesome.version>5.8.2</font-awesome.version>
         <html5shiv.version>3.7.3</html5shiv.version>
         <respond.version>1.4.2-1</respond.version>
         <json3.version>3.3.2</json3.version>
-        <jquery.version>1.12.0</jquery.version>
-<!--        <jquery.version>3.4.1</jquery.version>-->
+        <metisMenu.version>2.7.0</metisMenu.version>
+        <slidebars.version>2.0.2</slidebars.version>
+        <stomp-websocket.version>2.3.3-1</stomp-websocket.version>
+        <modernizr.version>2.8.3-1</modernizr.version>
+        <jquery.version>3.4.1</jquery.version>
+<!--        <jquery.version>1.12.0</jquery.version>-->
+        <jquery.form.version>4.2.2</jquery.form.version>
         <jquery.form.validator.version>2.1.47</jquery.form.validator.version>
         <jquery.validation.version>1.17.0</jquery.validation.version>
+        <extjs.version>6.2.0</extjs.version>
+        <cryptojs.version>3.1.2</cryptojs.version>
         <webjars.locator.core.version>0.37</webjars.locator.core.version>
+        <sweetalert.version>2.1.0</sweetalert.version>
+        <toastr.version>2.1.2</toastr.version>
         <!-- webjars end -->
+        <!--excel导出 start-->
+        <poi.version>4.1.0</poi.version>
+        <!--excel导出 start-->
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-batch</artifactId>
@@ -66,10 +99,17 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-quartz</artifactId>
         </dependency>
+        <!--thymeleaf-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github.theborakompanioni</groupId>
+            <artifactId>thymeleaf-extras-shiro</artifactId>
+            <version>${thymeleaf.extras.shiro.version}</version>
+        </dependency>
+        <!--thymeleaf-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -83,6 +123,7 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>${mybatis.version}</version>
         </dependency>
+
         <!--添加mybatis代码自动生成器-->
         <dependency>
             <groupId>org.mybatis.generator</groupId>
@@ -115,6 +156,50 @@
             <artifactId>spring-batch-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!--shiro start-->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-config-core</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-cas</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-ehcache</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring-boot</artifactId>
+            <version>${shiro.version}</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring-boot-starter</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring-boot-web-starter</artifactId>
+            <version>${shiro.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.penggle</groupId>
+            <artifactId>kaptcha</artifactId>
+            <version>${kaptcha.version}</version>
+        </dependency>
+        <!--shiro end-->
         <!--Oracle依赖-->
         <dependency>
             <groupId>com.oracle</groupId>
@@ -132,11 +217,18 @@
             <artifactId>log4j</artifactId>
             <version>${log4j.version}</version>
         </dependency>
+        <!--json start-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson-annotations.version}</version>
+        </dependency>
+        <!--json end-->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
@@ -178,6 +270,13 @@
             <artifactId>jquery</artifactId>
             <version>${jquery.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery-form</artifactId>
+            <version>${jquery.form.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>jquery-form-validator</artifactId>
@@ -188,7 +287,7 @@
             <artifactId>jquery-validation</artifactId>
             <version>${jquery.validation.version}</version>
         </dependency>
-        <!--Bootstrap框架（前端）-->
+        <!--Bootstrap框架（前端） start-->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
@@ -208,6 +307,43 @@
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap-treeview</artifactId>
             <version>${bootstrap.treeview.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap-sidebar</artifactId>
+            <version>${bootstrap-sidebar.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap-glyphicons</artifactId>
+            <version>${bootstrap-glyphicons.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap-modal</artifactId>
+            <version>${bootstrap-modal.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap-datepicker</artifactId>
+            <version>${bootstrap-datepicker.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap-datetimepicker</artifactId>
+            <version>${bootstrap-datetimepicker.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrapvalidator</artifactId>
+            <version>${bootstrapvalidator.version}</version>
+        </dependency>
+        <!--Bootstrap框架（前端） end-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>less</artifactId>
+            <version>${less.version}</version>
+            <scope>runtime</scope>
         </dependency>
         <!-- 图表 -->
         <dependency>
@@ -232,7 +368,7 @@
             <artifactId>font-awesome</artifactId>
             <version>${font-awesome.version}</version>
         </dependency>
-        <!-- font -->
+        <!-- html5shiv -->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>html5shiv</artifactId>
@@ -243,14 +379,112 @@
             <artifactId>respond</artifactId>
             <version>${respond.version}</version>
         </dependency>
-        <!-- font -->
+        <!-- json -->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>json3</artifactId>
             <version>${json3.version}</version>
         </dependency>
+        <!-- metisMenu -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>metisMenu</artifactId>
+            <version>${metisMenu.version}</version>
+        </dependency>
+        <!-- slidebars -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>slidebars</artifactId>
+            <version>${slidebars.version}</version>
+        </dependency>
+        <!-- stomp websocket -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>stomp-websocket</artifactId>
+            <version>${stomp-websocket.version}</version>
+        </dependency>
+        <!-- modernizr -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>modernizr</artifactId>
+            <version>${modernizr.version}</version>
+        </dependency>
+        <!-- jquery nicescroll -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery.nicescroll</artifactId>
+            <version>3.7.6</version>
+        </dependency>
+
+        <!--为了增强跨浏览器表现的一致性normalize-->
+        <dependency>
+            <groupId>org.webjars.npm</groupId>
+            <artifactId>normalize.css</artifactId>
+            <version>${normalize.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>extjs</artifactId>
+            <version>${extjs.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>cryptojs</artifactId>
+            <version>${cryptojs.version}</version>
+        </dependency>
+        <!--弹出框-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>sweetalert</artifactId>
+            <version>${sweetalert.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>toastr</artifactId>
+            <version>${toastr.version}</version>
+        </dependency>
+
         <!-- 引入webjars end -->
 
+        <!-- 工作流组件 start -->
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-engine</artifactId>
+            <version>7.1.0.M4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-spring-boot</artifactId>
+            <version>6.0.0</version>
+            <type>pom</type>
+        </dependency>
+
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>spring-boot</artifactId>
+            <version>5.17.0</version>
+            <type>pom</type>
+        </dependency>
+
+        <!-- 工作流组件 end -->
+
+        <!--excel导出 start-->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${poi.version}</version>
+        </dependency>
+
+
+        <!--excel导出 end-->
     </dependencies>
 
     <build>

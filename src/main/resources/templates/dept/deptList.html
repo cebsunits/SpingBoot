@@ -16,7 +16,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">
-            用户管理
+            部门管理
         </h3>
     </div>
     <div class="row">
@@ -25,11 +25,8 @@
     <table id="table_user"  class="table table-striped table-bordered" >
         <thead>
         <tr>
-            <th>用户ID</th>
-            <th>用户名</th>
-            <th>登录名</th>
-            <th>邮箱</th>
-            <th>电话</th>
+            <th>部门编码</th>
+            <th>部门名称</th>
             <th>备注</th>
             <th>操作</th>
         </tr>
@@ -78,11 +75,8 @@
             fnServerData: retrieveData,
             //列表表头字段
             columns: [
-                {data: 'userId'},
-                {data: 'userName'},
-                {data: 'loginName'},
-                {data: 'email'},
-                {data: 'phone'},
+                {data: 'deptCode'},
+                {data: 'deptName'},
                 {data: 'remarks'},
                 //新建列的 定义
                 {
@@ -98,9 +92,14 @@
                 console.log(data);
                 var obj = JSON.stringify(data);
                 //行渲染回调,在这里可以对该行dom元素进行任何操作
+                var view = "<button class='manage-btn btn red btn-outline btn-sm' onclick='view(" + obj + ")'>查看</button>";
+                //行渲染回调,在这里可以对该行dom元素进行任何操作
+                var update = "<button class='manage-btn btn red btn-outline btn-sm' onclick='update(" + obj + ")'>更改</button>";
+                //行渲染回调,在这里可以对该行dom元素进行任何操作
                 var del = "<button class='manage-btn btn red btn-outline btn-sm' onclick='del(" + obj + ")'>删除</button>";
-                //
-                $('td', row).eq(6).append(del);
+                //渲染
+                var endDisplay=view+update+del;
+                $('td', row).eq(2).append(endDisplay);
             }
         });
     }
@@ -135,8 +134,7 @@
         alert("删除"+data);
     }
     function toAdd(){
-        window.open("/user/toAdd");
-        // window.location.href = "/logon/toAdd";
+        window.open("/dept/add");
     }
 </script>
 </body>

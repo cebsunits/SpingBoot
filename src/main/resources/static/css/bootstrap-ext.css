@@ -1,0 +1,7 @@
+package static.css
+/**
+    Firefox 浏览器对 fieldset 元素设置了一些影响 width 属性的样式，导致响应式表格出现问题
+*/
+@-moz-document url-prefix() {
+    fieldset { display: table-cell; }
+}

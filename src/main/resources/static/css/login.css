@@ -1,0 +1,11 @@
+body{
+    background:url(../images/login1.png)  no-repeat;
+    background-size: cover;
+    font-size: 16px;
+    height:1080px;
+    margin-top: 5px;
+}
+
+.form{
+    margin-top: 200px;
+}

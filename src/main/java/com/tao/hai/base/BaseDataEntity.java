@@ -1,18 +1,27 @@
 package com.tao.hai.base;
 
-import javax.persistence.Column;
-import java.io.Serializable;
-import java.util.Date;
+import com.alibaba.fastjson.annotation.JSONField;
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
-public class BaseDataEntity<T> implements Serializable {
+import javax.persistence.Column;
+import java.util.Date;
+@Data
+public class BaseDataEntity<T> extends DataEntity<T> {
     /**
      * 创建日期
      */
+    //格式化前台页面收到的json时间格式，不指定的话会变成缺省的"yyyy-MM-dd'T'HH:mm:ss"
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     @Column(name="create_date")
     private Date createDate;
     /**
      * 更新日期
      */
+    //格式化前台页面收到的json时间格式，不指定的话会变成缺省的"yyyy-MM-dd'T'HH:mm:ss"
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     @Column(name="update_date")
     private Date updateDate;
     /**
@@ -20,28 +29,4 @@ public class BaseDataEntity<T> implements Serializable {
      */
     @Column(name="del_flag")
     private String delFlag;
-
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
-    public Date getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
-    }
-
-    public String getDelFlag() {
-        return delFlag;
-    }
-
-    public void setDelFlag(String delFlag) {
-        this.delFlag = delFlag;
-    }
 }

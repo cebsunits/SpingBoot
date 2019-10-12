@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--引用通用head--->
+<head th:replace="common/commonHeader::common_header(~{::title},~{::link},~{})">
+    <title>用户信息</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrapvalidator/css/bootstrapValidator.min.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-glyphicons/css/bootstrap-glyphicons.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-datepicker/css/bootstrap-datepicker3.css}"/>
+</head>
+<body>
+    <!--引用通用JS-->
+    <div th:replace="common/commonFoot::foot(~{::script})">
+        <script th:src="@{/webjars/bootstrapvalidator/js/bootstrapValidator.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
+        <script th:src="@{/webjars/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js}"></script>
+        <script th:src="@{/js/user.js}"></script>
+    </div>
+    <div class="container-fluid panel-body">
+        <form id="userForm" class="form-horizontal validation-form" action="#" method="post">
+            <input type="hidden" name="userId" id="userId" th:value="${user.userId}">
+            <input type="hidden" name="flag" id="flag" th:value="${readOnly}">
+            <input type="hidden" name="createDate" id="createDate" th:value="${#dates.format(user.createDate, 'yyyy-MM-dd HH:mm:ss')}">
+            <input type="hidden" name="updateDate" id="updateDate" th:value="${#dates.format(user.updateDate, 'yyyy-MM-dd HH:mm:ss')}" >
+            <input type="hidden" name="delFlag" id="delFlag" th:value="${user.delFlag}">
+            <div class="panel-body">
+                <div class="form-inline">
+                    <label for="userName" class="col-sm-2 control-label"style="white-space:nowrap">用户名</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="userName" name="userName" placeholder="请输入用户名"
+                               th:value="${user.userName}" th:th:readonly="${readOnly}"  required>
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <label for="loginName" class="col-sm-2 control-label"style="white-space:nowrap">登录名</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="loginName" name="loginName"
+                               th:value="${user.loginName}" th:readonly="${readOnly}"  placeholder="请输入登录名" required>
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <label for="password" class="col-sm-2 control-label"style="white-space:nowrap">密码</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="password" name="password"
+                               th:value="${user.password}" th:readonly="${readOnly}"  placeholder="请输入密码" required>
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <label for="password" class="col-sm-2 control-label"style="white-space:nowrap">确认密码</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm"
+                               th:value="${user.password}" th:readonly="${readOnly}"  placehold er="请确认密码">
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <label for="email" class="col-sm-2 control-label"style="white-space:nowrap">邮箱</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="email" name="email"
+                               th:value="${user.email}" th:readonly="${readOnly}"  placeholder="请输入邮箱">
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <label for="phone" class="col-sm-2 control-label"style="white-space:nowrap">电话</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="phone" name="phone"
+                               th:value="${user.phone}" th:readonly="${readOnly}"  placeholder="请输入电话">
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <label class="col-sm-2 control-label"style="white-space:nowrap">部门</label>
+                    <div class="col-sm-10">
+                        <input type="hidden" id="deptId" name="deptId">
+                        <input type="text" class="form-control" id="deptName" name="deptName"
+                               readonly="true"  placeholder="请选择部门">
+                        <a href="javascript:void(0)" onclick="queryDept()" th:readonly="${readOnly}" >
+                            <span class="glyphicon glyphicon-search"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <label class="col-sm-2 control-label"style="white-space:nowrap">角色</label>
+                    <div class="col-sm-10">
+                        <label th:each="role:${roles}" class="checkbox-inline">
+                            <input name="role" type="checkbox" th:value="${role.roleId}"
+                                   th:text="${role.roleName}">
+                        </label>
+                    </div>
+                </div>
+                <div class="form-inline">
+                    <label class="col-sm-2 control-label">有效期</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control date form_date" name="expiredDate" data-date-format="yyyy-mm-dd"
+                               th:value="${#dates.format(user.expiredDate, 'yyyy-MM-dd')}" th:readonly="${readOnly}"  placeholder="有效期"
+                               id="expiredDate">
+                    </div>
+                    <label class="control-label">（置空表示永不过期）</label>
+                </div>
+                <div class="form-inline">
+                    <label for="remarks" class="col-sm-2 control-label"style="white-space:nowrap">备注</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" id="remarks" name="remarks"
+                                  th:value="${user.remarks}" th:readonly="${readOnly}"
+                                  placeholder="请输入备注" rows="3">
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-inline">
+                <button type="submit" id="btn_save" name="btn_save" class="btn btn-primary" th:if="${readOnly} ne true" >保存</button>
+                <button type="button" id="btn_back" name="btn_back" class="btn btn-secondary" onclick="goBack()">返回</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
