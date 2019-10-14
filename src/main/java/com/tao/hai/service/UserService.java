@@ -71,6 +71,18 @@ public class UserService extends BaseServiceImpl<UserDao, User> {
             user.setUserId(UUID.randomUUID().toString());
         }
         super.save(user);
+        /**删除部门信息**/
+        userDao.deleteUserDept(user);
+        /**删除角色信息**/
+        userDao.deleteUserRole(user);
+        /**新增部门信息**/
+        if(!user.getDeptList().isEmpty()){
+            userDao.insertUserDept(user);
+        }
+        /**新增角色信息**/
+        if(!user.getRoleList().isEmpty()){
+            userDao.insertUserRole(user);
+        }
     }
 
     /**
@@ -132,10 +144,10 @@ public class UserService extends BaseServiceImpl<UserDao, User> {
     /**
      * 判断用户是否存在
      */
-    @Cacheable(value = CACHE_NAME, key = "#userName")
-    public boolean checkUserExists(String userName) {
+    @Cacheable(value = CACHE_NAME, key = "#loginName")
+    public boolean checkUserExists(String loginName) {
         boolean isExists = false;
-        User user = getUser(userName);
+        User user = getUser(loginName);
         if (user != null) {
             isExists = true;
         }

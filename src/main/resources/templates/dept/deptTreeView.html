@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--引用通用head--->
+<head th:replace="common/commonHeader::common_header(~{::title},~{::link},~{})">
+    <title>部门树信息</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-glyphicons/css/bootstrap-glyphicons.css}"/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap-treeview/bootstrap-treeview.min.css}"/>
+</head>
+<body>
+<!--引用通用JS-->
+<div th:replace="common/commonFoot::foot(~{::script})">
+    <script th:src="@{/webjars/bootstrap-treeview/bootstrap-treeview.min.js}"></script>
+    <script th:src="@{/webjars/jquery-validation/jquery.validate.min.js}"></script>
+</div>
+<div class="graphic-container">
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox-content">
+                    <div id="deptTree"></div>
+                </div>
+                <div class="form-group hidden">
+                    <div class="col-sm-12 col-sm-offset-12">
+                        <button type="submit" id="btn_select" class="btn btn-primary">提交</button>
+                        <button type="button" class="btn btn-secondary" onclick="javascript:window.top.close()">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var deptTree;
+    $(document).ready(
+        function () {
+            //获取树结构
+            getTreeData();
+            //点击提交时把选择的数据返回给父页面
+            $("#btn_select").click=selectDepts;
+        }
+    );
+    //获取树信息
+    function getTreeData() {
+        //ajax请求数据方法
+        $.ajax({
+            type: "POST",
+            url: "/dept/deptTree",//url请求的地址
+            cache: false,  //禁用缓存
+            data: {},  //传入组装的参数
+            dataType: "json",
+            success: function (result) {
+                if(result.success){
+                    toastr.success('查询成功！');
+                    loadTree(result.data);
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                toastr.warning('查询失败！');
+                alert("status:" + XMLHttpRequest.status + ",readyState:" + XMLHttpRequest.readyState + ",textStatus:" + textStatus);
+            }
+        });
+    }
+    function loadTree(data) {
+        deptTree= $("#deptTree").treeview(
+            {
+                data:data,
+                level:5,
+                collapseIcon: "glyphicon glyphicon-minus",//可收缩的节点图标
+                nodeIcon: "glyphicon glyphicon-user",
+                expandIcon: "glyphicon glyphicon-plus",  //设置列表上中有子节点的图标
+                highlightSearchResults:true,//是否高亮搜索结果 默认true
+                highlightSelected:true,     //是否选中高亮显示
+                onhoverColor: "#f5f5f5",    //鼠标滑过的颜色
+                selectedIcon: 'glyphicon glyphicon-tint',
+                showBorder:true,                //是否显示边框
+                showCheckbox:true,             //是否显示多选框
+                onNodeSelected:onNodeSelected(event, data), //一个节点被选择。
+                nodeChecked :nodeChecked (event, data), //一个节点被checked。
+                nodeUnchecked:nodeUnchecked(event, data),//一个节点被unchecked。
+                nodeUnselected:nodeUnselected(event, data) //取消选择一个节点。
+            }
+        );
+    }
+    //点击提交时把选择的数据返回给父页面
+    function selectDepts() {
+        if(deptTree!=undefined){
+            var depts=deptTree.getChecked;
+            console.log(depts)
+        }
+    }
+
+    function onNodeSelected(event, data){
+        console.log("onNodeSelected"+data)
+    }
+    function nodeUnselected(event, data){
+        console.log("nodeUnselected"+data)
+    }
+    function nodeChecked(event, data){
+        console.log("nodeChecked"+data)
+    }
+    function nodeUnchecked(event, data){
+        console.log("nodeUnchecked"+data)
+    }
+</script>
+</body>
+</html>

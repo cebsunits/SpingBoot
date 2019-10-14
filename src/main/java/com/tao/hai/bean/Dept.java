@@ -23,6 +23,12 @@ public class Dept extends BaseDataEntity<Dept> {
     @Column(name = "parent_id")
     private String parentId;
     /**
+     * 部门层级
+     */
+    @Column(name = "dept_level")
+    private String deptLevel;
+
+    /**
      * 部门编码
      */
     @Column(name="dept_code")

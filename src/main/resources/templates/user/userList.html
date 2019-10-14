@@ -172,7 +172,7 @@
             success: function (result) {
                 if(result.success){
                     toastr.success('删除成功！');
-                    window.location.href=result.url;
+                    window.location.reload();
                 }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {

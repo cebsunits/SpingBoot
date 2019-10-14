@@ -4,15 +4,15 @@ package com.tao.hai.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.tao.hai.base.DataTablePage;
+import com.tao.hai.bean.Dept;
 import com.tao.hai.bean.Role;
 import com.tao.hai.bean.User;
 import com.tao.hai.facotry.LogFactory;
 import com.tao.hai.json.AjaxError;
+import com.tao.hai.json.AjaxJson;
 import com.tao.hai.json.AjaxSuccess;
-import com.tao.hai.service.LogService;
-import com.tao.hai.service.LoginService;
-import com.tao.hai.service.RoleService;
-import com.tao.hai.service.UserService;
+import com.tao.hai.json.BootStrapValidatorJson;
+import com.tao.hai.service.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -32,6 +29,8 @@ public class UserController {
     private int hashIterations = 2;
     @Autowired
     UserService userService;
+    @Autowired
+    DeptService deptService;
     @Autowired
     RoleService roleService;
     @Autowired
@@ -112,7 +111,7 @@ public class UserController {
      */
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     @ResponseBody
-    public Object save(User user) {
+    public Object save(User user,HttpServletRequest request) {
         if (StringUtils.isEmpty(user.getUserId())) {
             user.setCreateDate(new Date());
             Md5Hash md5Hash = new Md5Hash(user.getPassword(), user.getCredentialsSalt(), hashIterations);
@@ -130,6 +129,31 @@ public class UserController {
         }
         try {
             user.setUpdateDate(new Date());
+            //更新部门信息
+            List<Dept> deptList=new ArrayList<>();
+            String[] deptIds=request.getParameterValues("deptId");
+            if(deptIds!=null&&deptIds.length>0){
+                for(String deptId:deptIds){
+                    if(StringUtils.isNotEmpty(deptId)){
+                        Dept dept=deptService.getDept(deptId);
+                        deptList.add(dept);
+                    }
+                }
+            }
+            user.setDeptList(deptList);
+            //更新角色信息
+            List<Role> roleList=new ArrayList<>();
+            String[] roleIds=request.getParameterValues("role");
+            if(roleIds!=null&&roleIds.length>0){
+                for(String roleId:roleIds){
+                    if(StringUtils.isNotEmpty(roleId)){
+                        Role role=roleService.getRole(roleId);
+                        roleList.add(role);
+                    }
+                }
+            }
+            user.setRoleList(roleList);
+            //保存用户信息
             userService.save(user);
             logService.save(LogFactory.createSysLog("新增或修改用户", "用户：" + user.getUserName()));
             AjaxSuccess ajaxJson=new AjaxSuccess();
@@ -150,31 +174,39 @@ public class UserController {
     @RequestMapping("/delete")
     @ResponseBody
     public Object userDel(String userId) {
-        Map<String, Object> map = new HashMap<>();
+        AjaxJson ajaxJson;
         try {
             userService.delete(userId);
-            map.put("success", true);
-            map.put("url", "/user/userList");
+            ajaxJson=new AjaxSuccess();
+            ajaxJson.setMessage("删除成功！");
             logService.save(LogFactory.createSysLog("删除用户", "用户id：" + userId));
         } catch (Exception e) {
             e.printStackTrace();
-            map.put("error", "true");
+             ajaxJson=new AjaxError();
+            ajaxJson.setMessage("删除失败！");
         }
-        return map;
+        return ajaxJson;
     }
 
     @RequestMapping("/checkUserExists")
     @ResponseBody
-    public Object checkRoleExists(@RequestParam String newUserName, @RequestParam(required = false) String userId, @RequestParam(required = false) String oldUserName) {
-        Map<String, Boolean> map = new HashMap<>();
-        if (StringUtils.isEmpty(userId)) {
-            boolean result = !userService.checkUserExists(newUserName);
-            map.put("valid", result);
+    public Object checkUserExists(String loginName) {
+        BootStrapValidatorJson bootStrapValidatorJson=new BootStrapValidatorJson();
+        if (StringUtils.isNotEmpty(loginName)) {
+            boolean result = userService.checkUserExists(loginName);
+            //已经存在用户
+            if(result){
+                bootStrapValidatorJson.setValid(false);
+                bootStrapValidatorJson.setMessage("用户已存在，请更换用户名！");
+            }else{
+                bootStrapValidatorJson.setValid(true);
+                bootStrapValidatorJson.setMessage("用户名可用！");
+            }
         } else {
-            boolean result = !userService.checkUserExists2(oldUserName, newUserName);
-            map.put("valid", result);
+            bootStrapValidatorJson.setValid(false);
+            bootStrapValidatorJson.setMessage("请输入用户名！");
         }
-        return map;
+        return bootStrapValidatorJson;
     }
 
 

@@ -20,5 +20,10 @@ public class RoleService extends BaseServiceImpl<RoleDao, Role> {
     public List<Role> userRoles(String userId){
         return roleDao.userRoles(userId);
     }
-
+    /**根据ID获取角色*/
+    public Role getRole(String roleId){
+        Role queryRole=new Role();
+        queryRole.setRoleId(roleId);
+       return super.getByKey(queryRole);
+    }
 }

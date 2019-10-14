@@ -3,4 +3,31 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tao.hai.dao.UserDao">
 
+    <!-- 删除用户和部门关联表数据 -->
+    <delete id="deleteUserDept">
+		DELETE FROM sys_user_dept
+		WHERE user_id = #{userId}
+	</delete>
+    <!-- 插入用户和角色关联表数据 -->
+    <insert id="insertUserDept">
+        INSERT INTO sys_user_role(user_id, dept_id)
+        <foreach collection="deptList" item="dept" separator=" union all ">
+            SELECT #{userId}, #{dept.deptId} FROM dual
+        </foreach>
+    </insert>
+    <!-- 删除用户和角色关联表数据 -->
+    <delete id="deleteUserRole">
+		DELETE FROM sys_user_role
+		WHERE user_id = #{userId}
+	</delete>
+
+    <!-- 插入用户和角色关联表数据 -->
+    <insert id="insertUserRole">
+        INSERT INTO sys_user_role(user_id, role_id)
+        <foreach collection="roleList" item="role" separator=" union all ">
+            SELECT #{userId}, #{role.roleId} FROM dual
+        </foreach>
+    </insert>
+
+
 </mapper>

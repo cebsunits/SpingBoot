@@ -12,11 +12,29 @@ $(function(){
     validateLoginName();
     //表单验证
     validate();
+    //ajaxsubmit
+    var options = {
+        type: 'POST',
+        success:showResponse,
+        dataType: 'json',
+        error : function(xhr, status, err) {
+            toastr.warning('操作失败！');
+        }
+    };
     //监听保存你按钮信息
-    $("#btn_save").click=save;
+    $("#btn_save").click=saveUser(options);
 })
+//响应
+function showResponse(responseText, statusText, xhr, $form) {
+    if (responseText.success == true) {
+        window.top.close();
+    } else {
+        toastr.warning('保存失败！');
+    }
+}
 //监听保存你按钮信息
-function save(){
+function saveUser(options){
+    //防止表单自动提交
     $("#userForm").submit(function(ev){
         ev.preventDefault();
     });
@@ -25,12 +43,11 @@ function save(){
         var bootstrapValidator=$("#userForm").data('bootstrapValidator');
         bootstrapValidator.validate();
         if(bootstrapValidator.isValid()){
-            $("#userForm").submit();
-            // $("#userForm").on("submit",function(){
-            //     $(this).ajaxSubmit=save;
-            //     return false;
-            // });
-            // $("#userForm").ajaxSubmit(save);
+            $("#userForm").on("submit",function(){
+                $(this).ajaxSubmit(options);
+                //防止表单自动提交
+                return false;
+            });
         }else {
             return;
         }
@@ -101,6 +118,12 @@ function validate(){
                     notEmpty:{
                         message:'登录名不能为空'
                     },
+                    remote:{
+                        message:"登录名重复",
+                        url:"/user/checkUserExists",
+                        data:'',//默认传递该字段的值到后台
+                        delay:2000
+                    },
                     stringLength:{
                         min:1,
                         max:50,
@@ -141,7 +164,7 @@ function validate(){
 
 /**查询部门信息*/
 function queryDept(){
-
+    openDialogView("部门信息","/dept/deptTreeView",'800px', '600px');
 }
 
 function queryRole(){

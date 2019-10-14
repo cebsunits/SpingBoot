@@ -48,7 +48,12 @@ public class DeptController {
 
         return "";
     }
-    @RequestMapping(value="deptTree")
+    @RequestMapping(value="/deptTreeView")
+    public String deptTreeView(HttpServletRequest request){
+
+        return "/dept/deptTreeView";
+    }
+    @RequestMapping(value="/deptTree")
     @ResponseBody
     public Object deptTree(Dept dept,HttpServletRequest request, Model model){
         List<BootstrapUITreeNode> list=deptService.buildDeptTree(dept);

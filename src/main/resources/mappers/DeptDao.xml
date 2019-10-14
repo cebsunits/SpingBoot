@@ -5,13 +5,17 @@
     <resultMap id="BaseResultMap" type="com.tao.hai.bean.Dept">
         <id column="dept_id" property="deptId" jdbcType="VARCHAR"/>
         <result column="parent_id" property="parentId" jdbcType="VARCHAR"/>
+        <result column="dept_level" property="deptLevel" jdbcType="VARCHAR"/>
         <result column="dept_code" property="deptCode" jdbcType="VARCHAR"/>
         <result column="dept_name" property="deptName" jdbcType="VARCHAR"/>
         <result column="dept_sort" property="deptSort" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="del_flag" property="delFlag" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="sqlColumns">
-		dept_id, parent_id, dept_code, dept_name, dept_sort
+		dept_id, parent_id, dept_code, dept_name, dept_sort,dept_level,create_date,update_date,del_flag
 	</sql>
     <!--获取父节点信息-->
     <select id="deptParent" resultMap="BaseResultMap" parameterType="com.tao.hai.bean.Dept">

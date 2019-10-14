@@ -10,4 +10,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserDao extends BaseDao<User> {
 
+    /**更新部门关联表*/
+    int insertUserDept(User user);
+    /**更新角色关联表*/
+    int insertUserRole(User user);
+    /**删除部门关联表*/
+    int deleteUserDept(User user);
+    /**删除角色关联表*/
+    int deleteUserRole(User user);
 }
