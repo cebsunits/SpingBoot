@@ -1,6 +1,7 @@
 package com.tao.hai.service;
 
 import com.tao.hai.bean.LoginUser;
+import com.tao.hai.bean.User;
 import com.tao.hai.util.AesUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -15,7 +16,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LoginService {
-
+    /**
+     * 登录
+     */
     public LoginUser login(LoginUser loginUser) {
 
         if (StringUtils.isEmpty(loginUser.getLoginName())) {
@@ -31,14 +34,7 @@ public class LoginService {
         String msg = "";
         // 1、获取Subject实例对象
         Subject currentUser = SecurityUtils.getSubject();
-
-//        // 2、判断当前用户是否登录
-//        if (currentUser.isAuthenticated() == false) {
-//
-//        }
-        String password = AesUtils.decrypt(loginUser.getPassword(),loginUser.getLoginName());
-
-        // 3、将用户名和密码封装到UsernamePasswordToken
+        // 2、将用户名和密码封装到UsernamePasswordToken
         UsernamePasswordToken token = new UsernamePasswordToken(loginUser.getLoginName(), loginUser.getPassword());
         // 4、认证
         try {
@@ -71,12 +67,23 @@ public class LoginService {
     }
 
     /**
-     * 获取当前登录用户
+     * 获取当前登录用户名
      */
     public String getCurrentUserName() {
         Subject currentUser = SecurityUtils.getSubject();
         Session session = currentUser.getSession();
         return (String) session.getAttribute("userName");
+    }
+    /**
+     * 获取当前登录用户
+     */
+    public User getCurrentUser() {
+        Subject subject = SecurityUtils.getSubject();
+        User principal = (User) subject.getPrincipal();
+        if (principal != null) {
+            return principal;
+        }
+        return null;
     }
 
     /**

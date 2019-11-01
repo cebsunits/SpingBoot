@@ -11,6 +11,6 @@ import java.util.List;
 @Mapper
 @Repository
 public interface MenuDao extends BaseDao<Menu> {
-
-    List<Menu> getLoginMenu(String loginName);
+    /**获取用户对应的菜单信息*/
+    List<Menu> getUserMenu(String userId);
 }

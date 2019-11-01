@@ -26,7 +26,7 @@ public class IndexController {
             return "login";
         }
         User user=userService.getUser(loginName);
-        List<Menu> menuList=menuService.getList(loginName);
+        List<Menu> menuList=menuService.getUserList(user.getUserId());
         model.addAttribute("user", user);
         model.addAttribute("menuList", menuList);
         return "index";

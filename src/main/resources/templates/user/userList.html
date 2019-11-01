@@ -39,12 +39,14 @@
     </div>
 </div>
 <script type="text/javascript">
+
     // 第三步初始化Datatables
     $(document).ready(function () {
         dataTable();
     });
 
     function dataTable() {
+
         // 第三步初始化Datatables
         $('#table_user').DataTable({
             autoWidth: false,  //禁用自动调整列宽
@@ -85,12 +87,13 @@
                 "infoEmpty": "0条记录",
                 "infoFiltered": "(从 _MAX_ 条记录过滤)"
             },
+
+            sAjaxSource: "/user/page",//url请求的地址
+            fnServerData: retrieveData,
             columnDefs: [{
                 "targets": 'nosort',  //列的样式名
                 "orderable": false    //包含上样式名‘nosort’的禁止排序
             }],
-            sAjaxSource: "/user/page",//url请求的地址
-            fnServerData: retrieveData,
             //列表表头字段
             columns: [
                 {data: 'userId'},

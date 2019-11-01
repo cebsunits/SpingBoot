@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 public class BootstrapUITreeNode implements Serializable {
     //节点id
-    private String nodeId;
+    private String id;
     //父节点id
     private String parentId;
     //说明

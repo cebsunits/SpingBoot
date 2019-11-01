@@ -34,6 +34,10 @@ function showResponse(responseText, statusText, xhr, $form) {
 }
 //监听保存你按钮信息
 function saveUser(options){
+    // var Password = $("#password").val();
+    // var md5Password=$.MD5(Password);
+    // //更改密码为加密后密码
+    // options.data.password=md5Password;
     //防止表单自动提交
     $("#userForm").submit(function(ev){
         ev.preventDefault();

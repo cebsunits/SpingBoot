@@ -1,37 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<!--引用通用head--->
+<head th:replace="common/commonHeader::common_header(~{::title},~{::link},~{})">
 	<title>登录管理</title>
-	<!-- 引入font-awesome icons CSS  -->
-	<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-	<link rel="stylesheet" th:href="@{/webjars/font-awesome/css/fontawesome.min.css}"></link>
 	<link rel="stylesheet" th:href="@{/css/custom.css}"></link>
 	<link rel="stylesheet" th:href="@{/css/style.css}"></link>
-	<!-- 引入bootstrap插件样式 -->
-	<script th:src="@{/webjars/jquery/jquery.min.js}" ></script>
-	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+	<link rel="stylesheet" th:href="@{/css/login.css}"></link>
+</head>
+<body >
+<!--引用通用JS-->
+<div th:replace="common/commonFoot::foot(~{::script})">
+	<script th:src="@{/webjars/jquery-validation/jquery.validate.min.js}"></script>
 	<script th:src="@{/webjars/cryptojs/components/core-min.js}"></script>
 	<script th:src="@{/webjars/cryptojs/components/md5-min.js}"></script>
-	<script th:src="@{/webjars/jquery-validation/jquery.validate.min.js}"></script>
-	<link rel="stylesheet" th:href="@{/css/login.css}"></link>
 	<script th:src="@{/js/login.js}"></script>
-	<!--[if lt IE 9]>
-	<meta http-equiv="refresh" content="0;ie.html"/>
-	<![endif]-->
 	<script>
 		if (window.top !== window.self) {
 			window.top.location = window.location;
 		}
 	</script>
-	<script th:inline="javascript">
-		var ctx = [[@{/}]] ;
-	</script>
-</head>
-<body >
+</div>
 	<div class="container">
 		<div class="row center">
 			<div class="col-sm-offset-4 col-sm-4">

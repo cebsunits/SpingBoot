@@ -7,11 +7,16 @@
     <script th:src="@{/webjars/jquery-form/jquery.form.min.js}" ></script>
     <!-- 引入bootstrap插件样式 JS-->
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <!-- 引入bootstrap验证插件样式 JS-->
+    <script th:src="@{/webjars/bootstrapvalidator/js/bootstrapValidator.min.js}"></script>
     <!-- 消息提醒框JS -->
     <script th:src="@{/webjars/toastr/build/toastr.min.js}" ></script>
     <!-- 引入支持多种浏览器的JS -->
     <script th:src="@{/webjars/html5shiv/html5shiv.min.js}"></script>
     <script th:src="@{/webjars/respond/dest/respond.min.js}"></script>
+    <script th:inline="javascript">
+        var ctx = [[@{/}]] ;
+    </script>
     <!--/* Per-page placeholder for additional links */-->
     <th:block th:replace="${scripts}"/>
 </div>

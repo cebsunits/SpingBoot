@@ -3,17 +3,15 @@
 <!--引用通用head--->
 <head th:replace="common/commonHeader::common_header(~{::title},~{::link},~{})">
     <title>用户信息</title>
-    <link rel="stylesheet" th:href="@{/webjars/bootstrapvalidator/css/bootstrapValidator.min.css}"/>
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap-glyphicons/css/bootstrap-glyphicons.css}"/>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap-datepicker/css/bootstrap-datepicker3.css}"/>
 </head>
 <body>
     <!--引用通用JS-->
     <div th:replace="common/commonFoot::foot(~{::script})">
-        <script th:src="@{/webjars/bootstrapvalidator/js/bootstrapValidator.min.js}"></script>
         <script th:src="@{/webjars/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
         <script th:src="@{/webjars/jquery-validation/jquery.validate.min.js}"></script>
         <script th:src="@{/webjars/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js}"></script>
+        <script th:src="@{/webjars/cryptojs/components/md5-min.js}"></script>
         <script th:src="@{/js/common.js}"></script>
         <script th:src="@{/js/user.js}"></script>
     </div>

@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.tao.hai.base.BaseServiceImpl;
 import com.tao.hai.bean.Menu;
 import com.tao.hai.dao.MenuDao;
+import com.tao.hai.util.menu.MenuTreeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -39,9 +40,11 @@ public class MenuService extends BaseServiceImpl<MenuDao, Menu> {
     /**
      * 获取信息  第二次访问会取缓存
      */
-    @Cacheable(value=CACHE_NAME)
-    public List<Menu> getList(String loginName){
-        return menuDao.getLoginMenu(loginName);
+    @Cacheable(value=CACHE_NAME,key="#userId")
+    public List<Menu> getUserList(String userId){
+        List<Menu> userMenuList= menuDao.getUserMenu(userId);
+        MenuTreeUtil.treeList(userMenuList);
+        return userMenuList;
     }
     /**
      * 添加redis缓存

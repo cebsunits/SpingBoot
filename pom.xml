@@ -42,6 +42,7 @@
         <bootstrap-datetimepicker.version>2.4.4</bootstrap-datetimepicker.version>
         <bootstrapvalidator.version>0.5.3</bootstrapvalidator.version>
         <!-- bootstrap end -->
+        <zTree.version>3.5.37</zTree.version>
         <!-- normalize 浏览器差异 -->
         <normalize.version>8.0.1</normalize.version>
         <!-- less  CSS 预处理语言,它扩展了 CSS 语言,增加了变量、Mixin、函数等特性 -->
@@ -58,6 +59,7 @@
         <slidebars.version>2.0.2</slidebars.version>
         <stomp-websocket.version>2.3.3-1</stomp-websocket.version>
         <modernizr.version>2.8.3-1</modernizr.version>
+        <nicescroll.version>3.7.6</nicescroll.version>
         <jquery.version>3.4.1</jquery.version>
 <!--        <jquery.version>1.12.0</jquery.version>-->
         <jquery.form.version>4.2.2</jquery.form.version>
@@ -68,7 +70,18 @@
         <webjars.locator.core.version>0.37</webjars.locator.core.version>
         <sweetalert.version>2.1.0</sweetalert.version>
         <toastr.version>2.1.2</toastr.version>
+        <animate.version>3.5.2</animate.version>
+        <pace.version>1.0.2</pace.version>
+        <layui.version>2.5.5</layui.version>
+        <react.version>16.5.2</react.version>
+        <vue.version>2.6.10</vue.version>
+        <jqgrid.version>4.7.0</jqgrid.version>
         <!-- webjars end -->
+        <!--工作流组件 start-->
+        <activiti-engine.version>7.1.0.M4</activiti-engine.version>
+        <activiti-spring-boot.version>6.0.0</activiti-spring-boot.version>
+        <activiti.spring-boot.version>5.17.0</activiti.spring-boot.version>
+        <!--工作流组件 end-->
         <!--excel导出 start-->
         <poi.version>4.1.0</poi.version>
         <!--excel导出 start-->
@@ -194,6 +207,7 @@
             <artifactId>shiro-spring-boot-web-starter</artifactId>
             <version>${shiro.version}</version>
         </dependency>
+        <!--验证码-->
         <dependency>
             <groupId>com.github.penggle</groupId>
             <artifactId>kaptcha</artifactId>
@@ -245,12 +259,6 @@
             <groupId>net.sf.ehcache</groupId>
             <artifactId>ehcache</artifactId>
         </dependency>
-        <!--lombok依赖-->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
         <!-- 引入nekohtml解除html严格语法限制 -->
         <dependency>
             <groupId>net.sourceforge.nekohtml</groupId>
@@ -293,6 +301,7 @@
             <artifactId>bootstrap</artifactId>
             <version>${bootstrap.version}</version>
         </dependency>
+        <!-- table表格样式 -->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap-table</artifactId>
@@ -339,6 +348,14 @@
             <version>${bootstrapvalidator.version}</version>
         </dependency>
         <!--Bootstrap框架（前端） end-->
+        <!--ZTree START-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>zTree</artifactId>
+            <version>${zTree.version}</version>
+        </dependency>
+
+
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>less</artifactId>
@@ -413,7 +430,7 @@
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>jquery.nicescroll</artifactId>
-            <version>3.7.6</version>
+            <version>${nicescroll.version}</version>
         </dependency>
 
         <!--为了增强跨浏览器表现的一致性normalize-->
@@ -422,13 +439,13 @@
             <artifactId>normalize.css</artifactId>
             <version>${normalize.version}</version>
         </dependency>
-
+        <!--extjs-->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>extjs</artifactId>
             <version>${extjs.version}</version>
         </dependency>
-
+        <!--加密工具包-->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>cryptojs</artifactId>
@@ -445,6 +462,40 @@
             <artifactId>toastr</artifactId>
             <version>${toastr.version}</version>
         </dependency>
+        <!--animate动画样式包-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>animate.css</artifactId>
+            <version>${animate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>pace</artifactId>
+            <version>${pace.version}</version>
+        </dependency>
+        <!--layUI-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>layui</artifactId>
+            <version>${layui.version}</version>
+        </dependency>
+        <!--react-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>react</artifactId>
+            <version>${react.version}</version>
+        </dependency>
+        <!--vue-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>vue</artifactId>
+            <version>${vue.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jqgrid</artifactId>
+            <version>${jqgrid.version}</version>
+        </dependency>
 
         <!-- 引入webjars end -->
 
@@ -452,20 +503,20 @@
         <dependency>
             <groupId>org.activiti</groupId>
             <artifactId>activiti-engine</artifactId>
-            <version>7.1.0.M4</version>
+            <version>${activiti-engine.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.activiti</groupId>
             <artifactId>activiti-spring-boot</artifactId>
-            <version>6.0.0</version>
+            <version>${activiti-spring-boot.version}</version>
             <type>pom</type>
         </dependency>
 
         <dependency>
             <groupId>org.activiti</groupId>
             <artifactId>spring-boot</artifactId>
-            <version>5.17.0</version>
+            <version>${activiti.spring-boot.version}</version>
             <type>pom</type>
         </dependency>
 

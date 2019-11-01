@@ -45,7 +45,12 @@ public class Menu  extends BaseDataEntity<Menu> {
      * 菜单排序
      */
     @Column(name="menu_sort")
-    private String menuSort;
+    private int menuSort;
+    /**
+     * 菜单图标
+     */
+    @Column(name="menu_icon")
+    private String menuIcon;
     //菜单子列表
     @Transient
     private List<Menu> subMenuList;

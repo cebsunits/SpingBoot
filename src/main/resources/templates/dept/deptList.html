@@ -1,140 +1,206 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>用户信息</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <!-- 引入font-awesome icons CSS  -->
-    <link rel="stylesheet" href="/webjars/font-awesome/css/fontawesome.min.css"></link>
-    <!-- 引入bootstrap插件样式 -->
-    <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
-    <!-- 引入dataTables插件 -->
-    <link rel="stylesheet" href="/webjars/datatables/css/jquery.dataTables.css"></link>
-    <script src="/webjars/jquery/jquery.min.js"></script>
+<!--引用通用head--->
+<head th:replace="common/commonHeader::common_header(~{::title},~{::link},~{})">
+    <title>部门列表</title>
+    <link rel="stylesheet" th:href="@{/webjars/zTree/css/zTreeStyle/zTreeStyle.css}"/>
 </head>
 <body>
-<div class="panel panel-default">
+<!--引用通用JS-->
+<div th:replace="common/commonFoot::foot(~{::script})">
+    <script th:src="@{/webjars/jquery-validation/jquery.validate.min.js}"></script>
+    <script th:src="@{/webjars/zTree/js/jquery.ztree.all.js}"></script>
+    <script th:src="@{/js/common.js}" ></script>
+    <script th:src="@{/js/zTreeCommon.js}" ></script>
+</div>
+<div class="wrapper wrapper-content ">
     <div class="panel-heading">
         <h3 class="panel-title">
             部门管理
         </h3>
     </div>
-    <div class="row">
-        <button onclick="toAdd()">新增</button>
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-body">
+                <div class="fixed-table-toolbar">
+                    <div class="columns pull-left">
+                        <button onclick="toAdd()" class="btn btn-primary">
+                            <i class="fa fa-plus hidden" aria-hidden="true"></i>添加
+                        </button>
+                        <button onclick="batchDelete()" class="btn btn-primary">
+                            <i class="fa fa-trash" aria-hidden="true"></i>删除
+                        </button>
+                    </div>
+                </div>
+                <div id="tableMain">
+                    <div>
+                        搜索：<input type="text" id="deptName" class="empty" style="width: 80px;margin-left: 3px;font-weight: normal;" placeholder="请输入部门名称"/>
+                    </div>
+                    <ul id="dataTree" class="ztree">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-    <table id="table_user"  class="table table-striped table-bordered" >
-        <thead>
-        <tr>
-            <th>部门编码</th>
-            <th>部门名称</th>
-            <th>备注</th>
-            <th>操作</th>
-        </tr>
-        </thead>
-    </table>
+    <div class="row">
+    </div>
 </div>
 
-<script src="/webjars/datatables/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
-
     // 第三步初始化Datatables
-    $(document).ready(function () {
-        dataTable();
+    $(function() {
+        initDept();
     });
-
-    function dataTable() {
-        // 第三步初始化Datatables
-        $('#table_user').DataTable({
-            autoWidth: false,  //禁用自动调整列宽
-            stripeClasses: ["odd", "even"],  //为奇偶行加上样式，兼容不支持CSS伪类的场合
-            processing: true,  //隐藏加载提示,自行处理
-            serverSide: true,  //启用服务器端分页
-            searching: false,  //禁用原生搜索
-            orderMulti: false,  //启用多列排序
-            order: [],  //取消默认排序查询,否则复选框一列会出现小箭头
-            renderer: "bootstrap",  //渲染样式：Bootstrap和jquery-ui
-            pagingType: "simple_numbers",  //分页样式：simple,simple_numbers,full,full_numbers
-            language: {
-                "lengthMenu": "每页 _MENU_ 条记录",
-                "zeroRecords": " ",
-                "info": "当前 _START_ 条到 _END_ 条 共 _TOTAL_ 条",
-                "infoEmpty": "无记录",
-                "infoFiltered": "(从 _MAX_ 条记录过滤)",
-                "paginate": {
-                    "first": "首页",
-                    "previous": "上一页",
-                    "next": "下一页",
-                    "last": "尾页"
-                }
-            },
-            columnDefs: [{
-                "targets": 'nosort',  //列的样式名
-                "orderable": false    //包含上样式名‘nosort’的禁止排序
-            }],
-            sAjaxSource: "/user/page",//url请求的地址
-            fnServerData: retrieveData,
-            //列表表头字段
-            columns: [
-                {data: 'deptCode'},
-                {data: 'deptName'},
-                {data: 'remarks'},
-                //新建列的 定义
-                {
-                    className: "td-operation text-center",
-                    data: null,
-                    defaultContent: "",
-                    orderable: false,
-                    width: "160px"
-                }
-            ],
-            //新建列的 数据内容
-            "createdRow": function (row, data, index) {
-                console.log(data);
-                var obj = JSON.stringify(data);
-                //行渲染回调,在这里可以对该行dom元素进行任何操作
-                var view = "<button class='manage-btn btn red btn-outline btn-sm' onclick='view(" + obj + ")'>查看</button>";
-                //行渲染回调,在这里可以对该行dom元素进行任何操作
-                var update = "<button class='manage-btn btn red btn-outline btn-sm' onclick='update(" + obj + ")'>更改</button>";
-                //行渲染回调,在这里可以对该行dom元素进行任何操作
-                var del = "<button class='manage-btn btn red btn-outline btn-sm' onclick='del(" + obj + ")'>删除</button>";
-                //渲染
-                var endDisplay=view+update+del;
-                $('td', row).eq(2).append(endDisplay);
+    //设置
+    var setting={
+        check: {
+            enable: true,
+            autoCheckTrigger: true,   //true / false 分别表示 触发 / 不触发 事件回调函数
+            chkStyle: "checkbox",
+            chkboxType: { "Y": "p", "N": "s" }   //勾选 checkbox 对于父子节点的关联关系
+        },
+        view:{
+            showLine: true,
+            showIcon: false
+        },
+        data: {
+            simpleData: {
+                enable: true
             }
-        });
+        },
+        callback: {
+            onClick:"",
+            beforeCheck: beforeCheckParam,
+            onCheck: onCheckParam
+        }
     }
 
-    //渲染数据
-    function retrieveData(url, data, fnCallback) {
-        //封装请求参数
-        var param = {};
-        param.pageSize = data.length;//页面显示记录条数，在页面显示每页显示多少项的时候
-        param.start = data.start;//开始的记录序号
-        param.pageNum = (data.start / data.length);//当前页码
-        //ajax请求数据方法
+    function beforeCheckParam(treeId, treeNode) {
+        if (treeNode.isParent) {
+            toastr.warning("请选择子节点！",0);
+            return false;
+        }
+    }
+    //获取选中的节点
+    function onCheckParam(e, treeId, treeNode) {
+        var treeObj=$.fn.zTree.getZTreeObj("dataTree"),
+            nodes=treeObj.getCheckedNodes(true),
+            v="";
+        for(var i=0;i<nodes.length;i++){
+            v+=nodes[i].name + ",";
+        }
+        var id_close = '';
+        for(var i=0;i<nodes.length;i++){
+            //判断是不是根节点
+            if(nodes[i].pId == null){
+                //判断根节点有没有下级了，没有下级，需要选中跟节点
+                if(nodes[i].children == undefined){
+                    id_close = id_close + ',' + nodes[i].id;
+                }
+            }else{
+                id_close = id_close + ',' + nodes[i].id
+            }
+        }
+        return id_close;
+    }
+    //ajax调用初始化方法
+    function initDept(){
         $.ajax({
-            type: "POST",
-            url: url,//url请求的地址
-            cache: false,  //禁用缓存
-            data: param,  //传入组装的参数
+            url: "/dept/list",
+            type: "post",
+            data: {},
             dataType: "json",
-            success: function (result) {
-                console.log("----"+JSON.stringify(result));
-                var data=JSON.stringify(result);
-                //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
-                //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
-                fnCallback(result);
+            success: function (data) {
+                var zNodes=[];
+                var datas=eval(data);
+                datas.forEach(function(dept){
+                    var node=new Object();
+                    node.id=dept.deptId;
+                    node.pId=dept.parentId;
+                    node.name=dept.deptName;
+                    zNodes.push(node);
+                });
+                //初始化tree树
+                var zTree = $.fn.zTree.init($("#dataTree"), setting,  zNodes);
+                zTreeAutoMatch('dataTree','#deptName',null,true); //初始化模糊搜索方法
+                zTree.expandAll(true);   //true 节点全部展开、false节点收缩
             },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                alert("status:" + XMLHttpRequest.status + ",readyState:" + XMLHttpRequest.readyState + ",textStatus:" + textStatus);
+            error: function (msg) {
+
             }
         });
     }
+
+
+
+    //批量删除
+    function batchDelete(){
+        var treeObj=$.fn.zTree.getZTreeObj("dataTree");
+        var rows=treeObj.getCheckedNodes(true);
+        if (rows.length == 0) {
+            toastr.warning("请选择要删除的数据");
+            return;
+        }
+        var ids = [];
+        // 遍历所有选择的行数据，取每条数据对应的ID
+        $.each(rows, function(i, row) {
+            ids[i] = row['id'];
+        });
+        console.log(rows+"--"+ids);
+        if(confirm("确定删除选中的部门信息？")){
+            $.ajax(
+                {
+                    type: "POST",
+                    url: "/dept/batchDelete",//url请求的地址
+                    cache: false,  //禁用缓存
+                    data: {deptIds:ids},  //传入组装的参数
+                    dataType: "json",
+                    traditional:true,
+                    success: function (result) {
+                        if(result.success){
+                            toastr.success('删除成功！');
+                            window.location.reload();
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        toastr.warning('删除失败！'+errorThrown);
+                    }
+                }
+            );
+        }
+    }
+    //单个删除
     function del(data){
-        alert("删除"+data);
+       if(confirm("确定删除本部门信息？")){
+            $.ajax(
+                {
+                    type: "POST",
+                    url: "/dept/delete",//url请求的地址
+                    cache: false,  //禁用缓存
+                    data: {deptId:data.deptId},  //传入组装的参数
+                    dataType: "json",
+                    success: function (result) {
+                        if(result.success){
+                            toastr.success('删除成功！');
+                            window.location.reload();
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        toastr.warning('删除失败！'+errorThrown);
+                    }
+                }
+            );
+       }
     }
     function toAdd(){
-        window.open("/dept/add");
+        var url="/dept/add";
+        openDialogView("新增部门",url,"800px","600px")
+    }
+    //添加下级
+    function addChild(obj) {
+        var url="/dept/add?deptId="+obj.deptId;
+        openDialogView("新增部门",url,"800px","600px")
     }
 </script>
 </body>

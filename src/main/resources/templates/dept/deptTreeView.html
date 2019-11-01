@@ -16,12 +16,33 @@
     <div class="wrapper wrapper-content">
         <div class="row">
             <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="input_search" clas="sr-only">快捷搜索：</label>
+                    <input type="text" class="form-control" id="input_search" placeholder="请输入要查询的部门名称">
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-success" id="btn-search">搜索</button>
+                    <button type="button" class="btn btn-default" id="btn-clear-search">清除</button>
+                </div>
+            </div>
+        </div>
+        <!--显示结果-->
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="search-output">
+
+                </div>
+            </div>
+        </div>
+        <!--显示树-->
+        <div class="row">
+            <div class="col-sm-12">
                 <div class="ibox-content">
                     <div id="deptTree"></div>
                 </div>
                 <div class="form-group hidden">
                     <div class="col-sm-12 col-sm-offset-12">
-                        <button type="submit" id="btn_select" class="btn btn-primary">提交</button>
+                        <button type="button" id="btn_select" class="btn btn-primary" onclick="selectDepts()">提交</button>
                         <button type="button" class="btn btn-secondary" onclick="javascript:window.top.close()">关闭</button>
                     </div>
                 </div>
@@ -31,14 +52,13 @@
 </div>
 <script type="text/javascript">
     var deptTree;
-    $(document).ready(
-        function () {
-            //获取树结构
-            getTreeData();
-            //点击提交时把选择的数据返回给父页面
-            $("#btn_select").click=selectDepts;
-        }
-    );
+    $(function() {
+        //获取树结构
+        getTreeData();
+        $('#btn-search').click=search();
+        $('#btn-search').keyup=search();
+        $('#btn-clear-search').click=clearSearch();
+    })
     //获取树信息
     function getTreeData() {
         //ajax请求数据方法
@@ -51,7 +71,7 @@
             success: function (result) {
                 if(result.success){
                     toastr.success('查询成功！');
-                    loadTree(result.data);
+                    deptTree= loadTree(result.data);
                 }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -60,46 +80,82 @@
             }
         });
     }
+    //加载树
     function loadTree(data) {
         deptTree= $("#deptTree").treeview(
             {
                 data:data,
                 level:5,
-                collapseIcon: "glyphicon glyphicon-minus",//可收缩的节点图标
-                nodeIcon: "glyphicon glyphicon-user",
-                expandIcon: "glyphicon glyphicon-plus",  //设置列表上中有子节点的图标
-                highlightSearchResults:true,//是否高亮搜索结果 默认true
-                highlightSelected:true,     //是否选中高亮显示
-                onhoverColor: "#f5f5f5",    //鼠标滑过的颜色
-                selectedIcon: 'glyphicon glyphicon-tint',
-                showBorder:true,                //是否显示边框
-                showCheckbox:true,             //是否显示多选框
-                onNodeSelected:onNodeSelected(event, data), //一个节点被选择。
-                nodeChecked :nodeChecked (event, data), //一个节点被checked。
-                nodeUnchecked:nodeUnchecked(event, data),//一个节点被unchecked。
-                nodeUnselected:nodeUnselected(event, data) //取消选择一个节点。
+                nodeIcon: "glyphicon",
+                selectedIcon: 'glyphicon',
+                showCheckbox:true,
+                multiSelect: true,
+                selectable:true,
+                //一个节点被选择。
+                onNodeSelected:function onNodeSelected(event, data){
+                    console.log("onNodeSelected"+data)
+                },
+                //取消选择一个节点。
+                onNodeUnselected:function nodeUnselected(event, data){
+                    console.log("onNodeUnselected"+data)
+                },
+                //一个节点被checked。
+                onNodeChecked :function nodeChecked (event, data){
+                    console.log("onNodeChecked"+data)
+                    console.log(JSON.stringify(data))
+                },
+                //一个节点被unchecked。
+                onNodeUnchecked:function nodeUnchecked(event, data){
+                    console.log("onNodeUnchecked"+data)
+                    console.log(JSON.stringify(data))
+                }
             }
         );
+        return deptTree;
+    }
+    //获取查询结果
+    function search(){
+        if(deptTree!=undefined){
+            var pattern = $.trim($('#input-search').val());
+            var options = {
+                ignoreCase: false,
+                exactMatch: false,
+                revealResults: true
+            };
+            var results = deptTree.treeview('search', [pattern, options]);
+            var output = '<p>' + results.length + ' 匹配的搜索结果</p>';
+            $.each(results,
+                function(index, result) {
+                    output += '<p>- <span style="color:red;">' + result.text + '</span></p>';
+                });
+            $('#search-output').html(output);
+        }
+    }
+    //清空
+    function clearSearch() {
+        if(deptTree!=undefined){
+            deptTree.treeview('clearSearch');
+            $('#input-search').val('');
+            $('#search-output').html('');
+            $('#deptTree').treeview('collapseAll', {
+                silent: false //设置初始化节点关闭
+            });
+        }
     }
     //点击提交时把选择的数据返回给父页面
     function selectDepts() {
-        if(deptTree!=undefined){
-            var depts=deptTree.getChecked;
-            console.log(depts)
-        }
-    }
-
-    function onNodeSelected(event, data){
-        console.log("onNodeSelected"+data)
-    }
-    function nodeUnselected(event, data){
-        console.log("nodeUnselected"+data)
-    }
-    function nodeChecked(event, data){
-        console.log("nodeChecked"+data)
-    }
-    function nodeUnchecked(event, data){
-        console.log("nodeUnchecked"+data)
+        var objs = $("#deptTree").find(":checkbox:checked");
+        //选择的部门数组
+        var depts=new Array();
+        $.each(objs,function () {
+            console.log(JSON.stringify($(this)))
+            $(this).next().nodeId();
+            //获取text 部门名称
+            var deptName=$(this).next().text();
+        });
+        console.log(objs+"----")
+        var depts=deptTree.getChecked;
+        console.log("----"+depts)
     }
 </script>
 </body>

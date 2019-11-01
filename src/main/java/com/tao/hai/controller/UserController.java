@@ -22,7 +22,11 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
-
+/**
+ * @author zhanght
+ * @description 用户管理，表格采用datatables方式进行展示
+ *
+ * */
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
