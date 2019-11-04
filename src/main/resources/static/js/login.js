@@ -3,47 +3,37 @@ $(document).ready(function () {
     //引入消息提醒框，置于底部
     toastr.options.positionClass = 'toast-bottom-right';
     //监听登录按钮
-    $("#btn_login").click=login;
+    $("#btn_login").on('click', function () {
+        $("#loginForm").submit();
+    });
     //校验规则
-    validate();
+    validateRule();
     $("body").keydown(keyDownLogon);
 
     $("#imgVerify").click();
 });
 
 $.validator.setDefaults({
-    submitHandler: function () {
+    submitHandler: function (form) {
         login();
     }
 });
 //登录
 function login() {
-    var loginName=$("#loginName").val();
-    var password=$("#password").val();
-    var key = CryptoJS.enc.Utf8.parse(loginName);
-    var newPassword = CryptoJS.enc.Utf8.parse(password);
-    var encrypted = CryptoJS.MD5(newPassword);
-    var verifyCode1=$("#verifyCode").val();
-    // .encrypt(newPassword, key, {mode: CryptoJS.mode.ECB, padding: CryptoJS.pad.Pkcs7});
-    var encryptedPwd = encrypted.toString();
-    var data={
-        loginName:loginName,
-        password:encryptedPwd,
-        verifyCode:verifyCode1
-    }
+    var data=$('#loginForm').serialize();
     $.ajax({
         type: "POST",
-        url: ctx + "login",
+        url: "/login",
         data: data,
         success: function (result) {
             console.log(result)
             //请求成功时
             if(result.success){
                 toastr.success(result.message);
-                parent.location.href=ctx+"/index";
+                parent.location.href="/index";
             }else{
                 toastr.warning(result.message);
-                parent.location.href=ctx+"/login";
+                parent.location.href="/login";
             }
         },
     });
@@ -85,7 +75,7 @@ function validateRule() {
 
 /**bootstrap验证方式*/
 function validate(){
-    $('#userForm').bootstrapValidator({
+    $('#loginForm').bootstrapValidator({
         live: 'enabled',//验证时机，enabled是内容有变化就验证（默认），disabled和submitted是提交再验证
         excluded: [':disabled', ':hidden', ':not(:visible)'],//排除无需验证的控件，比如被禁用的或者被隐藏的
         // submitButtons: '#btn_save',//指定提交按钮，如果验证失败则变成disabled
