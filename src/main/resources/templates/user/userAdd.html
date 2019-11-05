@@ -13,7 +13,7 @@
         <script th:src="@{/webjars/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js}"></script>
         <script th:src="@{/webjars/cryptojs/components/md5-min.js}"></script>
         <script th:src="@{/js/common.js}"></script>
-        <script th:src="@{/js/user.js}"></script>
+        <script th:src="@{/js/sys/user/user.js}"></script>
     </div>
     <div class="container-fluid panel-body">
         <form id="userForm" class="form-horizontal validation-form" action="/user/save" method="post">
@@ -22,6 +22,7 @@
             <input type="hidden" name="createDate" id="createDate" th:value="${#dates.format(user.createDate, 'yyyy-MM-dd HH:mm:ss')}">
             <input type="hidden" name="updateDate" id="updateDate" th:value="${#dates.format(user.updateDate, 'yyyy-MM-dd HH:mm:ss')}" >
             <input type="hidden" name="delFlag" id="delFlag" th:value="${user.delFlag}">
+            <input type="hidden" name="oldLoginName" id="oldLoginName" th:value="${user.loginName}">
             <div class="panel-body">
                 <div class="form-inline">
                     <label for="userName" class="col-sm-2 control-label"style="white-space:nowrap">用户名</label>

@@ -11,7 +11,6 @@ import com.tao.hai.facotry.LogFactory;
 import com.tao.hai.json.AjaxError;
 import com.tao.hai.json.AjaxJson;
 import com.tao.hai.json.AjaxSuccess;
-import com.tao.hai.json.BootStrapValidatorJson;
 import com.tao.hai.service.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.crypto.hash.Md5Hash;
@@ -194,23 +193,30 @@ public class UserController {
 
     @RequestMapping("/checkUserExists")
     @ResponseBody
-    public Object checkUserExists(String loginName) {
-        BootStrapValidatorJson bootStrapValidatorJson=new BootStrapValidatorJson();
+    public Object checkUserExists(String oldLoginName,String loginName) {
+        AjaxJson ajaxJson;
         if (StringUtils.isNotEmpty(loginName)) {
-            boolean result = userService.checkUserExists(loginName);
-            //已经存在用户
-            if(result){
-                bootStrapValidatorJson.setValid(false);
-                bootStrapValidatorJson.setMessage("用户已存在，请更换用户名！");
+            /**如果存在旧的登录名，并且旧的登录名与新登录名一样，则验证通过*/
+            if(StringUtils.isNotEmpty(oldLoginName)&&oldLoginName.equals(loginName)){
+                ajaxJson=new AjaxSuccess();
+                ajaxJson.setMessage("用户名可用！");
             }else{
-                bootStrapValidatorJson.setValid(true);
-                bootStrapValidatorJson.setMessage("用户名可用！");
+                /**验证新用户名是否已存在，存在则提示更换用户名*/
+                boolean result = userService.checkUserExists(loginName);
+                //已经存在用户
+                if(result){
+                    ajaxJson=new AjaxError();
+                    ajaxJson.setMessage("用户已存在，请更换用户名！");
+                }else{
+                    ajaxJson=new AjaxSuccess();
+                    ajaxJson.setMessage("用户名可用！");
+                }
             }
         } else {
-            bootStrapValidatorJson.setValid(false);
-            bootStrapValidatorJson.setMessage("请输入用户名！");
+            ajaxJson=new AjaxError();
+            ajaxJson.setMessage("请输入用户名！");
         }
-        return bootStrapValidatorJson;
+        return ajaxJson;
     }
 
 
@@ -271,99 +277,65 @@ public class UserController {
     }
 
     @RequestMapping(value = "/toChangePassword")
-    public String toChangePassword(String password, String newPassword, String newPassword2) {
-        return "/user/changePwd";
+    public String toChangePassword() {
+        return "/user/userPasswordReset";
     }
 
 
     @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
     @ResponseBody
-    public Object changePassword(HttpServletRequest request) {
-        Map<String, String> map = new HashMap<>();
-        String password = request.getParameter("password");
-        String newPassword = request.getParameter("newPassword");
-        String newPassword2 = request.getParameter("newPassword2");
-
-        if (StringUtils.isEmpty(newPassword)) {
-            map.put("success", "false");
-            map.put("result", "密码不能为空");
-            return map;
+    public Object changePassword(String oldPassword, String newPassword, Model model) {
+        User user = loginService.getCurrentUser();
+        AjaxJson ajaxJson;
+        if (user==null) {
+            ajaxJson=new AjaxError();
+            ajaxJson.setMessage("获取当前用户信息失败!");
+            return ajaxJson;
         }
-
-        if (!newPassword.equals(newPassword2)) {
-            map.put("success", "false");
-            map.put("result", "两次密码输入不一样");
-            return map;
-        }
-
-        if (newPassword.length() < 6) {
-            map.put("success", "false");
-            map.put("result", "密码长度必须大于6位");
-            return map;
-        }
-
-
-        String userName = loginService.getCurrentUserName();
-        if (StringUtils.isEmpty(userName)) {
-            map.put("success", "false");
-            map.put("result", "用户错误");
-            return map;
-        }
-        User user = userService.getUser(userName);
-        if (user == null) {
-            map.put("success", "false");
-            map.put("result", "用户错误");
-            return map;
-        }
-
-        Md5Hash md5Hash = new Md5Hash(password, user.getCredentialsSalt(), hashIterations);
+        /**验证密码是否正确*/
+        Md5Hash md5Hash = new Md5Hash(oldPassword, user.getCredentialsSalt(), hashIterations);
         String encryptPwd = md5Hash.toString();
         if (!encryptPwd.equals(user.getPassword())) {
-            map.put("success", "false");
-            map.put("result", "当前用户密码不正确");
-            return map;
+            ajaxJson=new AjaxError();
+            ajaxJson.setMessage("当前用户密码不正确!");
+            return ajaxJson;
         }
-
-
+        /**更改密码*/
         Md5Hash md5HashNew = new Md5Hash(newPassword, user.getCredentialsSalt(), hashIterations);
         String encryptNewPwd = md5HashNew.toString();
         user.setPassword(encryptNewPwd);
-        userService.save(user);
-        map.put("success", "true");
-        map.put("result", "密码修改成功，请重新登录");
-        map.put("url", "/logout");
+        userService.updatePassword(user);
+        ajaxJson=new AjaxSuccess();
+        ajaxJson.setMessage("密码修改成功，请重新登录");
         logService.save(LogFactory.createSysLog("修改密码", "成功"));
-        return map;
+        return ajaxJson;
     }
-
+    /***bootstrap validator remote 验证方法*/
     @RequestMapping(value = "/toCheckPwd")
     @ResponseBody
     public Object checkCurrentPwd(@RequestParam String password) {
-        Map<String, Boolean> map = new HashMap<>();
+        AjaxJson ajaxJson;
         if (StringUtils.isEmpty(password)) {
-            map.put("valid", false);
-            return map;
+            ajaxJson=new AjaxError();
+            ajaxJson.setMessage("密码不能为空！");
+            return ajaxJson;
         }
-
-        String userName = loginService.getCurrentUserName();
-        if (StringUtils.isEmpty(userName)) {
-            map.put("valid", false);
-            return map;
-        }
-        User user = userService.getUser(userName);
+        User user = loginService.getCurrentUser();
         if (user == null) {
-            map.put("valid", false);
-            return map;
+            ajaxJson=new AjaxError();
+            ajaxJson.setMessage("获取当前登录用户信息失败！");
+            return ajaxJson;
         }
         Md5Hash md5HashNew = new Md5Hash(password, user.getCredentialsSalt(), hashIterations);
         String encryptPwd = md5HashNew.toString();
         if (!encryptPwd.equals(user.getPassword())) {
-            map.put("valid", false);
-            return map;
+            ajaxJson=new AjaxError();
+            ajaxJson.setMessage("密码错误！");
+            return ajaxJson;
         }
-
-        map.put("valid", true);
-        return map;
+        ajaxJson=new AjaxSuccess();
+        ajaxJson.setMessage("验证密码成功！");
+        return ajaxJson;
     }
 
 }

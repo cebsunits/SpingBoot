@@ -1,20 +1,25 @@
 package com.tao.hai.config;
 
+import com.tao.hai.listener.ShiroSessionListener;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.mgt.SessionsSecurityManager;
+import org.apache.shiro.session.SessionListener;
+import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
 import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 /**
  * @description: shiro配置文件
- * @author: wxj
- * @create: 2019-05-28
  **/
 
 @Configuration
@@ -117,7 +122,21 @@ public class ShiroConfig {
     public SessionsSecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(customRealm());
+        securityManager.setSessionManager(sessionManager());
         return securityManager;
     }
-
+    /**session监听*/
+    @Bean("sessionListener")
+    public SessionListener sessionListener(){
+        ShiroSessionListener shiroSessionListener=new ShiroSessionListener();
+        return shiroSessionListener;
+    }
+    @Bean
+    public SessionManager sessionManager(){
+        DefaultWebSessionManager sessionManager=new DefaultWebSessionManager();
+        Collection<SessionListener> listeners=new ArrayList<>();
+        listeners.add(sessionListener());
+        sessionManager.setSessionListeners(listeners);
+        return sessionManager;
+    }
 }

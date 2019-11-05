@@ -23,12 +23,10 @@ public class SpringBootShrioRealm extends AuthorizingRealm {
     //权限信息，包括角色以及权限
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        System.out.println("权限配置-->MyShiroRealm.doGetAuthorizationInfo()");
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         //如果身份认证的时候没有传入User对象，这里只能取到userName
         //也就是SimpleAuthenticationInfo构造的时候第一个参数传递需要User对象
         User user  = (User)principals.getPrimaryPrincipal();
-
         for(Role role:user.getRoleList()){
             authorizationInfo.addRole(role.getRole());
             for(Permission p:role.getPermissionList()){
@@ -47,15 +45,11 @@ public class SpringBootShrioRealm extends AuthorizingRealm {
         if (userName == null) {
             throw new AccountException("Null usernames are not allowed by this realm.");
         }
-
-        System.out.println("身份认证-->MyShiroRealm.doGetAuthenticationInfo()");
-
         //通过username从数据库中查找 User对象，如果找到，没找到.
         //实际项目中，这里可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
         String version = userService.getDbVersion();
         System.out.println(version);
         User user = userService.getUser(userName);
-        System.out.println("-->>user=" + user);
         if (user == null) {
             throw new UnknownAccountException("No account found for admin [" + userName + "]");
         }

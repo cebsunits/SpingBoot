@@ -14,7 +14,40 @@
 <div th:replace="common/commonFoot::foot(~{::script})">
 	<script th:src="@{/webjars/metisMenu/metisMenu.min.js}"></script>
 	<script th:src="@{/js/contabs.js}"></script>
-	<script th:src="@{/js/index.js}"></script>
+	<script th:src="@{/webjars/sockjs-client/sockjs.min.js}"></script>
+	<script th:src="@{/webjars/stomp-websocket/stomp.min.js}"></script>
+	<script th:src="@{/js/websocket/StompUtil.js}"></script>
+	<script th:src="@{/js/sys/index.js}"></script>
+	<script type="text/javascript">
+		/**创建stomp client 对象*/
+		var options = {
+			connectType: "sockjs"
+		};
+		var topicMessage;
+		var userMessage;
+		var stompClient = new StompUtil(options);
+		stompClient.connect( function (frame) {
+			//监听全局通知
+			topicMessage = stompClient.subscribe("/topic/message", function (rsp) {
+				console.log('++++++监听全局通知+++++++');
+			});
+			//监听用户登出通知
+			userMessage = stompClient.subscribeByUser("/user/logout", function (data) {
+				console.log('++++++监听用户通知+++++++');
+				if(data){
+					window.location.href = "/logout";
+				}
+			});
+			$('#page-wrapper').html(' <iframe onload="this.height=window.innerHeight*0.8" style="width: 100%;" src="" frameborder="0"></iframe>');
+			$("#webSocketStatus").html("已连接");
+			$("#webSocketStatus").css("color","#00bb00");
+		},function (frame) {
+			console.log("已断开");
+			$("#webSocketStatus").html("已断开");``
+			$("#webSocketStatus").css("color","#d9534f");
+		});
+
+	</script>
 </div>
 <div class="wrapper">
 	<!--左侧导航开始-->
@@ -211,6 +244,7 @@
 	</div>
 	<!--底部footer-->
 	<div class="footer">
+		<span id="webSocketStatus" style="margin-right:30px;float:right;text-align:center;font-size: 75%;font-weight: bold;color: #d9534f;" >未连接</span><label style="font-size:88%;float:right;color: #FEFEFE">网络状态:&nbsp;&nbsp;</label>
 		<div class="pull-right">BootDo面向学习型的开源框架</div>
 	</div>
 </div>

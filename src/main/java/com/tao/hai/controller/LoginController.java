@@ -14,6 +14,7 @@ import com.tao.hai.service.LogService;
 import com.tao.hai.service.LoginService;
 import com.tao.hai.service.MenuService;
 import com.tao.hai.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +34,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
+import java.util.Calendar;
 import java.util.List;
 
 @Controller
@@ -42,6 +44,9 @@ public class LoginController {
     //验证码过期时间默认60秒
     @Value("${login.verifyTTL}")
     private long verifyTTL=60;
+    //密码过期时间天
+    @Value("${login.password.expireDate}")
+    private int passwordExpireDate=90;
     @Autowired
     LoginService loginService;
     @Autowired
@@ -58,6 +63,17 @@ public class LoginController {
         User user = loginService.getCurrentUser();
         if (user==null) {
             return "login";
+        }
+        /**1、验证密码是否过期*/
+        Calendar resetDate=Calendar.getInstance();
+        if(user.getExpiredDate()!=null){
+            resetDate.setTime(user.getExpiredDate());
+        }
+        resetDate.add(Calendar.DAY_OF_YEAR,passwordExpireDate);
+        Calendar nowDate=Calendar.getInstance();
+        if(resetDate.before(nowDate)){
+            model.addAttribute("message", "您的密码已过期，请重新设置密码");
+            return "user/userPasswordReset";
         }
         /**用户ID*/
         String userId=user.getUserId();

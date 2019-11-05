@@ -47,7 +47,7 @@ public class User extends BaseDataEntity<User> {
     private String phone;
 
     /**
-     * 电话
+     * 有效期
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JSONField(format = "yyyy-MM-dd")

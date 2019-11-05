@@ -6,7 +6,6 @@ import com.tao.hai.facotry.LogFactory;
 import com.tao.hai.json.AjaxError;
 import com.tao.hai.json.AjaxJson;
 import com.tao.hai.json.AjaxSuccess;
-import com.tao.hai.json.BootStrapValidatorJson;
 import com.tao.hai.service.DeptService;
 import com.tao.hai.service.LogService;
 import org.apache.commons.lang3.StringUtils;
@@ -101,22 +100,22 @@ public class DeptController {
     @RequestMapping("/checkUserExists")
     @ResponseBody
     public Object checkUserExists(String deptName) {
-        BootStrapValidatorJson bootStrapValidatorJson = new BootStrapValidatorJson();
+        AjaxJson ajaxJson;
         if (StringUtils.isNotEmpty(deptName)) {
             boolean result = deptService.checkDeptExists(deptName);
             //已经存在用户
             if (result) {
-                bootStrapValidatorJson.setValid(false);
-                bootStrapValidatorJson.setMessage("部门已存在，请重新输入！");
+                ajaxJson=new AjaxError();
+                ajaxJson.setMessage("部门已存在，请重新输入！");
             } else {
-                bootStrapValidatorJson.setValid(true);
-                bootStrapValidatorJson.setMessage("部门名称可用！");
+                ajaxJson=new AjaxSuccess();
+                ajaxJson.setMessage("部门名称可用！");
             }
         } else {
-            bootStrapValidatorJson.setValid(false);
-            bootStrapValidatorJson.setMessage("请输入部门名称！");
+            ajaxJson=new AjaxError();
+            ajaxJson.setMessage("请输入部门名称！");
         }
-        return bootStrapValidatorJson;
+        return ajaxJson;
     }
 
 

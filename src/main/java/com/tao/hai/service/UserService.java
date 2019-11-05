@@ -166,4 +166,10 @@ public class UserService extends BaseServiceImpl<UserDao, User> {
         }
         return isExists;
     }
+    /**
+     * 添加redis缓存
+     */
+    public void updatePassword(User user) {
+        super.save(user);
+    }
 }

@@ -5,8 +5,8 @@ import com.tao.hai.base.DataTablePage;
 import com.tao.hai.bean.Role;
 import com.tao.hai.facotry.LogFactory;
 import com.tao.hai.json.AjaxError;
+import com.tao.hai.json.AjaxJson;
 import com.tao.hai.json.AjaxSuccess;
-import com.tao.hai.json.BootStrapValidatorJson;
 import com.tao.hai.service.LogService;
 import com.tao.hai.service.RoleService;
 import org.apache.commons.lang3.StringUtils;
@@ -84,22 +84,22 @@ public class RoleController {
     @RequestMapping("/checkRoleExists")
     @ResponseBody
     public Object checkRoleExists(String role) {
-        BootStrapValidatorJson bootStrapValidatorJson = new BootStrapValidatorJson();
+        AjaxJson ajaxJson ;
         if (StringUtils.isNotEmpty(role)) {
             boolean result = roleService.checkRoleExists(role);
             //已经存在用户
             if (result) {
-                bootStrapValidatorJson.setValid(false);
-                bootStrapValidatorJson.setMessage("角色已存在！");
+                ajaxJson=new AjaxError();
+                ajaxJson.setMessage("角色已存在！");
             } else {
-                bootStrapValidatorJson.setValid(true);
-                bootStrapValidatorJson.setMessage("角色可用！");
+                ajaxJson=new AjaxSuccess();
+                ajaxJson.setMessage("角色可用！");
             }
         } else {
-            bootStrapValidatorJson.setValid(false);
-            bootStrapValidatorJson.setMessage("请输入角色！");
+            ajaxJson=new AjaxError();
+            ajaxJson.setMessage("请输入角色！");
         }
-        return bootStrapValidatorJson;
+        return ajaxJson;
     }
 
 
