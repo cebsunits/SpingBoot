@@ -10,6 +10,7 @@
 	<link rel="stylesheet" th:href="@{/css/SidebarNav.min.css}"></link>
 </head>
 <body class="fixed-sidebar full-height-layout  gray-bg">
+<input type="hidden" name="userName" id="userName" th:value="${user.loginName}">
 <!--引用通用JS-->
 <div th:replace="common/commonFoot::foot(~{::script})">
 	<script th:src="@{/webjars/metisMenu/metisMenu.min.js}"></script>
@@ -17,6 +18,7 @@
 	<script th:src="@{/webjars/sockjs-client/sockjs.min.js}"></script>
 	<script th:src="@{/webjars/stomp-websocket/stomp.min.js}"></script>
 	<script th:src="@{/js/websocket/StompUtil.js}"></script>
+	<script th:src="@{/js/common.js}"></script>
 	<script th:src="@{/js/sys/index.js}"></script>
 	<script type="text/javascript">
 		/**创建stomp client 对象*/
@@ -26,13 +28,14 @@
 		var topicMessage;
 		var userMessage;
 		var stompClient = new StompUtil(options);
-		stompClient.connect( function (frame) {
+		var userName=$("#userName").val();
+		stompClient.connect( {},function (frame) {
 			//监听全局通知
 			topicMessage = stompClient.subscribe("/topic/message", function (rsp) {
 				console.log('++++++监听全局通知+++++++');
 			});
 			//监听用户登出通知
-			userMessage = stompClient.subscribeByUser("/user/logout", function (data) {
+			userMessage = stompClient.subscribeByUser("/user/"+userName+"/logout", function (data) {
 				console.log('++++++监听用户通知+++++++');
 				if(data){
 					window.location.href = "/logout";
@@ -43,13 +46,24 @@
 			$("#webSocketStatus").css("color","#00bb00");
 		},function (frame) {
 			console.log("已断开");
-			$("#webSocketStatus").html("已断开");``
+			$("#webSocketStatus").html("已断开");
 			$("#webSocketStatus").css("color","#d9534f");
 		});
+
+		/**更改密碼*/
+		function userInfo(title) {
+			if(title=="密码修改"){
+				openDialog(title, '/user/toChangePassword','800px', '600px');
+			}else{
+				var userId=$("#userId").val();
+				openDialog(title, '/user/edit?userId='+userId,'800px', '600px');
+			}
+		}
 
 	</script>
 </div>
 <div class="wrapper">
+	<input type="hidden" id="userId" th:value="${user.userId}">
 	<!--左侧导航开始-->
 	<nav class="navbar-default navbar-static-side" role="navigation">
 		<div class="nav-close">
@@ -60,7 +74,7 @@
 				<li class="nav-header">
 					<div>
 						<span>
-							<img alt="image" class="img-circle" height="60" width="60" th:src="${pickUrl}">
+							<img alt="image" class="img-circle" height="60" width="60" th:src="${user.pickUrl}">
 						</span>
 						<h3 style="color: #ffffff ">
 							<i>管理系统</i>
@@ -77,16 +91,19 @@
 						</a>
 						<ul class="dropdown-menu animated fadeInRight m-t-xs">
 							<li>
-								<a @click="personal" href="#">修改头像</a>
+								<a onclick="userInfo('修改头像')" href="#">
+									<i class="fa fa-plus"></i>修改头像
+								</a>
 							</li>
 							<li>
-								<a @click="personal" href="#">个人资料</a>
+								<a onclick="userInfo('个人资料')" href="#">
+									<i class="fa fa-plus"></i>个人资料
+								</a>
 							</li>
 							<li>
-								<a @click="personal" href="#">密码修改</a>
-							</li>
-							<li>
-								<a @click="personal" href="#">信箱</a>
+								<a onclick="userInfo('密码修改')" href="#">
+									<i class="fa fa-plus"></i>密码修改
+								</a>
 							</li>
 							<li class="divider">
 							</li>

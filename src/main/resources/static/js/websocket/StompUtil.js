@@ -26,11 +26,8 @@ function StompUtil(options) {
     var subsCallBackMap = {};
     /**用户名*/
     var userName;
-    /**头部信息*/
-    var headers;
     //初始化链接
     init(options);
-
     //初始化链接
     function init(options) {
         if (!options) {
@@ -61,11 +58,6 @@ function StompUtil(options) {
             reconnectCount = options.maxReconnectCount;
         }
 
-        if(options.headers){
-            headers=options.headers;
-        }else{
-            initHeaders();
-        }
     }
     /**准备方法*/
     this.prepare=function () {
@@ -79,17 +71,25 @@ function StompUtil(options) {
         stompClient.heartbeat.incoming=heartBeatTime;
     }
     /**连接方法*/
-    this.connect=function (successCallBack,failureCallBack) {
-        doConnect(successCallBack, failureCallBack, this);
+    this.connect=function (headers, successCallBack,failureCallBack) {
+        doConnect(headers, successCallBack, failureCallBack, this);
     }
     /***建立连接*/
-    function doConnect(successCallback,failureCallBack, _this) {
+    function doConnect(headers, successCallback,failureCallBack, _this) {
         /***如果已经创建则无需创建websocket连接*/
         if (stompClient && stompClient.connected) {
             return;
         }
         /**准备方法*/
         _this.prepare();
+        /**获取消息头*/
+        if (headers == undefined || headers === {}) {
+            headers = {
+                login: 'guest',
+                passcode: 'guest',
+                serverIncoming: heartBeatTime
+            };
+        }
         /**调用stomp连接*/
         stompClient.connect(headers,function (frame) {
             var tempSubscribeCallBackMap=subsCallBackMap;
@@ -108,7 +108,7 @@ function StompUtil(options) {
             }
         },function (frame) {
             userName=undefined;
-            _this.connect(successCallback,failureCallBack);
+            _this.connect(headers, successCallback,failureCallBack);
             if(failureCallBack){
                 failureCallBack(frame);
             }
@@ -132,9 +132,9 @@ function StompUtil(options) {
             subsCallBackMap[destination] = callback;
             throw "websocket未连接，先调用connect(...)方法";
         }
-        var des = destination.substring(0, destination.indexOf("/", 2)) + "/" + userName + "/" + destination.substring(destination.indexOf("/", 2), destination.length);
-        console.log("*************************"+des);
-        return doSubscribe(des, callback);
+        // var des = destination.substring(0, destination.indexOf("/", 2)) + "/" + userName + "/" + destination.substring(destination.indexOf("/", 2), destination.length);
+        // console.log("*************************"+des);
+        return doSubscribe(destination, callback);
     };
     /**创建订阅信息*/
     function doSubscribe(destination,callback) {
@@ -152,11 +152,11 @@ function StompUtil(options) {
             }catch (e) {
                 console.dir("subscribe callback error"+e+",data="+event.body)
             }
-        },headers);
+        });
     }
     /**发送消息*/
    this.send=function (destination,body){
-        return stompClient.send(destination,headers,body);
+        return stompClient.send(destination,{},body);
     }
     /**断开连接*/
     this.disconnect=function (callback){
@@ -166,21 +166,11 @@ function StompUtil(options) {
                 if(callback){
                     callback(event);
                 }
-            },headers);
+            });
         }
     }
     /**调试模式*/
-    this.debug=function (isDebug) {
-        debug=isDebug;
-    }
-    /**获取headers*/
-    function initHeaders(){
-        if (headers == undefined || headers === {}) {
-            headers = {
-                login: 'guest',
-                passcode: 'guest',
-                serverIncoming: heartBeatTime
-            };
-        }
+    this.debug=function () {
+        debug=true;
     }
 }

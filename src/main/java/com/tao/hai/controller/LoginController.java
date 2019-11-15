@@ -1,6 +1,5 @@
 package com.tao.hai.controller;
 
-import com.github.pagehelper.util.StringUtil;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.tao.hai.bean.Log;
 import com.tao.hai.bean.LoginUser;
@@ -14,7 +13,6 @@ import com.tao.hai.service.LogService;
 import com.tao.hai.service.LoginService;
 import com.tao.hai.service.MenuService;
 import com.tao.hai.service.UserService;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,6 +76,8 @@ public class LoginController {
         /**用户ID*/
         String userId=user.getUserId();
         List<Menu> menuList=menuService.getUserList(userId);
+
+        model.addAttribute("username",user.getLoginName());
         model.addAttribute("user", user);
         model.addAttribute("menuList", menuList);
 

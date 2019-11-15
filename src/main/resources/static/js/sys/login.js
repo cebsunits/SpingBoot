@@ -26,7 +26,7 @@ function login() {
         url: "/login",
         data: data,
         success: function (result) {
-            console.log(result)
+            console.log(result);
             //请求成功时
             if(result.success){
                 toastr.success(result.message);

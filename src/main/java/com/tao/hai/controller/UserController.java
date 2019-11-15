@@ -277,7 +277,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "/toChangePassword")
-    public String toChangePassword() {
+    public String toChangePassword(Model model) {
+        User user = loginService.getCurrentUser();
+        model.addAttribute("user",user);
         return "/user/userPasswordReset";
     }
 

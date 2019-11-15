@@ -60,6 +60,11 @@ public class User extends BaseDataEntity<User> {
     @Column(name="remarks")
     private String remarks;
     /**
+     * 头像
+     */
+    @Column(name="pick_url")
+    private String pickUrl;
+    /**
      * 部门
      */
     @Transient

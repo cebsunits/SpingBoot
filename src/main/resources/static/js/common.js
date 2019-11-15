@@ -24,3 +24,30 @@ function openDialogView(title, url, width, height){
         }
     }, 1);
 }
+
+/**打开窗口*/
+function openDialog(title, url, width, height){
+    /**如果是移动端则进行自适应匹配显示*/
+    if(navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i)){
+        width='auto';
+        height='auto';
+    }
+    //彈出框
+    layui.use('layer',function () {
+        var layer=layui.layer;
+        layer.open({
+            type:2,
+            title:title,
+            content:url,
+            area:[width,height],
+            maxmin:true,
+            shadeClose:false
+        });
+    });
+}
+
+/**关闭窗口*/
+function windowClose(){
+    var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+    parent.layer.close(index); //再执行关闭
+}
