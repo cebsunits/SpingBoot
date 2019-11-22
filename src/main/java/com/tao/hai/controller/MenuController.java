@@ -48,25 +48,14 @@ public class MenuController {
         } else {
             readOnly = "false";
         }
-        /**判断是否为父节点*/
-        if(StringUtils.isEmpty(menu.getParentId())){
-            menu.setParentId(Menu.getRootId());
-        }
+        //获取父节点信息
         Menu parent=new Menu();
         parent.setMenuId(menu.getParentId());
         Menu mParent=null;
-        try {
+        if(StringUtils.isEmpty(menu.getParentId())){
+            mParent=new Menu();
+        }else{
             mParent=menuService.get(parent);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        /**当为第一次新增时需要对根目录进行处理*/
-        if(menu.getParentId().equals(Menu.getRootId())){
-            if(mParent==null){
-                mParent=new Menu();
-                mParent.setMenuId(menu.getParentId());
-                mParent.setMenuName("根目录");
-            }
         }
         menu.setParent(mParent);
         /**只读属性*/
@@ -76,6 +65,7 @@ public class MenuController {
     }
     /**保存方法*/
     @RequestMapping(value="save")
+    @ResponseBody
     public Object save(Menu menu,Model model){
         AjaxJson ajaxJson;
         try {

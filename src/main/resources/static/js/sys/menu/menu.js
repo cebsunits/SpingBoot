@@ -5,10 +5,6 @@ $(function () {
     $("#ico-btn").click(function () {
         openDialog("图标管理","/tagIcon.html","480px","80%");
     });
-
-    $("#saveBtn").click(function () {
-        $("#menuForm").submit();
-    });
 });
 $.validator.setDefaults({
     submitHandler: function () {
@@ -27,9 +23,9 @@ function menuSave() {
             //请求成功时
             if(result.success){
                 parent.toastr.success(result.message);
-                parent.reLoad();
-                var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-                parent.layer.close(index);
+                parent.location.reload();
+                /**关闭窗口*/
+                windowClose();
             }else{
                 toastr.warning(result.message);
             }
@@ -39,7 +35,7 @@ function menuSave() {
 //jquery验证方式
 function validateRule() {
     var icon = "<i class='fa fa-times-circle'></i> ";
-    $("#loginForm").validate({
+    $("#menuForm").validate({
         rules: {
             menuName: {
                 required: true
