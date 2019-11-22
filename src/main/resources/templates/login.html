@@ -3,8 +3,6 @@
 <!--引用通用head--->
 <head th:replace="common/commonHeader::common_header(~{::title},~{::link},~{})">
 	<title>登录管理</title>
-	<link rel="stylesheet" th:href="@{/css/custom.css}"></link>
-	<link rel="stylesheet" th:href="@{/css/style.css}"></link>
 	<link rel="stylesheet" th:href="@{/css/login.css}"></link>
 </head>
 <body >
@@ -46,7 +44,8 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<button type="submit" id="btn_login" class="btn btn-success center-block">登录</button>
+<!--						<a  id="btn_login" class="btn btn-success btn-block">登录</a>-->
+						<input type="button" id="btn_login" class="btn btn-success center-block" value="登录"/>
 					</div>
 				</form>
 			</div>

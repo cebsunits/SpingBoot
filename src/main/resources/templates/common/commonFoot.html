@@ -18,9 +18,12 @@
 <!--    <script th:src="@{/webjars/layui/lay/modules/layer.js}"></script>-->
     <!-- 消息提醒框JS -->
     <script th:src="@{/webjars/toastr/build/toastr.min.js}" ></script>
+    <!--公用js-->
+    <script th:src="@{/js/common/common.js}"></script>
     <!-- 引入支持多种浏览器的JS -->
     <script th:src="@{/webjars/html5shiv/html5shiv.min.js}"></script>
     <script th:src="@{/webjars/respond/dest/respond.min.js}"></script>
+    <!-- js获取项目路径 -->
     <script th:inline="javascript">
         var ctx = [[@{/}]] ;
     </script>

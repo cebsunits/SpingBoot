@@ -40,12 +40,12 @@ public class Menu  extends BaseDataEntity<Menu> {
      * 是否显示 0：隐藏 1：显示
      */
     @Column(name="is_Show")
-    private int isShow;
+    private Integer isShow;
     /**
      * 菜单排序
      */
     @Column(name="menu_sort")
-    private int menuSort;
+    private Integer menuSort;
     /**
      * 菜单图标
      */
@@ -54,5 +54,12 @@ public class Menu  extends BaseDataEntity<Menu> {
     //菜单子列表
     @Transient
     private List<Menu> subMenuList;
+    /**父节点信息*/
+    @Transient
+    private Menu parent;
 
+    /***获取根目录ID***/
+    public static String getRootId(){
+        return "1";
+    }
 }
