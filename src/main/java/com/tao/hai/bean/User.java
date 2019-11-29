@@ -3,13 +3,13 @@ package com.tao.hai.bean;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.tao.hai.base.BaseDataEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-
-
+@EqualsAndHashCode(callSuper = false)
 @Data
 @Entity
 @Table(name="sys_user")

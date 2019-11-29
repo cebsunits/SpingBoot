@@ -3,7 +3,19 @@ $(function () {
     validateRule();
     /**图标*/
     $("#ico-btn").click(function () {
-        openDialog("图标管理","/tagIcon.html","480px","80%");
+        // openDialog("图标管理","/tagIcon.html","480px","80%");
+        //彈出框
+        layui.use('layer',function () {
+            var layer=layui.layer;
+            layer.open({
+                type:2,
+                title:"图标管理",
+                content:"/tagIcon/iconSelect?value="+$("#menuIcon").val(),
+                area:["480px","80%"],
+                maxmin:true,
+                shadeClose:false
+            });
+        });
     });
 });
 $.validator.setDefaults({
@@ -11,6 +23,14 @@ $.validator.setDefaults({
         menuSave();
     }
 });
+/**获取子页面data数据*/
+function getChildrenData(data) {
+    console.log(data);
+    if(data!=undefined){
+        $("#menuIcon").addClass(data.value);
+        $("#menuIcon").val(data.text);
+    }
+}
 //保存
 function menuSave() {
     var data=$('#menuForm').serialize();

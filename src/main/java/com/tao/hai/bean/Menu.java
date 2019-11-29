@@ -2,10 +2,11 @@ package com.tao.hai.bean;
 
 import com.tao.hai.base.BaseDataEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.List;
-
+@EqualsAndHashCode(callSuper = false)
 @Data
 @Entity
 @Table(name="sys_menu")

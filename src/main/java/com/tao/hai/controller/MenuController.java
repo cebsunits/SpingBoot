@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 public class MenuController {
     @Autowired
     MenuService menuService;
-    @RequestMapping(value="index")
+    @RequestMapping(value="index",method = RequestMethod.GET)
     public String index(){
         return "/menu/menuList";
     }
@@ -40,13 +40,20 @@ public class MenuController {
         return dataTablePage;
     }
 
-    @RequestMapping(value="form")
+    @RequestMapping(value="form", method = RequestMethod.GET)
     public String form(Menu menu, Model model,HttpServletRequest request){
         /**只读属性*/
         String readOnly=request.getParameter("readOnly");
         if("true".equals(readOnly)){
         } else {
             readOnly = "false";
+        }
+        /**menuId不为空时获取menu菜单信息*/
+        if(StringUtils.isNotEmpty(menu.getMenuId())){
+            menu=menuService.get(menu);
+        }
+        if(menu==null){
+            menu=new Menu();
         }
         //获取父节点信息
         Menu parent=new Menu();
@@ -81,6 +88,7 @@ public class MenuController {
     }
     /**删除方法*/
     @RequestMapping(value="delete")
+    @ResponseBody
     public Object delete(Menu menu,Model model){
         AjaxJson ajaxJson;
         try {
@@ -96,6 +104,7 @@ public class MenuController {
     }
     /**批量删除方法*/
     @RequestMapping(value="batchDelete")
+    @ResponseBody
     public Object batchDelete(String[] ids,Model model){
         AjaxJson ajaxJson;
         try {
@@ -109,6 +118,5 @@ public class MenuController {
         }
         return ajaxJson;
     }
-
 
 }

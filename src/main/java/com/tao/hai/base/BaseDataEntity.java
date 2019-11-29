@@ -2,6 +2,7 @@ package com.tao.hai.base;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;

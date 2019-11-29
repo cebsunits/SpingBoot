@@ -6,7 +6,7 @@
         <link rel="stylesheet" th:href="@{/webjars/datatables/css/jquery.dataTables.css}"/>
         <link rel="stylesheet" th:href="@{/webjars/datatables/css/dataTables.bootstrap.min.css}"/>
     </head>
-<body>
+<body class="gray-bg">
     <!--引用通用JS-->
     <div th:replace="/common/commonFoot::foot(~{::script})">
         <script th:src="@{/webjars/datatables/js/jquery.dataTables.min.js}" ></script>
@@ -31,7 +31,7 @@
                         <th>菜单类型</th>
                         <th>是否显示</th>
                         <th>菜单排序</th>
-                        <th>操作</th>
+                        <th nowrap>操作</th>
                     </tr>
                 </thead>
             </table>
@@ -71,21 +71,21 @@
                     {data: 'menuSort'},
                     //新建列的 定义
                     {
-                        className: "td-operation text-center",
+                        className: "nowrap",
                         data: null,
                         defaultContent: "",
-                        orderable: false,
-                        width: "160px"
+                        orderable: false
+                        //width: "160px"
                     }
                 ],
                 //新建列的 数据内容
                 "createdRow": function (row, data, index) {
                     var obj = JSON.stringify(data);
                     //行渲染回调,在这里可以对该行dom元素进行任何操作
-                    var view = "<button class='btn-info' onclick='view(" + obj + ")'>查看</button>";
-                    var edit = "<button class='btn-success' onclick='edit(" + obj + ")'>编辑</button>";
-                    var del = "<button class='btn-danger' onclick='del(" + obj + ")'>删除</button>";
-                    var addChild = "<button class='btn-danger' onclick='addChild(" + obj + ")'>添加下级菜单</button>";
+                    var view = "<a href='#' class='btn btn-info  btn-xs' onclick='view(" + obj + ")'><i class='fa fa-search-plus'></i>查看</a>";
+                    var edit = "<a href='#' class='btn btn-success  btn-xs' onclick='edit(" + obj + ")'><i class='fa fa-edit'></i>编辑</a>";
+                    var del = "<a href='#' class='btn btn-danger  btn-xs' onclick='del(" + obj + ")'><i class='fa fa-trash'></i>删除</a>";
+                    var addChild = "<a href='#' class='btn btn-primary  btn-xs' onclick='addChild(" + obj + ")'><i class='fa fa-plus'></i> 添加下级菜单</a>";
                     var renderColumn=view+edit+del+addChild;
                     //
                     $('td', row).eq(7).append(renderColumn);
@@ -128,7 +128,7 @@
         }
         //新增
         function addChild(data){
-            openDialog("新增菜单","/sys/menu/form?parentId="+data.parentId,'800px', '600px');
+            openDialog("新增菜单","/sys/menu/form?parentId="+data.menuId,'800px', '600px');
         }
 
         function toAdd(){

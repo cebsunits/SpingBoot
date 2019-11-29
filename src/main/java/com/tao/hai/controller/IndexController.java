@@ -1,10 +1,10 @@
 package com.tao.hai.controller;
 
-import com.github.pagehelper.util.StringUtil;
 import com.tao.hai.bean.Menu;
 import com.tao.hai.bean.User;
 import com.tao.hai.service.MenuService;
 import com.tao.hai.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +22,7 @@ public class IndexController {
     MenuService menuService;
     public String index(Model model){
         String loginName = (String) SecurityUtils.getSubject().getPrincipal();
-        if (StringUtil.isEmpty(loginName)) {
+        if (StringUtils.isEmpty(loginName)) {
             return "login";
         }
         User user=userService.getUser(loginName);

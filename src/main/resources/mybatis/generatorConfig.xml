@@ -14,22 +14,26 @@
         </commentGenerator>
         <!--数据库连接字符串-->
         <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
-                        connectionURL="jdbc:oracle:thin:@192.168.1.138:1521:ORCL" userId="curry"
-                        password="curry"/>
+                        connectionURL="jdbc:oracle:thin:@localhost:1521/PDBORCL" userId="springboot"
+                        password="123456"/>
         <!--实体类路径-->
-        <javaModelGenerator targetPackage="com.finesys.fine.bean"
-                            targetProject="D:\self\tao\src/main/java">
+        <javaModelGenerator targetPackage="com.tao.hai.bean"
+                            targetProject=".\src">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="true"/>
+            <!-- 从数据库返回的值被清理前后的空格 -->
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
         <!--mybatis映射xml文件路径-->
         <sqlMapGenerator targetPackage="mappers"
-                         targetProject="D:\self\tao\src\main\resources">
+                         targetProject=".\src">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
-        <!--Mapper接口路径-->
-        <javaClientGenerator targetPackage="com.tao.hai.mappers"
-                             targetProject="D:\self\tao\src\main\java" type="XMLMAPPER">
+        <!-- targetPackage：mapper接口生成的位置 -->
+        <javaClientGenerator targetPackage="com.tao.hai.dao"
+                             targetProject=".\src" type="XMLMAPPER">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 

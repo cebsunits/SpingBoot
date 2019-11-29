@@ -18,7 +18,7 @@
             用户管理
         </h3>
         <div class="row">
-            <button class="btn-primary" onclick="toAdd()">新增</button>
+            <button class="btn btn-primary" onclick="toAdd()">新增</button>
         </div>
     </div>
     <div class="panel-body">
@@ -114,9 +114,9 @@
             "createdRow": function (row, data, index) {
                 var obj = JSON.stringify(data);
                 //行渲染回调,在这里可以对该行dom元素进行任何操作
-                var view = "<button class='btn-info' onclick='view(" + obj + ")'>查看</button>";
-                var edit = "<button class='btn-success' onclick='edit(" + obj + ")'>编辑</button>";
-                var del = "<button class='btn-danger' onclick='del(" + obj + ")'>删除</button>";
+                var view = "<a href='#' class='btn btn-info  btn-xs' onclick='view(" + obj + ")'><i class='fa fa-search-plus'></i>查看</a>";
+                var edit = "<a href='#' class='btn btn-success  btn-xs' onclick='edit(" + obj + ")'><i class='fa fa-edit'></i>编辑</a>";
+                var del = "<a href='#' class='btn btn-danger  btn-xs' onclick='del(" + obj + ")'><i class='fa fa-trash'></i>删除</a>";
                 var renderColumn=view+edit+del;
                 //
                 $('td', row).eq(6).append(renderColumn);
@@ -153,12 +153,12 @@
     //查看
     function view(data){
         var url="/user/view?userId="+data.userId;
-        openDialogView("查看用户",url,'800px', '600px');
+        openDialog("查看用户",url,'800px', '600px');
     }
     //编辑
     function edit(data){
         var url="/user/edit?userId="+data.userId;
-        openDialogView("编辑用户",url,'800px', '600px');
+        openDialog("编辑用户",url,'800px', '600px');
     }
     //删除
     function del(data){
@@ -185,7 +185,7 @@
     }
     //新增
     function toAdd(){
-        openDialogView("新增用户","/user/add",'800px', '600px');
+        openDialog("新增用户","/user/add",'800px', '600px');
     }
 </script>
 </body>

@@ -75,8 +75,8 @@ public class RoleController {
 
         String sortName = request.getParameter("sortName") == null ? "roleId" : request.getParameter("sortName");
         String sortOrder = request.getParameter("sortOrder") == null ? "asc" : request.getParameter("sortOrder");
-        Sort sort = new Sort(sortOrder.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, sortName);
-        Pageable pageable = PageRequest.of(pageNumber, pageSize, sort);
+        /**Sort对象初始化错误，需要更换方法解决*/
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, sortOrder.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC,sortName);
         List<Role> roleList = roleService.findAll();
         return roleList;
     }

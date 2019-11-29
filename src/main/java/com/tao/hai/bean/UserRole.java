@@ -1,13 +1,14 @@
 package com.tao.hai.bean;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
-
+@EqualsAndHashCode(callSuper = false)
 @Data
 @Entity
 @Table(name="sys_user_role")
