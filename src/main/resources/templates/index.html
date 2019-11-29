@@ -4,10 +4,9 @@
 <head th:replace="common/commonHeader::common_header(~{::title},~{::link},~{})">
 	<title>首页</title>
 	<!-- 引入bootstrap插件样式 -->
-	<link rel="stylesheet" th:href="@{/webjars/animate.css/animate.min.css}"/>
-	<link rel="stylesheet" th:href="@{/css/custom.css}"></link>
-	<link rel="stylesheet" th:href="@{/css/style.css}"></link>
-	<link rel="stylesheet" th:href="@{/css/SidebarNav.min.css}"></link>
+	<link rel="stylesheet" th:href="@{/css/custom.css}"/>
+	<link rel="stylesheet" th:href="@{/css/style.css}"/>
+	<link rel="stylesheet" th:href="@{/css/SidebarNav.min.css}"/>
 </head>
 <body class="fixed-sidebar full-height-layout  gray-bg">
 <input type="hidden" name="userName" id="userName" th:value="${user.loginName}">

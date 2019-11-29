@@ -31,4 +31,9 @@ public class IndexController {
         model.addAttribute("menuList", menuList);
         return "index";
     }
+
+    @RequestMapping(value="/main")
+    String main() {
+        return "main";
+    }
 }

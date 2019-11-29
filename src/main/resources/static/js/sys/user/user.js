@@ -58,10 +58,7 @@ function saveUser(options){
     });
 }
 
-/**返回*/
-function goBack(){
-    window.top.close();
-}
+
 /**验证用户名是否可更改*/
 function validateLoginName(){
     var userId=$("#userId").val();
