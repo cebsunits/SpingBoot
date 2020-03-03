@@ -15,7 +15,7 @@
         <script th:src="@{/js/sys/user/user.js}"></script>
     </div>
     <div class="container-fluid panel-body">
-        <form id="userForm" class="form-horizontal validation-form" action="/user/save" method="post">
+        <form id="userForm" class="form-horizontal validation-form" action="/sys/user/save" method="post">
             <input type="hidden" name="userId" id="userId" th:value="${user.userId}">
             <input type="hidden" name="flag" id="flag" th:value="${readOnly}">
             <input type="hidden" name="createDate" id="createDate" th:value="${#dates.format(user.createDate, 'yyyy-MM-dd HH:mm:ss')}">

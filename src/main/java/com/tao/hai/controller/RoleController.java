@@ -1,13 +1,19 @@
 package com.tao.hai.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.tao.hai.base.DataTablePage;
+import com.tao.hai.bean.Menu;
 import com.tao.hai.bean.Role;
+import com.tao.hai.bean.User;
 import com.tao.hai.facotry.LogFactory;
 import com.tao.hai.json.AjaxError;
 import com.tao.hai.json.AjaxJson;
 import com.tao.hai.json.AjaxSuccess;
 import com.tao.hai.service.LogService;
+import com.tao.hai.service.LoginService;
+import com.tao.hai.service.MenuService;
 import com.tao.hai.service.RoleService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +21,19 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/role")
+@RequestMapping(value = "/sys/role")
 public class RoleController {
     /**
      * @author zhanght
@@ -33,6 +41,10 @@ public class RoleController {
      */
     @Autowired
     RoleService roleService;
+    @Autowired
+    MenuService menuService;
+    @Autowired
+    LoginService loginService;
     @Autowired
     LogService logService;
 
@@ -104,11 +116,15 @@ public class RoleController {
 
 
     @RequestMapping(value = "/roleAdd", method = RequestMethod.GET)
-    public String toAdd(Role role) {
+    public String toAdd(Role role,Model model) {
+        if(StringUtils.isNotEmpty(role.getRoleId())){
+            role=roleService.getRole(role.getRoleId());
+        }
+        model.addAttribute("role",role);
         return "/role/roleAdd";
     }
 
-    @RequestMapping(value = "/roleAdd", method = RequestMethod.POST)
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
     @ResponseBody
     public Object save(Role role) {
         if (StringUtils.isEmpty(role.getRoleId())) {
@@ -130,5 +146,122 @@ public class RoleController {
             ajaxJson.setMessage("保存失败！");
             return ajaxJson;
         }
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @ResponseBody
+    public Object delete(Role role) {
+        if (StringUtils.isEmpty(role.getRoleId())) {
+            AjaxError ajaxJson = new AjaxError();
+            ajaxJson.setMessage("角色信息为空，不能删除！");
+            return ajaxJson;
+        }
+        try {
+            //保存用户信息
+            roleService.del(role);
+            logService.save(LogFactory.createSysLog("删除角色", "角色：" + role.getRole()));
+            AjaxSuccess ajaxJson = new AjaxSuccess();
+            ajaxJson.setMessage("删除成功！");
+            ajaxJson.setData(role);
+            return ajaxJson;
+        } catch (Exception e) {
+            e.printStackTrace();
+            AjaxError ajaxJson = new AjaxError();
+            ajaxJson.setMessage("删除失败！");
+            return ajaxJson;
+        }
+    }
+    /**批量删除方法*/
+    @RequestMapping(value = "/batchDelete", method = RequestMethod.POST)
+    @ResponseBody
+    public Object batchDelete(String roleIdList) {
+        if (StringUtils.isEmpty(roleIdList)) {
+            AjaxError ajaxJson = new AjaxError();
+            ajaxJson.setMessage("角色信息为空，不能删除！");
+            return ajaxJson;
+        }
+        try {
+            String[] roleIds=roleIdList.split(",");
+            //保存用户信息
+            roleService.delete(roleIds);
+            logService.save(LogFactory.createSysLog("删除角色", "角色：" + roleIds));
+            AjaxSuccess ajaxJson = new AjaxSuccess();
+            ajaxJson.setMessage("删除成功！");
+            return ajaxJson;
+        } catch (Exception e) {
+            e.printStackTrace();
+            AjaxError ajaxJson = new AjaxError();
+            ajaxJson.setMessage("删除失败！");
+            return ajaxJson;
+        }
+    }
+    /**授权功能*/
+    @RequestMapping(value="/auth",method = RequestMethod.GET)
+    public String auth(Role role, Model model){
+        AjaxJson ajaxJson;
+        if(StringUtils.isEmpty(role.getRoleId())){
+            ajaxJson=new AjaxError();
+            ajaxJson.setMessage("角色信息为空！");
+        }
+        role=roleService.getRole(role.getRoleId());
+        /**获取角色选择的列表信息*/
+        List<Menu> roleMenu=menuService.getRoleMenu(role.getRoleId());
+        role.setPermissionList(roleMenu);
+        List<String> menuIds=new ArrayList<>();
+        for(Menu menu:roleMenu){
+            menuIds.add(menu.getMenuId());
+        }
+        /**不为空情况下更新menuIds字段*/
+        if(!menuIds.isEmpty()&&menuIds.size()>0){
+            role.setMenuIds(menuIds.toArray(new String[menuIds.size()]));
+        }else{
+            String[] ids={};
+            role.setMenuIds(ids);
+        }
+        /**前台js中使用，需要转换为JSON对象*/
+        model.addAttribute("role", role);
+        /**放置角色菜单信息*/
+        model.addAttribute("roleMenuList", menuIds);
+        /**放置所有菜单信息*/
+        model.addAttribute("menuList",  JSONArray.toJSONString(menuService.findAll()));
+        return "/role/roleAuth";
+    }
+    /**保存授权信息成功*/
+    @RequestMapping(value="/saveAuth",method = RequestMethod.POST)
+    @ResponseBody
+    public Object saveAuth(Role role, Model model){
+        User user=loginService.getCurrentUser();
+        AjaxJson ajaxJson;
+        if(user==null||StringUtils.isEmpty(user.getUserId())){
+            ajaxJson=new AjaxError();
+            ajaxJson.setMessage("获取当前用户信息失败！");
+        }
+        if(role==null||StringUtils.isEmpty(role.getRoleId())){
+            ajaxJson=new AjaxError();
+            ajaxJson.setMessage("角色信息为空，不允许保存！");
+            return ajaxJson;
+        }
+        if(role.getMenuIds()==null||role.getMenuIds().length==0){
+            ajaxJson=new AjaxError();
+            ajaxJson.setMessage("菜单信息为空，不允许保存！");
+            return ajaxJson;
+        }
+        /**看是否能够查询到数据*/
+        List<Menu> menuList=new ArrayList<>();
+        for(String menuId:role.getMenuIds()){
+            Menu queryMenu=new Menu();
+            queryMenu.setMenuId(menuId);
+            Menu menu=menuService.getMenu(queryMenu);
+            if(menu!=null){
+                menuList.add(menu);
+            }
+        }
+        role.setPermissionList(menuList);
+        roleService.grant(role);
+        model.addAttribute("role",role);
+        model.addAttribute("menuList", role.getPermissionList());
+        ajaxJson=new AjaxSuccess();
+        ajaxJson.setMessage("角色授权成功！");
+        return ajaxJson;
     }
 }

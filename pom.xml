@@ -51,7 +51,8 @@
 
         <chartjs.version>2.7.3</chartjs.version>
         <highcharts.version>7.1.1</highcharts.version>
-        <datatables.version>1.10.19</datatables.version>
+        <datatables.version>1.10.20</datatables.version>
+        <download.version>0.1.17-1</download.version>
         <font-awesome.version>5.8.2</font-awesome.version>
         <html5shiv.version>3.7.3</html5shiv.version>
         <respond.version>1.4.2-1</respond.version>
@@ -407,6 +408,12 @@
             <artifactId>datatables</artifactId>
             <version>${datatables.version}</version>
         </dependency>
+        <!-- download 文件下载js -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>download</artifactId>
+            <version>${download.version}</version>
+        </dependency>
         <!-- font -->
         <dependency>
             <groupId>org.webjars</groupId>
@@ -548,7 +555,11 @@
             <artifactId>jqgrid</artifactId>
             <version>${jqgrid.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>slidebars</artifactId>
+            <version>2.0.2</version>
+        </dependency>
         <!-- 引入webjars end -->
 
         <!-- 工作流组件 start -->

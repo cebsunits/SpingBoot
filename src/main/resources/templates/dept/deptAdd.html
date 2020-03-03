@@ -15,7 +15,7 @@
     <script th:src="@{/js/sys/dept/dept.js}"></script>
 </div>
 <div class="container-fluid panel-body">
-    <form id="deptForm" class="form-horizontal validation-form" action="/dept/save" method="post">
+    <form id="deptForm" class="form-horizontal validation-form" action="/sys/dept/save" method="post">
         <input type="hidden" name="deptId" id="deptId" th:value="${dept.deptId}">
         <input type="hidden" name="parentId" id="parentId" th:value="${dept.parentId}">
         <input type="hidden" name="createDate" id="createDate" th:value="${#dates.format(dept.createDate, 'yyyy-MM-dd HH:mm:ss')}">

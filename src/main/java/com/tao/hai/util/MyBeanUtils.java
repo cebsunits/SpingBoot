@@ -53,16 +53,16 @@ public class MyBeanUtils extends PropertyUtilsBean {
                 if("class".equals(name)){
                     continue;
                 }
-                Object value= ((DynaBean) source).get(name);
-                setTargetValue(target,name,value);
+                setTargetValue(target,name,source);
             }
         }
     }
 
     /**对新对象相同的bean name进行赋值*/
-    public static void setTargetValue(Object target,String name,Object value){
-        if(PropertyUtils.isWriteable(target,name)){
+    public static void setTargetValue(Object target,String name,Object source){
+        if(PropertyUtils.isReadable(source,name)&&PropertyUtils.isWriteable(target,name)){
             try {
+                Object value = PropertyUtils.getSimpleProperty(source, name);
                 getInstance().setSimpleProperty(target,name,value);
             } catch (IllegalAccessException e) {
                 e.printStackTrace();

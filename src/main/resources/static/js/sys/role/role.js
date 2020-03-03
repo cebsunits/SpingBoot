@@ -23,7 +23,10 @@ function saveRole(){
     //防止表单自动提交
     $("#formAdd").ajaxForm(function (data) {
         if(data.success){
-            $("#container").load(data);
+            toastr.success(data.message);
+            parent.location.reload();
+            windowClose();
+            // $("#container").load(data);
         }else{
             toastr.warning("数据提交失败！");
         }
@@ -62,7 +65,7 @@ function validate(){
                     },
                     remote:{
                         message:"角色已存在",
-                        url:"/role/checkRoleExists",
+                        url:"/sys/role/checkRoleExists",
                         data:'',//默认传递该字段的值到后台
                         delay:2000
                     }

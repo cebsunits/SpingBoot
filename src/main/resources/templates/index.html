@@ -4,65 +4,14 @@
 <head th:replace="common/commonHeader::common_header(~{::title},~{::link},~{})">
 	<title>首页</title>
 	<!-- 引入bootstrap插件样式 -->
-	<link rel="stylesheet" th:href="@{/css/custom.css}"/>
 	<link rel="stylesheet" th:href="@{/css/style.css}"/>
-	<link rel="stylesheet" th:href="@{/css/SidebarNav.min.css}"/>
 </head>
-<body class="fixed-sidebar full-height-layout  gray-bg">
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden">
 <input type="hidden" name="userName" id="userName" th:value="${user.loginName}">
-<!--引用通用JS-->
-<div th:replace="common/commonFoot::foot(~{::script})">
-	<script th:src="@{/webjars/metisMenu/metisMenu.min.js}"></script>
-	<script th:src="@{/js/contabs.js}"></script>
-	<script th:src="@{/webjars/sockjs-client/sockjs.min.js}"></script>
-	<script th:src="@{/webjars/stomp-websocket/stomp.min.js}"></script>
-	<script th:src="@{/js/websocket/StompUtil.js}"></script>
-	<script th:src="@{/js/sys/index.js}"></script>
-	<script type="text/javascript">
-		/**创建stomp client 对象*/
-		var options = {
-			connectType: "sockjs"
-		};
-		var topicMessage;
-		var userMessage;
-		var stompClient = new StompUtil(options);
-		var userName=$("#userName").val();
-		stompClient.connect( {},function (frame) {
-			//监听全局通知
-			topicMessage = stompClient.subscribe("/topic/message", function (rsp) {
-				console.log('++++++监听全局通知+++++++');
-			});
-			//监听用户登出通知
-			userMessage = stompClient.subscribeByUser("/user/"+userName+"/logout", function (data) {
-				console.log('++++++监听用户通知+++++++');
-				if(data){
-					window.location.href = "/logout";
-				}
-			});
-			$('#page-wrapper').html(' <iframe onload="this.height=window.innerHeight*0.8" style="width: 100%;" src="" frameborder="0"></iframe>');
-			$("#webSocketStatus").html("已连接");
-			$("#webSocketStatus").css("color","#00bb00");
-		},function (frame) {
-			console.log("已断开");
-			$("#webSocketStatus").html("已断开");
-			$("#webSocketStatus").css("color","#d9534f");
-		});
+<input type="hidden" id="userId" th:value="${user.userId}"/>
+<div id="wrapper">
 
-		/**更改密碼*/
-		function userInfo(title) {
-			if(title=="密码修改"){
-				openDialog(title, '/user/toChangePassword','800px', '600px');
-			}else{
-				var userId=$("#userId").val();
-				openDialog(title, '/user/edit?userId='+userId,'800px', '600px');
-			}
-		}
-
-	</script>
-</div>
-<div class="wrapper">
-	<input type="hidden" id="userId" th:value="${user.userId}">
-	<!--左侧导航开始-->
+	<!--左侧导航栏开始-->
 	<nav class="navbar-default navbar-static-side" role="navigation">
 		<div class="nav-close">
 			<i class="fa fa-times-circle"></i>
@@ -71,21 +20,19 @@
 			<ul class="nav" id="side-menu">
 				<li class="nav-header">
 					<div>
-						<span>
-							<img alt="image" class="img-circle" height="60" width="60" th:src="${user.pickUrl}">
-						</span>
-						<h3 style="color: #ffffff ">
-							<i>管理系统</i>
+						<span><img alt="image" class="img-circle" height="60" width="60" th:src="${user.pickUrl}"/></span>
+						<h3 class="" style="color: #ffffff">
+							</i>管理系统
 						</h3>
 					</div>
-
 					<div class="dropdown profile-element hidden">
 						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-							<span class="clear"></span>
-							<span class="block m-t-xs">
+							<span class="clear">
+                            <span class="block m-t-xs">
 								<strong class="font-bold" th:text="${user.userName}">admin</strong>
 							</span>
-							<span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
+                            <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
+							</span>
 						</a>
 						<ul class="dropdown-menu animated fadeInRight m-t-xs">
 							<li>
@@ -116,31 +63,40 @@
 				</li>
 
 				<li>
-					<a href="#">
-						<i class="fa fa-home">
-							<span class="nav-label">主页</span>
-							<span class="fa arrow"></span>
-						</i>
+					<a href="#" data-id="index.html">
+						<i class="fa fa-home"></i>
+						<span class="nav-label">首页</span>
+						<span class="fa arrow"></span>
 					</a>
 					<ul class="nav nav-second-level">
 						<li>
-							<a id="index001" class="J_menuItem" href="index.html" data-index="0" th:href="@{/main}">
+							<a id="index001" class="J_menuItem" href="main.html" data-index="0" th:href="@{/main}">
 								了解tao
 							</a>
 						</li>
-						<li th:each="menu:${menuList}">
-							<a href="#">
-								<i class="fa fa-bar-chart-o" th:class="${menu.menuIcon}"></i>
-								<span class="nav-label" th:text="${menu.menuName}">基础信息</span>
+					</ul>
+				</li>
+				<li th:each="menu:${menuList}" th:if="${not menuList.isEmpty()}">
+					<!--存在下级菜单情况-->
+					<a href="#" th:if="${#strings.isEmpty(menu.menuUrl)}">
+						<i class="fa fa-bar-chart-o" th:class="${menu.menuIcon}"></i>
+						<span class="nav-label" th:text="${menu.menuName}">基础信息</span>
+						<span class="fa arrow"></span>
+					</a>
+					<!--不存在下级菜单情况-->
+					<a href="#" class="J_menuItem" th:href="${menu.menuUrl}" th:if="${not #strings.isEmpty(menu.menuUrl)}">
+						<i class="fa fa-bar-chart-o" th:class="${menu.menuIcon}"></i>
+						<span class="nav-label" th:text="${menu.menuName}">基础信息</span>
+						<span class="fa arrow"></span>
+					</a>
+					<!--下级菜单情况-->
+					<ul class="nav nav-second-level" aria-expanded="false">
+						<li th:each="subMenu:${menu.subMenuList}" th:if="${not menu.subMenuList.isEmpty()}">
+							<a class="J_menuItem" href="#" th:text="${subMenu.menuName}" th:href="${subMenu.menuUrl}">
+								<i class="fa fa-bar-chart-o" th:class="${subMenu.menuIcon}"></i>
+								<span class="nav-label" th:text="${subMenu.menuName}">基础信息</span>
 								<span class="fa arrow"></span>
 							</a>
-							<ul class="nav nav-second-level">
-								<li th:each="subMenu:${menu.subMenuList}">
-									<a class="J_menuItem" href="#" th:text="${subMenu.menuName}" th:href="${subMenu.menuUrl}">
-										系统管理
-									</a>
-								</li>
-							</ul>
 						</li>
 					</ul>
 				</li>
@@ -150,227 +106,220 @@
 	<!--左侧导航结束-->
 	<!--右侧部分开始-->
 	<div id="page-wrapper" class="gray-bg dashboard-1">
-		<div class="row border-bottom">
-			<nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-				<div class="navbar-header">
-					<a class="navbar-minimalize minimalize-styl-2 btn btn-default" href="#" title="收起菜单">
-						<i class="fa fa-bars"></i>
+		<!--首页-->
+		<div class="row content-tabs" >
+			<button class="roll-nav roll-left J_tabLeft navbar-minimalize">
+				<i class="fa fa-bars"></i>
+			</button>
+			<button class="roll-nav roll-left J_tabLeft" style="left: 40px;">
+				<i class="fa fa-backward"></i>
+			</button>
+			<nav class="page-tabs J_menuTabs">
+				<div class="page-tabs-content">
+					<a href="#" class="active J_menuTab" data-id="main.html">
+						首页
 					</a>
-					<form role="search" class="navbar-form-custom" method="post" action="">
-						<div class="form-group">
-							<input type="text" placeholder="请输入要查找的内容" class="form-control" name="top-search" id="top-search">
-						</div>
-					</form>
 				</div>
-				<ul class="nav navbar-top-links navbar-right">
-					<li class="hidden-xs">
-						<a href="#" target="_blank">
-							<i class="fa fa-rss-square"></i>
-							博客
-						</a>
+			</nav>
+			<button class="roll-nav roll-right J_tabRight" style="right: 200px;" ><i class="fa fa-forward"></i></button>
+			<!--关闭选项卡组件-->
+			<div class="btn-group roll-nav roll-right" style="right: 120px;">
+				<button class="dropdown J_tabClose" data-toggle="dropdown">
+					关闭操作<span class="caret"></span>
+				</button>
+				<ul role="menu" class="dropdown-menu dropdown-menu-right">
+					<li class="J_tabShowActive">
+						<a>定位当前选项卡</a>
 					</li>
-					<li class="dropdown">
-						<a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-							<i class="fa fa-envelope"></i>
-							<span class="label label-warning">{{total}}</span>
-						</a>
-						<ul class="dropdown-menu dropdown-messages">
-							<li v-for="row in rows" class="m-t-xs">
-								<div class="dropdown-messages-box">
-									<a class="pull-left">
-										<i class="fa fa-server"></i>
-									</a>
-									<div class="media-body">
-										<small class="pull-right">{{row.before}}</small>
-										<strong>{{row.sender}}</strong>
-										{{row.title}}<br>
-										<small class="text-muted">{{row.updateDate}}</small>
-									</div>
-								</div>
-								<div class="divider"></div>
-							</li>
-							<li>
-								<div class="text-center link-block">
-									<a class="J_menuItem" href="#">
-										<i class="fa fa-envelope"></i>
-										<strong>查看所有消息</strong>
-									</a>
-								</div>
-							</li>
-						</ul>
+					<li class="divider"></li>
+					<li class="J_tabCloseAll">
+						<a>关闭全部选项卡</a>
 					</li>
-					<li class="hidden-xs">
-						<a @click="personal" href="#" >
-							<i class="fa fa-id-card"></i> 个人
-						</a>
-					</li>
-					<li class="dropdown hidden-xs">
-						<a class="right-sidebar-toggle" aria-expanded="false">
-							<i class="fa fa-tasks"></i> 主题
-						</a>
+					<li class="J_tabCloseOther">
+						<a>关闭其他选项卡</a>
 					</li>
 				</ul>
-			</nav>
-		</div>
-	</div>
-
-	<div class="row content-tabs" >
-		<button class="roll-nav roll-left J_tabLeft">
-			<i class="fa fa-backward"></i>
-		</button>
-		<nav class="page-tabs J_menuTabs">
-			<div class="page-tabs-content">
-				<a href="#" class="active J_menuTab" data-id="index.html">
-					首页
-				</a>
 			</div>
-		</nav>
-		<button class="roll-nav roll-right J_tabRight">
-			<i class="fa fa-forward"></i>
-		</button>
-		<div class="btn-group roll-nav roll-right">
-			<button class="dropdown J_tabClose" data-toggle="dropdown">
-				关闭操作<span class="caret"></span>
-			</button>
-			<ul role="menu" class="dropdown-menu dropdown-menu-right">
-				<li class="J_tabShowActive">
-					<a>定位当前选项卡</a>
+			<!--主题-->
+			<a class="right-sidebar-toggle roll-nav roll-right" style="right: 60px;width:60px" aria-expanded="false">
+				<i class="fa fa-tasks"></i> 主题
+			</a>
+			<!--关闭选项卡组件-->
+			<a href="/logout" class="roll-nav roll-right J_tabExit">
+				<i class="fa fa fa-sign-out"></i> 退出
+			</a>
+		</div>
+		<!--首页 end-->
+		<!--内容主体-->
+		<div class="row J_mainContent" id="content-main">
+			<iframe class="J_iframe" name="iframe0" width="100%" height="100%"
+					src="" th:src="@{/main}" frameborder="0" data-id="main.html"
+					seamless>
+
+			</iframe>
+		</div>
+		<!--内容主体end-->
+		<!--footer-->
+		<div class="footer">
+			<!-- To the right -->
+			<div class="pull-right hidden-xs">
+				Anything you want
+			</div>
+			<!-- Default to the left -->
+			<strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+		</div>
+		<!--footer-->
+	</div>
+	<!--右侧部分开始 end-->
+	<!--右侧边栏开始-->
+	<div id="right-sidebar">
+		<div class="sidebar-container">
+			<ul class="nav nav-tabs navs-3">
+				<li class="active">
+					<a data-toggle="tab" href="#tab-1">
+						<i class="fa fa-gear"></i> 主题
+					</a>
 				</li>
-				<li class="divider"></li>
-				<li class="J_tabCloseAll">
-					<a>关闭全部选项卡</a>
-				</li>
-				<li class="J_tabCloseOther">
-					<a>关闭其他选项卡</a>
+				<li class="">
+					<a data-toggle="tab" href="#tab-2"> 通知 </a>
 				</li>
 			</ul>
+			<div class="tab-content">
+				<!--主题 start--->
+				<div id="tab-1" class="tab-pane active">
+					<div class="sidebar-title">
+						<h3>
+							<i class="fa fa-comments-o"></i> 主题设置
+						</h3>
+						<small>
+							<i class="fa fa-tim"></i>
+							你可以从这里选择和预览主题的布局和样式，这些设置会被保存在本地，下次打开的时候会直接应用这些设置。
+						</small>
+					</div>
+					<div class="skin-setttings">
+						<div class="title">主题设置</div>
+						<!--收起左侧菜单 start-->
+						<div class="setings-item">
+							<span>收起左侧菜单</span>
+							<div class="switch">
+								<div class="onoffswitch">
+									<input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="collapsemenu">
+									<label class="onoffswitch-label" for="collapsemenu">
+										<span class="onoffswitch-inner"></span>
+										<span class="onoffswitch-switch"></span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<!--收起左侧菜单 end -->
+						<!--固定宽度 start-->
+						<div class="setings-item">
+							<span> 固定宽度 </span>
+							<div class="switch">
+								<div class="onoffswitch">
+									<input type="checkbox" name="boxedlayout"
+										   class="onoffswitch-checkbox" id="boxedlayout">
+									<label class="onoffswitch-label" for="boxedlayout">
+										<span class="onoffswitch-inner"></span>
+										<span class="onoffswitch-switch"></span>
+									</label>
+								</div>
+							</div>
+						</div>
+						<!--固定宽度 end-->
+						<div class="title">皮肤选择</div>
+						<div class="setings-item default-skin nb">
+							<span class="skin-name ">
+								<a href="#" class="s-skin-0">
+									默认皮肤
+								</a>
+							</span>
+						</div>
+						<div class="setings-item blue-skin nb">
+							<span class="skin-name ">
+								<a href="#" class="s-skin-1">
+									蓝色主题
+								</a>
+							</span>
+						</div>
+						<div class="setings-item yellow-skin nb">
+							<span class="skin-name ">
+								<a href="#" class="s-skin-3">
+									黄色/紫色主题
+								</a>
+							</span>
+						</div>
+
+					</div>
+				</div>
+				<!--主题 end--->
+				<!--通知 start--->
+				<div id="tab-2" class="tab-pane">
+					<div class="sidebar-title">
+						<h3>
+							<i class="fa fa-comments-o"></i> 最新通知
+						</h3>
+						<small>
+							<i class="fa fa-tim"></i> 您当前有10条未读信息
+						</small>
+					</div>
+				</div>
+				<!--通知 end--->
+			</div>
 		</div>
-		<a href="/logout" class="roll-nav roll-right J_tabExit">
-			<i class="fa fa fa-sign-out"></i> 退出
-		</a>
 	</div>
-
-	<div class="row J_mainContent" id="content-main">
-		<iframe class="J_iframe" name="iframe0" width="100%" height="100%"
-				src="" th:src="@{/main}" frameborder="0" data-id="index.html"
-				seamless>
-
-		</iframe>
-	</div>
-	<!--底部footer-->
-	<div class="footer">
-		<span id="webSocketStatus" style="margin-right:30px;float:right;text-align:center;font-size: 75%;font-weight: bold;color: #d9534f;" >未连接</span><label style="font-size:88%;float:right;color: #FEFEFE">网络状态:&nbsp;&nbsp;</label>
-		<div class="pull-right">BootDo面向学习型的开源框架</div>
-	</div>
+	<!--右侧边栏end-->
 </div>
-<!--右侧部分结束-->
-<!--右侧边栏开始-->
-<div id="right-sidebar">
-	<div class="sidebar-container">
-		<ul class="nav nav-tabs navs-3">
-			<li class="active">
-				<a data-toggle="tab" href="#tab-1">
-					<i class="fa fa-gear"></i> 主题
-				</a>
-			</li>
-			<li class="">
-				<a data-toggle="tab" href="#tab-2"> 通知 </a>
-			</li>
-			<li>
-				<a data-toggle="tab" href="#tab-3"> 项目进度 </a>
-			</li>
-		</ul>
-		<div class="tab-content">
-			<div id="tab-1" class="tab-pane active">
-				<div class="sidebar-title">
-					<h3>
-						<i class="fa fa-comments-o"></i> 主题设置
-					</h3>
-					<small>
-						<i class="fa fa-tim"></i>
-						你可以从这里选择和预览主题的布局和样式，这些设置会被保存在本地，下次打开的时候会直接应用这些设置。
-					</small>
-				</div>
-				<div class="skin-setttings">
-					<div class="title">主题设置</div>
-					<div class="setings-item">
-						<span>收起左侧菜单</span>
-						<div class="switch">
-							<div class="onoffswitch">
-								<input type="checkbox" name="collapsemenu" class="onoffswitch-checkbox" id="collapsemenu">
-								<label class="onoffswitch-label" for="collapsemenu">
-									<span class="onoffswitch-inner"></span>
-									<span class="onoffswitch-switch"></span>
-								</label>
-							</div>
-						</div>
-					</div>
-					<div class="setings-item">
-						<span>固定顶部</span>
-						<div class="switch">
-							<div class="onoffswitch">
-								<input type="checkbox" name="fixednavbar" class="onoffswitch-checkbox" id="fixednavbar">
-								<label class="onoffswitch-label" for="fixednavbar">
-									<span class="onoffswitch-inner"></span>
-									<span class="onoffswitch-switch"></span>
-								</label>
-							</div>
-						</div>
-					</div>
-					<div class="setings-item">
-						<span> 固定宽度 </span>
-						<div class="switch">
-							<div class="onoffswitch">
-								<input type="checkbox" name="boxedlayout" class="onoffswitch-checkbox" id="boxedlayout">
-								<label class="onoffswitch-label" for="boxedlayout">
-									<span class="onoffswitch-inner"></span>
-									<span class="onoffswitch-switch"></span>
-								</label>
-							</div>
-						</div>
-					</div>
-					<div class="title">皮肤选择</div>
-					<div class="setings-item default-skin nb">
-						<span class="skin-name ">
-							<a href="#" class="s-skin-0">
-								默认皮肤
-							</a>
-						</span>
-					</div>
-					<div class="setings-item blue-skin nb">
-						<span class="skin-name ">
-							<a href="#" class="s-skin-1">
-								蓝色主题
-							</a>
-						</span>
-					</div>
-					<div class="setings-item yellow-skin nb">
-						<span class="skin-name ">
-							<a href="#" class="s-skin-3">
-								黄色/紫色主题
-							</a>
-						</span>
-					</div>
-				</div>
-			</div>
-			<div id="tab-2" class="tab-pane">
-				<div class="sidebar-title">
-					<h3>
-						<i class="fa fa-comments-o"></i> 最新通知
-					</h3>
-					<small><i class="fa fa-tim"></i> 您当前有10条未读信息</small>
-				</div>
-			</div>
-			<div id="tab-3" class="tab-pane">
-				<div class="sidebar-title">
-					<h3>
-						<i class="fa fa-cube"></i> 最新任务
-					</h3>
-					<small><i class="fa fa-tim"></i> 您当前有14个任务，10个已完成</small>
-				</div>
-			</div>
-		</div>
-	</div>
+<!-- ./wrapper -->
+
+<!--引用通用JS-->
+<div th:replace="common/commonFoot::foot(~{::script})">
+<!--	<script th:src="@{/webjars/metisMenu/metisMenu.min.js}"></script>-->
+	<script th:src="@{/js/metisMenu/jquery.metisMenu.js}"></script>
+	<script th:src="@{/js/contabs.js}"></script>
+	<script th:src="@{/webjars/sockjs-client/sockjs.min.js}"></script>
+	<script th:src="@{/webjars/stomp-websocket/stomp.min.js}"></script>
+	<script th:src="@{/js/websocket/StompUtil.js}"></script>
+	<script th:src="@{/js/sys/index.js}"></script>
+	<script type="text/javascript">
+		/**创建stomp client 对象*/
+		var options = {
+			connectType: "sockjs"
+		};
+		var topicMessage;
+		var userMessage;
+		var stompClient = new StompUtil(options);
+		var userName=$("#userName").val();
+		stompClient.connect( {},function (frame) {
+			//监听全局通知
+			topicMessage = stompClient.subscribe("/topic/message", function (rsp) {
+				console.log('++++++监听全局通知+++++++');
+			});
+			//监听用户登出通知
+			userMessage = stompClient.subscribeByUser("/user/"+userName+"/logout", function (data) {
+				console.log('++++++监听用户通知+++++++');
+				if(data){
+					window.location.href = "/logout";
+				}
+			});
+			$("#webSocketStatus").html("已连接");
+			$("#webSocketStatus").css("color","#00bb00");
+		},function (frame) {
+			console.log("已断开");
+			$("#webSocketStatus").html("已断开");
+			$("#webSocketStatus").css("color","#d9534f");
+		});
+
+		/**更改密碼*/
+		function userInfo(title) {
+			if(title=="密码修改"){
+				openDialog(title, '/sys/user/toChangePassword','800px', '600px');
+			}else{
+				var userId=$("#userId").val();
+				openDialog(title, '/sys/user/edit?userId='+userId,'800px', '600px');
+			}
+		}
+	</script>
 </div>
 </body>
 </html>

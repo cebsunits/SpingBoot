@@ -1,0 +1,431 @@
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 09:30:18.291][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 09:30:27.878][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 09:47:29.925][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 09:47:37.973][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 09:51:57.524][WARN ][restartedMain][ClassPathMapperScanner.java:146] - No MyBatis mapper was found in '[com.tao.**.dao]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 09:51:57.587][WARN ][restartedMain][ClassPathMapperScanner.java:146] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 09:51:57.587][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 09:51:57.820][WARN ][restartedMain][AbstractApplicationContext.java:558] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'shiroEventBusAwareBeanPostProcessor' defined in class path resource [org/apache/shiro/spring/boot/autoconfigure/ShiroBeanAutoConfiguration.class]: BeanPostProcessor before instantiation of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.annotation.ProxyCachingConfiguration': BeanPostProcessor before instantiation of bean failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'authorizationAttributeSourceAdvisor' defined in class path resource [org/apache/shiro/spring/boot/autoconfigure/ShiroAnnotationProcessorAutoConfiguration.class]: Unsatisfied dependency expressed through method 'authorizationAttributeSourceAdvisor' parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'securityManager' defined in class path resource [org/apache/shiro/spring/config/web/autoconfigure/ShiroWebAutoConfiguration.class]: Unsatisfied dependency expressed through method 'securityManager' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'missingRealm' defined in class path resource [org/apache/shiro/spring/boot/autoconfigure/ShiroAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.shiro.realm.Realm]: Factory method 'missingRealm' threw exception; nested exception is org.apache.shiro.spring.boot.autoconfigure.exception.NoRealmBeanConfiguredException
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 09:52:08.658][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 09:52:10.385][WARN ][restartedMain][DirectJDKLog.java:173] - The MBean registry cannot be disabled because it has already been initialised
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 09:52:12.547][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 09:54:11.475][WARN ][restartedMain][ClassPathMapperScanner.java:146] - No MyBatis mapper was found in '[com.tao.**.dao]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 09:54:11.678][WARN ][restartedMain][ClassPathMapperScanner.java:146] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 09:54:11.693][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 09:54:12.053][WARN ][restartedMain][AbstractApplicationContext.java:558] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'shiroEventBusAwareBeanPostProcessor' defined in class path resource [org/apache/shiro/spring/boot/autoconfigure/ShiroBeanAutoConfiguration.class]: BeanPostProcessor before instantiation of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.annotation.ProxyCachingConfiguration': BeanPostProcessor before instantiation of bean failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'authorizationAttributeSourceAdvisor' defined in class path resource [org/apache/shiro/spring/boot/autoconfigure/ShiroAnnotationProcessorAutoConfiguration.class]: Unsatisfied dependency expressed through method 'authorizationAttributeSourceAdvisor' parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'securityManager' defined in class path resource [org/apache/shiro/spring/config/web/autoconfigure/ShiroWebAutoConfiguration.class]: Unsatisfied dependency expressed through method 'securityManager' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'missingRealm' defined in class path resource [org/apache/shiro/spring/boot/autoconfigure/ShiroAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.shiro.realm.Realm]: Factory method 'missingRealm' threw exception; nested exception is org.apache.shiro.spring.boot.autoconfigure.exception.NoRealmBeanConfiguredException
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 09:54:21.760][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 09:54:23.053][WARN ][restartedMain][DirectJDKLog.java:173] - The MBean registry cannot be disabled because it has already been initialised
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 09:54:25.289][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 09:59:14.010][WARN ][restartedMain][ClassPathMapperScanner.java:146] - No MyBatis mapper was found in '[com.tao.**.dao]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 09:59:14.072][WARN ][restartedMain][ClassPathMapperScanner.java:146] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 09:59:14.088][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 09:59:14.384][WARN ][restartedMain][AbstractApplicationContext.java:558] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'shiroEventBusAwareBeanPostProcessor' defined in class path resource [org/apache/shiro/spring/boot/autoconfigure/ShiroBeanAutoConfiguration.class]: BeanPostProcessor before instantiation of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.annotation.ProxyCachingConfiguration': BeanPostProcessor before instantiation of bean failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'authorizationAttributeSourceAdvisor' defined in class path resource [org/apache/shiro/spring/boot/autoconfigure/ShiroAnnotationProcessorAutoConfiguration.class]: Unsatisfied dependency expressed through method 'authorizationAttributeSourceAdvisor' parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'securityManager' defined in class path resource [org/apache/shiro/spring/config/web/autoconfigure/ShiroWebAutoConfiguration.class]: Unsatisfied dependency expressed through method 'securityManager' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'missingRealm' defined in class path resource [org/apache/shiro/spring/boot/autoconfigure/ShiroAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.shiro.realm.Realm]: Factory method 'missingRealm' threw exception; nested exception is org.apache.shiro.spring.boot.autoconfigure.exception.NoRealmBeanConfiguredException
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 09:59:23.880][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 09:59:24.773][WARN ][restartedMain][DirectJDKLog.java:173] - The MBean registry cannot be disabled because it has already been initialised
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 09:59:26.542][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 09:59:54.847][WARN ][http-nio-8081-exec-1][AbstractAuthenticator.java:216] - Authentication failed for token submission [org.apache.shiro.authc.UsernamePasswordToken - admin, rememberMe=false].  Possible unexpected error? (Typical or expected login exceptions should extend from AuthenticationException).
+java.lang.ClassCastException: com.tao.hai.bean.User cannot be cast to com.tao.hai.base.DataEntity
+	at com.tao.hai.base.BaseServiceImpl.get(BaseServiceImpl.java:47)
+	at com.tao.hai.service.UserService.getUser(UserService.java:55)
+	at com.tao.hai.config.SpringBootShrioRealm.doGetAuthenticationInfo(SpringBootShrioRealm.java:55)
+	at org.apache.shiro.realm.AuthenticatingRealm.getAuthenticationInfo(AuthenticatingRealm.java:571)
+	at org.apache.shiro.authc.pam.ModularRealmAuthenticator.doSingleRealmAuthentication(ModularRealmAuthenticator.java:180)
+	at org.apache.shiro.authc.pam.ModularRealmAuthenticator.doAuthenticate(ModularRealmAuthenticator.java:267)
+	at org.apache.shiro.authc.AbstractAuthenticator.authenticate(AbstractAuthenticator.java:198)
+	at org.apache.shiro.mgt.AuthenticatingSecurityManager.authenticate(AuthenticatingSecurityManager.java:106)
+	at org.apache.shiro.mgt.DefaultSecurityManager.login(DefaultSecurityManager.java:275)
+	at org.apache.shiro.subject.support.DelegatingSubject.login(DelegatingSubject.java:260)
+	at com.tao.hai.service.LoginService.login(LoginService.java:41)
+	at com.tao.hai.controller.LoginController.login(LoginController.java:159)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:888)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:793)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.servlet.resource.ResourceUrlEncodingFilter.doFilter(ResourceUrlEncodingFilter.java:64)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:124)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:526)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:861)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1579)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 10:00:06.524][WARN ][http-nio-8081-exec-8][AbstractAuthenticator.java:216] - Authentication failed for token submission [org.apache.shiro.authc.UsernamePasswordToken - admin, rememberMe=false].  Possible unexpected error? (Typical or expected login exceptions should extend from AuthenticationException).
+java.lang.ClassCastException: com.tao.hai.bean.User cannot be cast to com.tao.hai.base.DataEntity
+	at com.tao.hai.base.BaseServiceImpl.get(BaseServiceImpl.java:47)
+	at com.tao.hai.service.UserService.getUser(UserService.java:55)
+	at com.tao.hai.config.SpringBootShrioRealm.doGetAuthenticationInfo(SpringBootShrioRealm.java:55)
+	at org.apache.shiro.realm.AuthenticatingRealm.getAuthenticationInfo(AuthenticatingRealm.java:571)
+	at org.apache.shiro.authc.pam.ModularRealmAuthenticator.doSingleRealmAuthentication(ModularRealmAuthenticator.java:180)
+	at org.apache.shiro.authc.pam.ModularRealmAuthenticator.doAuthenticate(ModularRealmAuthenticator.java:267)
+	at org.apache.shiro.authc.AbstractAuthenticator.authenticate(AbstractAuthenticator.java:198)
+	at org.apache.shiro.mgt.AuthenticatingSecurityManager.authenticate(AuthenticatingSecurityManager.java:106)
+	at org.apache.shiro.mgt.DefaultSecurityManager.login(DefaultSecurityManager.java:275)
+	at org.apache.shiro.subject.support.DelegatingSubject.login(DelegatingSubject.java:260)
+	at com.tao.hai.service.LoginService.login(LoginService.java:41)
+	at com.tao.hai.controller.LoginController.login(LoginController.java:159)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:888)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:793)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.servlet.resource.ResourceUrlEncodingFilter.doFilter(ResourceUrlEncodingFilter.java:64)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:124)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:526)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:861)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1579)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 10:00:25.983][WARN ][http-nio-8081-exec-6][AbstractAuthenticator.java:216] - Authentication failed for token submission [org.apache.shiro.authc.UsernamePasswordToken - admin, rememberMe=false].  Possible unexpected error? (Typical or expected login exceptions should extend from AuthenticationException).
+java.lang.ClassCastException: com.tao.hai.bean.User cannot be cast to com.tao.hai.base.DataEntity
+	at com.tao.hai.base.BaseServiceImpl.get(BaseServiceImpl.java:47)
+	at com.tao.hai.service.UserService.getUser(UserService.java:55)
+	at com.tao.hai.config.SpringBootShrioRealm.doGetAuthenticationInfo(SpringBootShrioRealm.java:55)
+	at org.apache.shiro.realm.AuthenticatingRealm.getAuthenticationInfo(AuthenticatingRealm.java:571)
+	at org.apache.shiro.authc.pam.ModularRealmAuthenticator.doSingleRealmAuthentication(ModularRealmAuthenticator.java:180)
+	at org.apache.shiro.authc.pam.ModularRealmAuthenticator.doAuthenticate(ModularRealmAuthenticator.java:267)
+	at org.apache.shiro.authc.AbstractAuthenticator.authenticate(AbstractAuthenticator.java:198)
+	at org.apache.shiro.mgt.AuthenticatingSecurityManager.authenticate(AuthenticatingSecurityManager.java:106)
+	at org.apache.shiro.mgt.DefaultSecurityManager.login(DefaultSecurityManager.java:275)
+	at org.apache.shiro.subject.support.DelegatingSubject.login(DelegatingSubject.java:260)
+	at com.tao.hai.service.LoginService.login(LoginService.java:41)
+	at com.tao.hai.controller.LoginController.login(LoginController.java:159)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:888)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:793)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.servlet.resource.ResourceUrlEncodingFilter.doFilter(ResourceUrlEncodingFilter.java:64)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:124)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:526)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:861)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1579)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 10:00:36.286][WARN ][http-nio-8081-exec-5][AbstractAuthenticator.java:216] - Authentication failed for token submission [org.apache.shiro.authc.UsernamePasswordToken - admin, rememberMe=false].  Possible unexpected error? (Typical or expected login exceptions should extend from AuthenticationException).
+java.lang.ClassCastException: com.tao.hai.bean.User cannot be cast to com.tao.hai.base.DataEntity
+	at com.tao.hai.base.BaseServiceImpl.get(BaseServiceImpl.java:47)
+	at com.tao.hai.service.UserService.getUser(UserService.java:55)
+	at com.tao.hai.config.SpringBootShrioRealm.doGetAuthenticationInfo(SpringBootShrioRealm.java:55)
+	at org.apache.shiro.realm.AuthenticatingRealm.getAuthenticationInfo(AuthenticatingRealm.java:571)
+	at org.apache.shiro.authc.pam.ModularRealmAuthenticator.doSingleRealmAuthentication(ModularRealmAuthenticator.java:180)
+	at org.apache.shiro.authc.pam.ModularRealmAuthenticator.doAuthenticate(ModularRealmAuthenticator.java:267)
+	at org.apache.shiro.authc.AbstractAuthenticator.authenticate(AbstractAuthenticator.java:198)
+	at org.apache.shiro.mgt.AuthenticatingSecurityManager.authenticate(AuthenticatingSecurityManager.java:106)
+	at org.apache.shiro.mgt.DefaultSecurityManager.login(DefaultSecurityManager.java:275)
+	at org.apache.shiro.subject.support.DelegatingSubject.login(DelegatingSubject.java:260)
+	at com.tao.hai.service.LoginService.login(LoginService.java:41)
+	at com.tao.hai.controller.LoginController.login(LoginController.java:159)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:190)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:106)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:888)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:793)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1040)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:943)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:61)
+	at org.apache.shiro.web.servlet.AdviceFilter.executeChain(AdviceFilter.java:108)
+	at org.apache.shiro.web.servlet.AdviceFilter.doFilterInternal(AdviceFilter.java:137)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.shiro.web.servlet.ProxiedFilterChain.doFilter(ProxiedFilterChain.java:66)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.executeChain(AbstractShiroFilter.java:449)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter$1.call(AbstractShiroFilter.java:365)
+	at org.apache.shiro.subject.support.SubjectCallable.doCall(SubjectCallable.java:90)
+	at org.apache.shiro.subject.support.SubjectCallable.call(SubjectCallable.java:83)
+	at org.apache.shiro.subject.support.DelegatingSubject.execute(DelegatingSubject.java:387)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:362)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.servlet.resource.ResourceUrlEncodingFilter.doFilter(ResourceUrlEncodingFilter.java:64)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at com.alibaba.druid.support.http.WebStatFilter.doFilter(WebStatFilter.java:124)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:526)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:861)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1579)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 10:01:00.471][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 10:01:07.369][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 10:13:22.704][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 10:13:28.885][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 10:26:00.937][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 10:26:06.936][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 11:18:06.040][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 11:18:12.269][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 11:22:39.411][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 11:22:49.323][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 11:29:20.535][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 11:29:26.922][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 13:15:40.792][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 13:15:49.280][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:07:25.366][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:07:34.071][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:16:07.710][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:16:15.021][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:20:23.382][WARN ][restartedMain][ClassPathMapperScanner.java:146] - No MyBatis mapper was found in '[com.tao.**.dao]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:20:23.520][WARN ][restartedMain][ClassPathMapperScanner.java:146] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:20:23.530][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:20:23.987][WARN ][restartedMain][AbstractApplicationContext.java:558] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'shiroEventBusAwareBeanPostProcessor' defined in class path resource [org/apache/shiro/spring/boot/autoconfigure/ShiroBeanAutoConfiguration.class]: BeanPostProcessor before instantiation of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.annotation.ProxyCachingConfiguration': BeanPostProcessor before instantiation of bean failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'authorizationAttributeSourceAdvisor' defined in class path resource [org/apache/shiro/spring/boot/autoconfigure/ShiroAnnotationProcessorAutoConfiguration.class]: Unsatisfied dependency expressed through method 'authorizationAttributeSourceAdvisor' parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'securityManager' defined in class path resource [org/apache/shiro/spring/config/web/autoconfigure/ShiroWebAutoConfiguration.class]: Unsatisfied dependency expressed through method 'securityManager' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'missingRealm' defined in class path resource [org/apache/shiro/spring/boot/autoconfigure/ShiroAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.shiro.realm.Realm]: Factory method 'missingRealm' threw exception; nested exception is org.apache.shiro.spring.boot.autoconfigure.exception.NoRealmBeanConfiguredException
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:20:35.391][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:20:38.200][WARN ][restartedMain][DirectJDKLog.java:173] - The MBean registry cannot be disabled because it has already been initialised
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:20:43.182][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:22:27.055][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:22:33.696][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:22:36.169][WARN ][http-nio-8081-exec-3][TransportHandlingSockJsService.java:236] - Unknown transport type for http://localhost:8081/websocket/782/yafjdjt3/jsonp?c=_jp.aqjamhm
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:26:26.256][WARN ][restartedMain][ClassPathMapperScanner.java:146] - No MyBatis mapper was found in '[com.tao.**.dao]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:26:26.320][WARN ][restartedMain][ClassPathMapperScanner.java:146] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:26:26.329][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:26:26.715][WARN ][restartedMain][AbstractApplicationContext.java:558] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'shiroEventBusAwareBeanPostProcessor' defined in class path resource [org/apache/shiro/spring/boot/autoconfigure/ShiroBeanAutoConfiguration.class]: BeanPostProcessor before instantiation of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.annotation.ProxyCachingConfiguration': BeanPostProcessor before instantiation of bean failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'authorizationAttributeSourceAdvisor' defined in class path resource [org/apache/shiro/spring/boot/autoconfigure/ShiroAnnotationProcessorAutoConfiguration.class]: Unsatisfied dependency expressed through method 'authorizationAttributeSourceAdvisor' parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'securityManager' defined in class path resource [org/apache/shiro/spring/config/web/autoconfigure/ShiroWebAutoConfiguration.class]: Unsatisfied dependency expressed through method 'securityManager' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'missingRealm' defined in class path resource [org/apache/shiro/spring/boot/autoconfigure/ShiroAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.shiro.realm.Realm]: Factory method 'missingRealm' threw exception; nested exception is org.apache.shiro.spring.boot.autoconfigure.exception.NoRealmBeanConfiguredException
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:26:34.188][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:26:35.138][WARN ][restartedMain][DirectJDKLog.java:173] - The MBean registry cannot be disabled because it has already been initialised
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:26:37.057][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:28:09.165][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:28:16.862][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:29:09.694][WARN ][http-nio-8081-exec-2][AbstractHandlerExceptionResolver.java:199] - Resolved [org.springframework.http.converter.HttpMessageNotWritableException: No converter for [class java.util.LinkedHashMap] with preset Content-Type 'text/event-stream;charset=UTF-8']
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:33:03.241][WARN ][restartedMain][ClassPathMapperScanner.java:146] - No MyBatis mapper was found in '[com.tao.**.dao]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:33:03.315][WARN ][restartedMain][ClassPathMapperScanner.java:146] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:33:03.322][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:33:03.614][WARN ][restartedMain][AbstractApplicationContext.java:558] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'shiroEventBusAwareBeanPostProcessor' defined in class path resource [org/apache/shiro/spring/boot/autoconfigure/ShiroBeanAutoConfiguration.class]: BeanPostProcessor before instantiation of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.annotation.ProxyCachingConfiguration': BeanPostProcessor before instantiation of bean failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'authorizationAttributeSourceAdvisor' defined in class path resource [org/apache/shiro/spring/boot/autoconfigure/ShiroAnnotationProcessorAutoConfiguration.class]: Unsatisfied dependency expressed through method 'authorizationAttributeSourceAdvisor' parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'securityManager' defined in class path resource [org/apache/shiro/spring/config/web/autoconfigure/ShiroWebAutoConfiguration.class]: Unsatisfied dependency expressed through method 'securityManager' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'missingRealm' defined in class path resource [org/apache/shiro/spring/boot/autoconfigure/ShiroAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.shiro.realm.Realm]: Factory method 'missingRealm' threw exception; nested exception is org.apache.shiro.spring.boot.autoconfigure.exception.NoRealmBeanConfiguredException
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:33:15.091][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:33:16.134][WARN ][restartedMain][DirectJDKLog.java:173] - The MBean registry cannot be disabled because it has already been initialised
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:33:18.187][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:52:12.685][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:52:19.615][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:52:22.172][WARN ][http-nio-8081-exec-3][TransportHandlingSockJsService.java:236] - Unknown transport type for http://localhost:8081/websocket/920/omqrmbtv/jsonp?c=_jp.a2q41o2
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:53:37.225][WARN ][http-nio-8081-exec-9][AbstractHandlerExceptionResolver.java:199] - Resolved [org.springframework.http.converter.HttpMessageNotWritableException: No converter for [class java.util.LinkedHashMap] with preset Content-Type 'text/event-stream;charset=UTF-8']
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:59:38.152][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 14:59:45.577][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 15:01:57.322][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 15:02:04.321][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 15:10:21.791][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 15:10:30.873][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 15:45:18.182][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 15:45:24.697][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 16:00:35.642][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 16:00:43.505][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 16:02:45.740][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 16:02:52.385][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 16:04:27.796][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 16:04:34.451][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 16:06:05.665][WARN ][restartedMain][ClassPathMapperScanner.java:146] - No MyBatis mapper was found in '[com.tao.**.dao]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 16:06:05.805][WARN ][restartedMain][ClassPathMapperScanner.java:146] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 16:06:05.814][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 16:06:06.278][WARN ][restartedMain][AbstractApplicationContext.java:558] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'shiroEventBusAwareBeanPostProcessor' defined in class path resource [org/apache/shiro/spring/boot/autoconfigure/ShiroBeanAutoConfiguration.class]: BeanPostProcessor before instantiation of bean failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.cache.annotation.ProxyCachingConfiguration': BeanPostProcessor before instantiation of bean failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'authorizationAttributeSourceAdvisor' defined in class path resource [org/apache/shiro/spring/boot/autoconfigure/ShiroAnnotationProcessorAutoConfiguration.class]: Unsatisfied dependency expressed through method 'authorizationAttributeSourceAdvisor' parameter 0; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'securityManager' defined in class path resource [org/apache/shiro/spring/config/web/autoconfigure/ShiroWebAutoConfiguration.class]: Unsatisfied dependency expressed through method 'securityManager' parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'missingRealm' defined in class path resource [org/apache/shiro/spring/boot/autoconfigure/ShiroAutoConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.shiro.realm.Realm]: Factory method 'missingRealm' threw exception; nested exception is org.apache.shiro.spring.boot.autoconfigure.exception.NoRealmBeanConfiguredException
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 16:06:18.719][WARN ][restartedMain][Logger.java:44] - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 16:06:20.002][WARN ][restartedMain][DirectJDKLog.java:173] - The MBean registry cannot be disabled because it has already been initialised
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-03-03 16:06:22.771][WARN ][restartedMain][JpaBaseConfiguration.java:220] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning

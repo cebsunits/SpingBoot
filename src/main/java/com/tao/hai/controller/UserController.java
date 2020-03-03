@@ -27,7 +27,7 @@ import java.util.*;
  *
  * */
 @Controller
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/sys/user")
 public class UserController {
     private int hashIterations = 2;
     @Autowired
@@ -236,7 +236,7 @@ public class UserController {
         if (userId == null)
             return null;
 
-        List<Role> list = userService.findUserRoleByUserId(userId);
+        List<Role> list = userService.findUserRole(userId);
         return list;
     }
 
@@ -248,7 +248,7 @@ public class UserController {
         Map<String, String> map = new HashMap<>();
         if (roleIdList == null) {
             try {
-                userService.deleteAllUserRoleByUserId(userId);
+                userService.deleteAllUserRole(userId);
                 map.put("success", "true");
                 map.put("url", "/user/userList");
                 logService.save(LogFactory.createSysLog("角色清除", "用户ID：" + userId));

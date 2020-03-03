@@ -20,4 +20,17 @@
         on r.role_id=u.role_id
         where u.user_id =#{userId}
     </select>
+
+    <!-- 插入菜单和角色关联表数据 -->
+    <insert id="insertRoleMenu">
+        INSERT INTO sys_role_menu(role_id, menu_Id)
+        <foreach collection="permissionList" item="menu" separator=" union all ">
+            SELECT #{roleId}, #{menu.menuId} FROM dual
+        </foreach>
+    </insert>
+    <!-- 删除用户和角色关联表数据 -->
+    <delete id="deleteRoleMenu">
+		DELETE FROM sys_role_menu
+		WHERE role_id = #{roleId}
+	</delete>
 </mapper>

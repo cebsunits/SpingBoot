@@ -39,6 +39,7 @@ public class Role extends BaseDataEntity<Role> {
     private Boolean available = Boolean.TRUE;
     //角色 -- 权限关系：多对多关系;
     @Transient
-    private List<Permission> permissionList;
-
+    private List<Menu> permissionList;
+    @Transient
+    private String[] menuIds;
 }

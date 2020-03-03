@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <!--引用通用head--->
-<head th:replace="common/commonHeader::common_header(~{::title},~{::link},~{})">
+<head th:replace="/common/commonHeader::common_header(~{::title},~{::link},~{})">
     <title>角色管理</title>
     <link rel="stylesheet" th:href="@{/webjars/datatables/css/jquery.dataTables.css}"/>
     <link rel="stylesheet" th:href="@{/webjars/datatables/css/dataTables.bootstrap.min.css}"/>
@@ -9,7 +9,7 @@
 </head>
 <body>
 <!--引用通用JS-->
-<div th:replace="common/commonFoot::foot(~{::script})">
+<div th:replace="/common/commonFoot::foot(~{::script})">
     <script th:src="@{/webjars/datatables/js/jquery.dataTables.min.js}" ></script>
     <script th:src="@{/webjars/bootstrap-table/bootstrap-table.min.js}" ></script>
     <script th:src="@{/webjars/bootstrap-table/locale/bootstrap-table-zh-CN.min.js}" ></script>
@@ -31,17 +31,8 @@
         <button id="btn_add" type="button" class="btn btn-default">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
         </button>
-        <button id="btn_edit" type="button" class="btn btn-default">
-            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
-        </button>
         <button id="btn_delete_tip" type="button" class="btn btn-default" data-target="#deleteModal" data-toggle="modal">
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
-        </button>
-        <button id="btn_detail" type="button" class="btn btn-default">
-            <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>详情
-        </button>
-        <button id="btn_authority" type="button" class="btn btn-default">
-            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>权限
         </button>
     </div>
     <!--删除模态框-->
@@ -78,9 +69,6 @@
         //初始化bootstrap table
         initTable();
         //添加off("click")避免点击一次触发两次情况
-        $('#btn_edit').off("click").on("click",function () {
-            edit();
-        });
         $('#btnQuery').off("click").on("click",function () {
             refresh();
         });
@@ -90,15 +78,12 @@
         $('#btn_delete').off("click").on("click",function () {
             toDelete();
         });
-        $('#btn_authority').off("click").on("click",function () {
-            authority();
-        });
     });
 
 
     function initTable() {
         $roleTable.bootstrapTable({
-            url:"/role/page",
+            url:"/sys/role/page",
             cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
             method: 'post',
             contentType : "application/x-www-form-urlencoded;charset=UTF-8", //post方式必须设置,get方式设置application/json
@@ -171,6 +156,22 @@
                         if(value) return "正常";
                         else return "禁用";
                     }
+                },  {
+                    field: 'roleId',
+                    title: '操作',
+                    sortable: true,
+                    formatter:function (value,row,index) {
+                        var e = '<a class="btn btn-primary btn-sm" href="#" mce_href="#" title="编辑" onclick="edit(\''
+                            + row.roleId
+                            + '\')"><i class="fa fa-edit"></i>编辑</a> ';
+                        var d = '<a class="btn btn-warning btn-sm" href="#" title="删除"  mce_href="#" onclick="toDelete(\''
+                            + row.roleId
+                            + '\')"><i class="fa fa-remove"></i>删除</a> ';
+                        var grant = '<a class="btn btn-warning btn-sm" href="#" title="权限"  mce_href="#" onclick="authority(\''
+                            + row.roleId
+                            + '\')"><i class="fa fa-cog"></i>权限</a> ';
+                        return e + d+grant;
+                    }
                 }
             ],
             queryParamsType: '',
@@ -215,30 +216,19 @@
         });
     }
 
-    //编辑
-    function edit() {
-        toastr.info("编辑");
-        var selectedLine = $roleTable.bootstrapTable('getSelections');
-        if (selectedLine.length < 1) {
-            toastr.warning("请选中一行数据");
-        }
-        else {
-            var idList = selectedLine[0].roleId;
-            console.log(idList);
-            var url = "/role/edit/"+idList;
-            $('#container').load(url);
-        }
-    }
+
     //刷新
     function refresh() {
         $roleTable.bootstrapTable('refresh');
     }
     //新增
     function add() {
-        var url = "/role/roleAdd";
-        $('#container').load(url);
+        var url = "/sys/role/roleAdd";
+        openDialog("角色新增",url,"800px","600px");
+        // $('#container').load(url);
     }
-    //删除
+
+    //批量删除
     function toDelete(){
         var selectedLine = $roleTable.bootstrapTable('getSelections');
         if (selectedLine.length < 1) {
@@ -249,16 +239,48 @@
             for (var i = 1; i < selectedLine.length; i++) {
                 idList += ','+ selectedLine[i].roleId;
             }
-            var deleteUrl = "/role/delete";
+            var deleteUrl = "/sys/role/batchDelete";
             $.ajax({
                 type:"post",
                 url:deleteUrl,
                 data:{roleIdList:idList},
                 dataType:"json",
                 success:function (result) {
-                    $('#container').load(result.url);
+                    // $('#container').load(result.url);
+                    toastr.success(result.message);
+                    parent.location.reload();
                     $('.modal-backdrop').remove();//移除遮罩
                     $("body").removeClass('modal-open'); //移除模态
+                    windowClose();
+                },
+                error:function (result) {
+                    toastr.warning(result.message);
+                }
+            });
+        }
+    }
+
+    //编辑
+    function edit(roleId) {
+        var url = "/sys/role/roleAdd?roleId="+roleId;
+        openDialog("角色编辑",url,"800px","600px");
+        // $('#container').load(url);
+    }
+    //删除
+    function toDelete(roleId){
+        var deleteUrl = "/sys/role/delete";
+        if(confirm("确认删除？")){
+            $.ajax({
+                type:"post",
+                url:deleteUrl,
+                data:{roleId:roleId},
+                dataType:"json",
+                success:function (result) {
+                    // $('#container').load(result.url);
+                    parent.location.reload();
+                    $('.modal-backdrop').remove();//移除遮罩
+                    $("body").removeClass('modal-open'); //移除模态
+                    windowClose();
                 },
                 error:function (result) {
                     toastr.warning("删除失败！");
@@ -267,16 +289,10 @@
         }
     }
     //角色
-    function authority() {
-        var selectedLine = $roleTable.bootstrapTable('getSelections');
-        if (selectedLine.length < 1) {
-            toastr.warning("请选中一行数据");
-        }
-        else {
-            var idList = selectedLine[0].roleId;
-            var url = "/role/plist/"+idList;
-            $('#container').load(url);
-        }
+    function authority(roleId) {
+        var url = "/sys/role/auth?roleId="+roleId;
+        openDialog("角色授权",url,"800px","600px");
+        // $('#container').load(url);
     }
 </script>
 </html>

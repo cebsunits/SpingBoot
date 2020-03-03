@@ -52,6 +52,11 @@ public class Menu  extends BaseDataEntity<Menu> {
      */
     @Column(name="menu_icon")
     private String menuIcon;
+    /**
+     * 权限字符串,menu例子：role:*，button例子：role:create,role:update,role:delete,role:view
+     */
+    @Column(name="permission")
+    private String permission;
     //菜单子列表
     @Transient
     private List<Menu> subMenuList;

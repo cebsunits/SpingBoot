@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--引用通用head--->
+<head th:replace="/common/commonHeader::common_header(~{::title},~{::link},~{})">
+    <title>角色配置</title>
+    <link rel="stylesheet" th:href="@{/webjars/zTree/css/zTreeStyle/zTreeStyle.css}"/>
+</head>
+<body>
+<!--引用通用JS-->
+<div th:replace="/common/commonFoot::foot(~{::script})">
+    <script th:src="@{/webjars/zTree/js/jquery.ztree.all.min.js}"></script>
+</div>
+<div class="container-fluid panel-body">
+    <form class="form-horizontal" id="formAdd" action="#" method="post">
+        <input type="hidden" name="roleId" th:value="${role.roleId}">
+        <input type="hidden" name="menuIds" id="menuIds"/>
+        <div class="row">
+            <div id="menuTree" class="ztree" style="margin-top:3px;float:left;">
+
+            </div>
+        </div>
+        <div class="row">
+            <button type="button" id="btn_save" name="btn_save" class="btn btn-primary" th:if="${readOnly} ne true" >保存</button>
+            <button type="button" id="btn_back" name="btn_back" class="btn btn-secondary" onclick="windowClose()">返回</button>
+        </div>
+    </form>
+
+</div>
+
+<script type="text/javascript" th:inline="javascript">
+    $(function () {
+        /**参数设置*/
+        var settings={
+            view:{
+                dblClickExpand: false,//双击节点时，是否自动展开父节点的标识
+                showLine: true,//是否显示节点之间的连线
+                fontCss:{'color':'black','font-weight':'bold'},//字体样式函数
+                selectedMulti: true //设置是否允许同时选中多个节点
+            },
+            check:{
+                //chkboxType: { "Y": "ps", "N": "ps" },
+                chkboxType: { "Y": "ps", "N": "ps" },
+                chkStyle: "checkbox",//复选框类型
+                enable: true //每个节点上是否显示 CheckBox
+            },
+            data: {
+                simpleData: {//简单数据模式
+                    enable:true,
+                    idKey: "id",
+                    pIdKey: "pId",
+                    rootPId: null
+                }
+            },
+            callback: {
+                beforeClick:function(treeId, treeNode){
+                    tree.checkNode(treeNode, !treeNode.checked, true, true);
+                    return false;
+                }
+            }
+        };
+        /**获取数据*/
+        var menuListString=[[${menuList}]];
+        var menuList=JSON.parse(menuListString);
+        var zNodes=new Array();
+        /***value 内容值  index 下标  arr 所属数组 */
+        menuList.forEach(
+            function (value,index,array) {
+                var zNode={};
+                zNode.id=value.menuId;
+                zNode.pId=value.parentId;
+                zNode.name=value.menuName;
+                zNodes.push(zNode);
+            }
+        );
+        /**初始化树结构*/
+        var tree = $.fn.zTree.init($("#menuTree"), settings, zNodes);
+        // 默认选择节点
+        var ids = [[${roleMenuList}]];
+        if(ids!=null&&ids!=undefined&&ids.length>0){
+            for(var i=0; i<ids.length; i++) {
+                var node = tree.getNodeByParam("id", ids[i]);
+                try{
+                    tree.checkNode(node, true, false);
+                }catch(e){
+
+                }
+            }
+        }
+        /**默认展开全部节点*/
+        tree.expandAll(true);
+
+        /***监听按钮*/
+        $("#btn_save").click(function () {
+            /***获取选择的菜单信息*/
+            var ids = [], nodes = tree.getCheckedNodes(true);
+            for(var i=0; i<nodes.length; i++) {
+                ids.push(nodes[i].id);
+            }
+            $("#menuIds").val(ids);
+            /**数据*/
+            var data=$('#formAdd').serialize();
+            $.ajax({
+                type: "POST",
+                url: "/sys/role/saveAuth",
+                data: data,
+                success: function (result) {
+                    console.log(result);
+                    //请求成功时
+                    if(result.success){
+                        toastr.success(result.message);
+                        parent.location.reload();
+                        windowClose();
+                    }else{
+                        toastr.warning(result.message);
+                    }
+                },
+            });
+        });
+
+    });
+
+
+
+</script>
+</body>
+</html>

@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/dept")
+@RequestMapping(value = "/sys/dept")
 public class DeptController {
     @Autowired
     DeptService deptService;

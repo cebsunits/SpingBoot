@@ -32,4 +32,16 @@
         )
         order by m.menu_sort,m.parent_id
     </select>
+    <!--获取父节点信息-->
+    <select id="getRoleMenu" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="sqlColumns"></include>
+        from sys_menu m
+        where m.menu_id in(
+        select distinct rm.menu_id from sys_role_menu rm
+        left join sys_role r on rm.role_id=R.ROLE_ID
+        where r.ROLE_ID=#{roleId}
+        )
+        order by m.menu_sort,m.parent_id
+    </select>
 </mapper>

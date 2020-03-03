@@ -73,10 +73,7 @@ public class LoginController {
             model.addAttribute("message", "您的密码已过期，请重新设置密码");
             return "user/userPasswordReset";
         }
-        /**用户ID*/
-        String userId=user.getUserId();
-        List<Menu> menuList=menuService.getUserList(userId);
-
+        List<Menu> menuList=menuService.getUserList(user);
         model.addAttribute("username",user.getLoginName());
         model.addAttribute("user", user);
         model.addAttribute("menuList", menuList);
@@ -178,5 +175,9 @@ public class LoginController {
         logService.save(sysLog);
         loginService.logout();
         return "redirect:/login";
+    }
+    @RequestMapping(value="/main")
+    String main() {
+        return "main";
     }
 }

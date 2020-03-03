@@ -11,12 +11,12 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @Data
 @Entity
-@Table(name="sys_role_permission")
-public class RolePermission implements Serializable {
+@Table(name="sys_role_menu")
+public class RoleMenu implements Serializable {
     @Id
     @Column(name="role_id")
     private String roleId;
     @Id
-    @Column(name="permission_Id")
-    private String permissionId;//主键.
+    @Column(name="menu_Id")
+    private String meunId;//主键.
 }

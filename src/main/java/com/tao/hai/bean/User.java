@@ -78,9 +78,12 @@ public class User extends BaseDataEntity<User> {
      * 权限
      */
     @Transient
-    private List<Permission> permissionList;
+    private List<Menu> permissionList;
     /**加盐*/
     public  String getCredentialsSalt(){
       return this.loginName;
     }
+    @Transient
+    /**是否管理员*/
+    private boolean isAdmin;
 }

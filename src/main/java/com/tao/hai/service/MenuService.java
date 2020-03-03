@@ -3,6 +3,7 @@ package com.tao.hai.service;
 import com.github.pagehelper.PageInfo;
 import com.tao.hai.base.BaseServiceImpl;
 import com.tao.hai.bean.Menu;
+import com.tao.hai.bean.User;
 import com.tao.hai.dao.MenuDao;
 import com.tao.hai.util.menu.MenuTreeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class MenuService extends BaseServiceImpl<MenuDao, Menu> {
     /**
      * 获取信息  第二次访问会取缓存
      */
-    @Cacheable(value=CACHE_NAME)
+    @Cacheable(value=CACHE_NAME,key = "#menu.menuId")
     public Menu getMenu(Menu menu) {
         Menu menuInfo = super.get(menu);
         return menuInfo;
@@ -40,11 +41,29 @@ public class MenuService extends BaseServiceImpl<MenuDao, Menu> {
     /**
      * 获取信息  第二次访问会取缓存
      */
-    @Cacheable(value=CACHE_NAME,key="#userId")
-    public List<Menu> getUserList(String userId){
-        List<Menu> userMenuList= menuDao.getUserMenu(userId);
-        MenuTreeUtil.treeList(userMenuList);
-        return userMenuList;
+    @Cacheable(value=CACHE_NAME,key="#user.userId")
+    public List<Menu> getUserList(User user){
+        /**是否查询全部菜单*/
+        boolean isMenuAll=user.isAdmin();
+        /**查询全部菜单*/
+        List<Menu> userMenuList;
+        if(isMenuAll){
+            userMenuList= super.findAll();
+        }else{
+            userMenuList= menuDao.getUserMenu(user.getUserId());
+        }
+        List menuTreeList= MenuTreeUtil.treeList(userMenuList);
+        return menuTreeList;
+    }
+    /**
+     * 获取信息  第二次访问会取缓存
+     */
+    @Cacheable(value=CACHE_NAME,key="#roleId")
+    public List<Menu> getRoleMenu(String roleId){
+        /**是否查询全部菜单*/
+        List<Menu> roleMenuList= menuDao.getRoleMenu(roleId);
+        List menuTreeList= MenuTreeUtil.treeList(roleMenuList);
+        return menuTreeList;
     }
     /**
      * 添加redis缓存
@@ -60,7 +79,7 @@ public class MenuService extends BaseServiceImpl<MenuDao, Menu> {
     /**
      * 删除redis缓存
      */
-    @CacheEvict(value = CACHE_NAME, key = "#menu.getMenuId()")
+    @CacheEvict(value = CACHE_NAME)
     public void delelte(Menu menu) {
         super.del(menu);
     }

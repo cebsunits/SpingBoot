@@ -2,9 +2,11 @@ package com.tao.hai.service;
 
 import com.github.pagehelper.PageInfo;
 import com.tao.hai.base.BaseServiceImpl;
-import com.tao.hai.bean.Permission;
+import com.tao.hai.bean.Menu;
 import com.tao.hai.bean.Role;
 import com.tao.hai.bean.User;
+import com.tao.hai.dao.MenuDao;
+import com.tao.hai.dao.RoleDao;
 import com.tao.hai.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -30,7 +32,10 @@ public class UserService extends BaseServiceImpl<UserDao, User> {
     private static final String CACHE_NAME = "userCache";
     @Autowired
     UserDao userDao;
-
+    @Autowired
+    MenuDao menuDao;
+    @Autowired
+    RoleDao roleDao;
     /**
      * 获取信息  第二次访问会取缓存
      */
@@ -109,27 +114,20 @@ public class UserService extends BaseServiceImpl<UserDao, User> {
     /**
      * 查询用户对应的权限信息
      */
-    public List<Permission> findUserRolePermissionByUserName(String loginName) {
+    public List<Menu> findUserRolePermission(String userId) {
 
-        return null;
+        return menuDao.getUserMenu(userId);
     }
 
     /**
      * 查询用户对应的角色信息
      */
-    public List<Role> findUserRoleByUserName(String loginName) {
+    public List<Role> findUserRole(String userId) {
 
-        return null;
-    }
-    /**
-     * 查询用户对应的角色信息
-     */
-    public List<Role> findUserRoleByUserId(String userId) {
-
-        return null;
+        return roleDao.userRoles(userId);
     }
 
-    public void deleteAllUserRoleByUserId(String userId){
+    public void deleteAllUserRole(String userId){
 
     }
 

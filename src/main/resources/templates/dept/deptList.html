@@ -106,7 +106,7 @@
     //ajax调用初始化方法
     function initDept(){
         $.ajax({
-            url: "/dept/list",
+            url: "/sys/dept/list",
             type: "post",
             data: {},
             dataType: "json",
@@ -151,7 +151,7 @@
             $.ajax(
                 {
                     type: "POST",
-                    url: "/dept/batchDelete",//url请求的地址
+                    url: "/sys/dept/batchDelete",//url请求的地址
                     cache: false,  //禁用缓存
                     data: {deptIds:ids},  //传入组装的参数
                     dataType: "json",
@@ -175,7 +175,7 @@
             $.ajax(
                 {
                     type: "POST",
-                    url: "/dept/delete",//url请求的地址
+                    url: "/sys/dept/delete",//url请求的地址
                     cache: false,  //禁用缓存
                     data: {deptId:data.deptId},  //传入组装的参数
                     dataType: "json",
@@ -193,12 +193,12 @@
        }
     }
     function toAdd(){
-        var url="/dept/add";
+        var url="/sys/dept/add";
         openDialogView("新增部门",url,"800px","600px")
     }
     //添加下级
     function addChild(obj) {
-        var url="/dept/add?deptId="+obj.deptId;
+        var url="/sys/dept/add?deptId="+obj.deptId;
         openDialogView("新增部门",url,"800px","600px")
     }
 </script>

@@ -1,5 +1,6 @@
 package com.tao.hai.config;
 
+import com.tao.hai.bean.Menu;
 import com.tao.hai.bean.Permission;
 import com.tao.hai.bean.Role;
 import com.tao.hai.bean.User;
@@ -11,6 +12,8 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 public class SpringBootShrioRealm extends AuthorizingRealm {
     @Autowired
@@ -29,7 +32,7 @@ public class SpringBootShrioRealm extends AuthorizingRealm {
         User user  = (User)principals.getPrimaryPrincipal();
         for(Role role:user.getRoleList()){
             authorizationInfo.addRole(role.getRole());
-            for(Permission p:role.getPermissionList()){
+            for(Menu p:role.getPermissionList()){
                 authorizationInfo.addStringPermission(p.getPermission());
             }
         }
@@ -53,8 +56,22 @@ public class SpringBootShrioRealm extends AuthorizingRealm {
         if (user == null) {
             throw new UnknownAccountException("No account found for admin [" + userName + "]");
         }
-        user.setPermissionList(userService.findUserRolePermissionByUserName(user.getUserName()));
-        user.setRoleList(userService.findUserRoleByUserName(user.getUserName()));
+        /***获取角色信息*/
+        List<Role> roleList=userService.findUserRole(user.getUserId());
+        user.setRoleList(roleList);
+        /**是否管理员*/
+        boolean idAdmin=false;
+        if(roleList!=null){
+            for(Role role:roleList){
+                if(role.getRole().equalsIgnoreCase("admin")){
+                    idAdmin=true;
+                    break;
+                }
+            }
+        }
+        user.setAdmin(idAdmin);
+        /**菜单列表*/
+        user.setPermissionList(userService.findUserRolePermission(user.getUserId()));
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
                 user, //这里传入的是user对象，比对的是用户名，直接传入用户名也没错，但是在授权部分就需要自己重新从数据库里取权限
                 user.getPassword(), //密码

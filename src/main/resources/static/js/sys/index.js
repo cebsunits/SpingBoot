@@ -1,5 +1,4 @@
 //自定义js
-//公共配置
 $(document).ready(function () {
 
     // MetsiMenu
@@ -16,28 +15,6 @@ $(document).ready(function () {
         railOpacity: 0.4,
         wheelStep: 10
     });
-
-    // 打开聊天窗口
-    $('.open-small-chat').click(function () {
-        $(this).children().toggleClass('fa-comments').toggleClass('fa-remove');
-        $('.small-chat-box').toggleClass('active');
-    });
-
-    // 聊天窗口使用slimscroll
-    $('.small-chat-box .content').slimScroll({
-        height: '234px',
-        railOpacity: 0.4
-    });
-
-    // Small todo handler
-    $('.check-link').click(function () {
-        var button = $(this).find('i');
-        var label = $(this).next('span');
-        button.toggleClass('fa-check-square').toggleClass('fa-square-o');
-        label.toggleClass('todo-completed');
-        return false;
-    });
-
     //固定菜单栏
     $(function () {
         $('.sidebar-collapse').slimScroll({
@@ -47,19 +24,11 @@ $(document).ready(function () {
         });
     });
 
-
     // 菜单切换
     $('.navbar-minimalize').click(function () {
         $("body").toggleClass("mini-navbar");
         SmoothlyMenu();
     });
-
-
-    // 侧边栏高度
-    function fix_height() {
-        var heightWithoutNavbar = $("body > #wrapper").height() - 61;
-        $(".sidebard-panel").css("min-height", heightWithoutNavbar + "px");
-    }
     fix_height();
 
     $(window).bind("load resize click scroll", function () {
@@ -107,7 +76,11 @@ $(window).bind("load resize", function () {
         $('.navbar-static-side').fadeIn();
     }
 });
-
+// 侧边栏高度
+function fix_height() {
+    var heightWithoutNavbar = $("body > #wrapper").height() - 61;
+    $(".sidebard-panel").css("min-height", heightWithoutNavbar + "px");
+}
 function NavToggle() {
     $('.navbar-minimalize').trigger('click');
 }
@@ -133,33 +106,6 @@ function SmoothlyMenu() {
 
 //主题设置
 $(function () {
-
-    // 顶部菜单固定
-    $('#fixednavbar').click(function () {
-        if ($('#fixednavbar').is(':checked')) {
-            $(".navbar-static-top").removeClass('navbar-static-top').addClass('navbar-fixed-top');
-            $("body").removeClass('boxed-layout');
-            $("body").addClass('fixed-nav');
-            $('#boxedlayout').prop('checked', false);
-
-            if (localStorageSupport) {
-                localStorage.setItem("boxedlayout", 'off');
-            }
-
-            if (localStorageSupport) {
-                localStorage.setItem("fixednavbar", 'on');
-            }
-        } else {
-            $(".navbar-fixed-top").removeClass('navbar-fixed-top').addClass('navbar-static-top');
-            $("body").removeClass('fixed-nav');
-
-            if (localStorageSupport) {
-                localStorage.setItem("fixednavbar", 'off');
-            }
-        }
-    });
-
-
     // 收起左侧菜单
     $('#collapsemenu').click(function () {
         if ($('#collapsemenu').is(':checked')) {
@@ -230,14 +176,10 @@ $(function () {
 
     if (localStorageSupport) {
         var collapse = localStorage.getItem("collapse_menu");
-        var fixednavbar = localStorage.getItem("fixednavbar");
         var boxedlayout = localStorage.getItem("boxedlayout");
 
         if (collapse == 'on') {
             $('#collapsemenu').prop('checked', 'checked')
-        }
-        if (fixednavbar == 'on') {
-            $('#fixednavbar').prop('checked', 'checked')
         }
         if (boxedlayout == 'on') {
             $('#boxedlayout').prop('checked', 'checked')
@@ -247,7 +189,6 @@ $(function () {
     if (localStorageSupport) {
 
         var collapse = localStorage.getItem("collapse_menu");
-        var fixednavbar = localStorage.getItem("fixednavbar");
         var boxedlayout = localStorage.getItem("boxedlayout");
 
         var body = $('body');
@@ -257,12 +198,6 @@ $(function () {
                 body.addClass('mini-navbar');
             }
         }
-
-        if (fixednavbar == 'on') {
-            $(".navbar-static-top").removeClass('navbar-static-top').addClass('navbar-fixed-top');
-            body.addClass('fixed-nav');
-        }
-
         if (boxedlayout == 'on') {
             body.addClass('boxed-layout');
         }

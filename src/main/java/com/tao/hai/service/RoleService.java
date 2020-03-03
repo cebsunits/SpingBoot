@@ -8,11 +8,15 @@ import com.tao.hai.bean.User;
 import com.tao.hai.dao.DeptDao;
 import com.tao.hai.dao.RoleDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class RoleService extends BaseServiceImpl<RoleDao, Role> {
@@ -43,4 +47,39 @@ public class RoleService extends BaseServiceImpl<RoleDao, Role> {
         }
         return isExists;
     }
+
+    /**
+     * 添加redis缓存
+     */
+    public void save(Role role) {
+        if (StringUtils.isEmpty(role.getRoleId())) {
+            role.setRoleId(UUID.randomUUID().toString());
+        }
+        super.save(role);
+    }
+    /**
+     * 添加redis缓存
+     */
+    public void delete(String... ids) {
+       super.delete(ids);
+    }
+    /**
+     * 添加redis缓存
+     */
+    public void del(Role role) {
+        super.del(role);
+    }
+
+
+    /**
+     * 保存或更新方法
+     */
+    @CacheEvict(value ="menuCache",key = "#role.roleId")
+    public void grant(Role role) {
+        /**删除关联表*/
+       roleDao.deleteRoleMenu(role);
+       /**更新关联表*/
+       roleDao.insertRoleMenu(role);
+    }
+
 }
