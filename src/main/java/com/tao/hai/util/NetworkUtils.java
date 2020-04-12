@@ -26,7 +26,7 @@ public class NetworkUtils {
         } else if (ip.length() > 15) {
             String[] ips = ip.split(",");
             for (int index = 0; index < ips.length; index++) {
-                String strIp = (String) ips[index];
+                String strIp = ips[index];
                 if (!("unknown".equalsIgnoreCase(strIp))) {
                     ip = strIp;
                     break;

@@ -7,14 +7,19 @@
         <result column="role" property="role" jdbcType="VARCHAR"/>
         <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
         <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="create_id" property="createId" jdbcType="VARCHAR"/>
+        <result column="update_id" property="updateId" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="del_flag" property="delFlag" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="sqlColumns">
-		r.role_id, r.role, r.role_name, r.description
+		r.role_id, r.role, r.role_name, r.description,r.create_id,r.update_id,r.create_date,r.update_date,r.del_flag
 	</sql>
     <!--获取父节点信息-->
     <select id="userRoles" resultMap="BaseResultMap">
-        select
+        select distinct
         <include refid="sqlColumns"></include>
         from sys_role r right join sys_user_role u
         on r.role_id=u.role_id
@@ -24,7 +29,7 @@
     <!-- 插入菜单和角色关联表数据 -->
     <insert id="insertRoleMenu">
         INSERT INTO sys_role_menu(role_id, menu_Id)
-        <foreach collection="permissionList" item="menu" separator=" union all ">
+        <foreach collection="menuList" item="menu" separator=" union all ">
             SELECT #{roleId}, #{menu.menuId} FROM dual
         </foreach>
     </insert>

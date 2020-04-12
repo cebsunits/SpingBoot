@@ -14,6 +14,7 @@ public class WebSocketServiceImpl implements WebSocketService {
 
     @Autowired
     SimpMessagingTemplate simpMessagingTemplate;
+
     /**
      * 向指定用户发送事件
      *
@@ -22,7 +23,7 @@ public class WebSocketServiceImpl implements WebSocketService {
      * @param message
      */
     public void convertAndSendToUser(String userName, String destination, Object message) {
-        simpMessagingTemplate.convertAndSendToUser(userName,destination,message);
+        simpMessagingTemplate.convertAndSendToUser(userName, destination, message);
     }
 
     /**
@@ -31,11 +32,10 @@ public class WebSocketServiceImpl implements WebSocketService {
      * @param message
      */
     public void convertAndSendToUserSuccess(String userName, Object message) {
-        AjaxSuccess ajaxSuccess=new AjaxSuccess();
+        AjaxSuccess ajaxSuccess = new AjaxSuccess();
         ajaxSuccess.setData(message);
-        simpMessagingTemplate.convertAndSendToUser(userName,WEBSOCKET_MESSAGE_USER,ajaxSuccess);
+        simpMessagingTemplate.convertAndSendToUser(userName, WEBSOCKET_MESSAGE_USER, ajaxSuccess);
     }
-
 
 
     /**
@@ -45,7 +45,7 @@ public class WebSocketServiceImpl implements WebSocketService {
      * @param message
      */
     public void convertAndSend(String destination, Object message) {
-        simpMessagingTemplate.convertAndSend(destination,message);
+        simpMessagingTemplate.convertAndSend(destination, message);
     }
 
     /**
@@ -55,8 +55,8 @@ public class WebSocketServiceImpl implements WebSocketService {
      * @param message
      */
     public void convertAndSendSuccess(String destination, Object message) {
-        AjaxSuccess ajaxSuccess=new AjaxSuccess();
+        AjaxSuccess ajaxSuccess = new AjaxSuccess();
         ajaxSuccess.setData(message);
-        simpMessagingTemplate.convertAndSend(WEBSOCKET_MESSAGE_ALL,ajaxSuccess);
+        simpMessagingTemplate.convertAndSend(WEBSOCKET_MESSAGE_ALL, ajaxSuccess);
     }
 }

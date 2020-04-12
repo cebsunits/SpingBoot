@@ -40,7 +40,7 @@ public class MailUtil {
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
 
         try {
-            helper.setFrom(mailBean.getFrom(),mailBean.getFromName());
+            helper.setFrom(mailBean.getFrom(), mailBean.getFromName());
             helper.setTo(mailBean.getToEmails());
             helper.setSubject(mailBean.getSubject());
             helper.setText(mailBean.getText());
@@ -61,14 +61,14 @@ public class MailUtil {
     public void sendMailHtml(MailBean mailBean) {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         try {
-            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage,true,"UTF-8");
-            helper.setFrom(mailBean.getFrom(),mailBean.getFromName());
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
+            helper.setFrom(mailBean.getFrom(), mailBean.getFromName());
             helper.setTo(mailBean.getToEmails());
             helper.setSubject(mailBean.getSubject());
             helper.setText(mailBean.getText(), true);
         } catch (MessagingException e) {
             e.printStackTrace();
-        }catch (UnsupportedEncodingException e) {
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 

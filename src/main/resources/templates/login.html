@@ -2,10 +2,46 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <!--引用通用head--->
 <head th:replace="common/commonHeader::common_header(~{::title},~{::link},~{})">
-	<title>登录管理</title>
-	<link rel="stylesheet" th:href="@{/css/login.css}"></link>
+    <title>登录管理</title>
+    <link rel="stylesheet" th:href="@{/css/login.css}"></link>
 </head>
-<body >
+<body>
+
+<div class="container">
+    <div class="row center">
+        <div class="col-sm-offset-4 col-sm-4">
+            <h3 class="text-center">用户登录</h3>
+            <input type="hidden" name="key" th:value="${key}">
+            <form class="form-horizontal form" id="loginForm">
+                <div class="form-group">
+                    <label for="loginName" class="col-sm-2 control-label" style="white-space:nowrap">登录名</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="loginName" name="loginName" placeholder="请输入登录名">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-2 control-label" style="white-space:nowrap">密 码</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="请输入密码">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-2 control-label">验&nbsp;证&nbsp;码</label>
+                    <div class="col-sm-10 ">
+                        <input type="text" class="form-control" id="verifyCode" name="verifyCode" placeholder="验证码"/>
+                        <img class="verifyImage" id="imgVerify" alt="验证码" onclick="getVerifyCode(this)" src="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <!--						<a  id="btn_login" class="btn btn-success btn-block">登录</a>-->
+                    <input type="button" id="btn_login" class="btn btn-success center-block" value="登录"/>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
 <!--引用通用JS-->
 <div th:replace="common/commonFoot::foot(~{::script})">
 	<script th:src="@{/webjars/jquery-validation/jquery.validate.min.js}"></script>
@@ -18,40 +54,5 @@
 		}
 	</script>
 </div>
-	<div class="container">
-		<div class="row center">
-			<div class="col-sm-offset-4 col-sm-4">
-				<h3 class="text-center">用户登录</h3>
-				<input type="hidden" name="key" th:value="${key}">
-				<form class="form-horizontal form" id="loginForm">
-					<div class="form-group">
-						<label for="loginName" class="col-sm-2 control-label"style="white-space:nowrap">登录名</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="loginName" name="loginName" placeholder="请输入登录名">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="password" class="col-sm-2 control-label"style="white-space:nowrap">密  码</label>
-						<div class="col-sm-10">
-							<input type="password" class="form-control" id="password" name="password" placeholder="请输入密码">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="password" class="col-sm-2 control-label">验&nbsp;证&nbsp;码</label>
-						<div class="col-sm-10 ">
-							<input type="text" class="form-control" id="verifyCode"  name="verifyCode" placeholder="验证码"/>
-							<img class="verifyImage" id="imgVerify" alt="验证码" onclick="getVerifyCode(this)" src="">
-						</div>
-					</div>
-					<div class="form-group">
-<!--						<a  id="btn_login" class="btn btn-success btn-block">登录</a>-->
-						<input type="button" id="btn_login" class="btn btn-success center-block" value="登录"/>
-					</div>
-				</form>
-			</div>
-
-		</div>
-	</div>
-
 </body>
 </html>

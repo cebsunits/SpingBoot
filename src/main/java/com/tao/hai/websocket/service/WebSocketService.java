@@ -4,6 +4,7 @@ package com.tao.hai.websocket.service;
 public interface WebSocketService {
     /**
      * 向指定用户发送事件
+     *
      * @param userName
      * @param destination
      * @param message
@@ -17,8 +18,10 @@ public interface WebSocketService {
      * @param message
      */
     void convertAndSendToUserSuccess(String userName, Object message);
+
     /**
      * 发送事件
+     *
      * @param destination
      * @param message
      */
@@ -26,6 +29,7 @@ public interface WebSocketService {
 
     /**
      * 发送success事件
+     *
      * @param destination
      * @param message
      */

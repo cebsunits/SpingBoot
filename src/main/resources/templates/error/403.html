@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--引用通用head--->
+<head th:replace="common/commonHeader::common_header(~{::title},~{::link},~{})">
+	<title>403 页面</title>
+	<!-- 引入bootstrap插件样式 -->
+	<link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body class="gray-bg">
+	<div class="middle-box text-center animated fadeInDown">
+		<h1>403</h1>
+		<h3 class="font-bold">您没有访问权限！</h3>
+		<div class="error-desc">
+			抱歉，请联系管理员哦~
+			<form class="form-inline m-t" role="form">
+				<div class="form-group">
+					<input type="email" class="form-control"
+						placeholder="请输入您需要查找的内容 …">
+				</div>
+				<button type="submit" class="btn btn-primary">搜索</button>
+			</form>
+		</div>
+	</div>
+	<!--引用通用JS-->
+	<div th:replace="common/commonFoot::foot(~{})">
+
+	</div>
+
+</body>
+</html>

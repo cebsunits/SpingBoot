@@ -12,7 +12,7 @@ import java.util.List;
  * 组装查询条件工具类
  */
 public class ExampleUtil {
-    public static<T> Example getExample(Class<T> clazz, ParameterModelBean parameterModel) {
+    public static <T> Example getExample(Class<T> clazz, ParameterModelBean parameterModel) {
         Example example = example = new Example(clazz);
         if (parameterModel != null) {
             List<JsonModelBean> list = parameterModel.getQuery();
@@ -22,17 +22,17 @@ public class ExampleUtil {
             if (list != null && list.size() > 0) {
                 for (JsonModelBean jsonModel : list) {
                     //实体类是否存在该字段且字段值不为空
-                    if (jsonModel.getName() != null && jsonModel.getType() != null && StringUtil.isNotEmpty(jsonModel.getValue())  && existsField(clazz, jsonModel.getName())) {
-                        if ("llike".equals(jsonModel.getType()) ) {
-                            criteria.andLike(jsonModel.getName(), "%"+jsonModel.getValue());
+                    if (jsonModel.getName() != null && jsonModel.getType() != null && StringUtil.isNotEmpty(jsonModel.getValue()) && existsField(clazz, jsonModel.getName())) {
+                        if ("llike".equals(jsonModel.getType())) {
+                            criteria.andLike(jsonModel.getName(), "%" + jsonModel.getValue());
                             continue;
                         }
-                        if ("rlike".equals(jsonModel.getType()) ) {
-                            criteria.andLike(jsonModel.getName(), jsonModel.getValue()+"%");
+                        if ("rlike".equals(jsonModel.getType())) {
+                            criteria.andLike(jsonModel.getName(), jsonModel.getValue() + "%");
                             continue;
                         }
-                        if ("like".equals(jsonModel.getType()) ) {
-                            criteria.andLike(jsonModel.getName(), "%"+jsonModel.getValue()+"%");
+                        if ("like".equals(jsonModel.getType())) {
+                            criteria.andLike(jsonModel.getName(), "%" + jsonModel.getValue() + "%");
                             continue;
                         }
                         if ("eq".equals(jsonModel.getType())) {
@@ -79,24 +79,25 @@ public class ExampleUtil {
 
     /**
      * 判断该实例是否存在该字段
+     *
      * @param clz
      * @param fieldName
      * @return
      */
-    private static boolean existsField(Class clz,String fieldName){
-        try{
-            return clz.getDeclaredField(fieldName)!=null;
+    private static boolean existsField(Class clz, String fieldName) {
+        try {
+            return clz.getDeclaredField(fieldName) != null;
+        } catch (Exception e) {
         }
-        catch(Exception e){
-        }
-        if(clz!=Object.class){
-            return existsField(clz.getSuperclass(),fieldName);
+        if (clz != Object.class) {
+            return existsField(clz.getSuperclass(), fieldName);
         }
         return false;
     }
 
     /**
      * 将字符串转换为集合
+     *
      * @param string
      * @return
      */

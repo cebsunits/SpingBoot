@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * 参数模板实体bean
+ *
  * @author sunits
  * @date 2019/7/18
  */
@@ -19,6 +20,17 @@ public class ParameterModelBean {
     private List<JsonModelBean> query;
     private String querystr;
 
+    public ParameterModelBean() {
+
+    }
+
+    /**
+     * @param page     当前页数
+     * @param rows     每页多少行
+     * @param order    排序
+     * @param querystr 查询条件
+     * @parma sort 排序
+     */
     public ParameterModelBean(Integer page, Integer rows, String sort, String order, String querystr) {
         this.page = page;
         this.rows = rows;

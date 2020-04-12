@@ -24,7 +24,7 @@
         <druid.version>1.1.21</druid.version>
         <fastjson.version>1.2.62</fastjson.version>
         <jackson-annotations.version>2.9.9</jackson-annotations.version>
-        <shiro.version>1.4.2</shiro.version>
+        <shiro.version>1.5.2</shiro.version>
         <ehcache.version>2.9.1</ehcache.version>
         <log4j.version>1.2.17</log4j.version>
         <nekohtml.version>1.9.22</nekohtml.version>
@@ -35,6 +35,7 @@
         <bootstrap.version>4.3.1</bootstrap.version>
         <bootstrap.table.version>1.9.1-1</bootstrap.table.version>
         <bootstrap.select.version>1.9.4</bootstrap.select.version>
+        <bootstrap.multiselect.version>0a857a085d</bootstrap.multiselect.version>
         <bootstrap.treeview.version>1.2.0</bootstrap.treeview.version>
         <bootstrap-sidebar.version>0.2.2</bootstrap-sidebar.version>
         <bootstrap-glyphicons.version>bdd2cbfba0</bootstrap-glyphicons.version>
@@ -53,7 +54,9 @@
         <highcharts.version>7.1.1</highcharts.version>
         <datatables.version>1.10.20</datatables.version>
         <download.version>0.1.17-1</download.version>
-        <font-awesome.version>5.8.2</font-awesome.version>
+        <font-awesome.version>5.13.0</font-awesome.version>
+        <fontawesome-iconpicker.version>1.2.2</fontawesome-iconpicker.version>
+
         <html5shiv.version>3.7.3</html5shiv.version>
         <respond.version>1.4.2-1</respond.version>
         <json3.version>3.3.2</json3.version>
@@ -71,7 +74,8 @@
         <jquery.form.version>4.2.2</jquery.form.version>
         <jquery.form.validator.version>2.1.47</jquery.form.validator.version>
         <jquery.validation.version>1.19.0</jquery.validation.version>
-        <jquery-ui.version>1.9.2</jquery-ui.version>
+        <jquery-ui.version>1.12.1</jquery-ui.version>
+        <jQuery-Autocomplete.version>1.4.10</jQuery-Autocomplete.version>
         <extjs.version>6.2.0</extjs.version>
         <cryptojs.version>3.1.2</cryptojs.version>
         <webjars.locator.core.version>0.38</webjars.locator.core.version>
@@ -82,8 +86,9 @@
         <pace.version>1.0.2</pace.version>
         <layui.version>2.5.5</layui.version>
         <react.version>16.5.2</react.version>
-        <vue.version>2.6.10</vue.version>
+        <vue.version>2.6.11</vue.version>
         <jqgrid.version>4.7.0</jqgrid.version>
+        <source-map.version>0.1.40-1</source-map.version>
         <!-- webjars end -->
         <!--工作流组件 start-->
         <activiti-engine.version>7.1.0.M4</activiti-engine.version>
@@ -93,6 +98,8 @@
         <!--excel导出 start-->
         <poi.version>4.1.0</poi.version>
         <!--excel导出 start-->
+        <!--swagger2-->
+        <swagger2.version>2.9.2</swagger2.version>
     </properties>
 
     <dependencies>
@@ -134,12 +141,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-log4j12</artifactId>
-                </exclusion>
-            </exclusions>
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>org.slf4j</groupId>-->
+<!--                    <artifactId>slf4j-log4j12</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -191,47 +198,16 @@
         <!--shiro start-->
         <dependency>
             <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-core</artifactId>
-            <version>${shiro.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-config-core</artifactId>
-            <version>${shiro.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-cas</artifactId>
-            <version>${shiro.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-ehcache</artifactId>
-            <version>${shiro.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-spring-boot</artifactId>
-            <version>${shiro.version}</version>
-            <type>pom</type>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-spring-boot-starter</artifactId>
-            <version>${shiro.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring-boot-web-starter</artifactId>
             <version>${shiro.version}</version>
         </dependency>
+        <!--shiro end-->
         <!--验证码-->
         <dependency>
             <groupId>com.github.penggle</groupId>
             <artifactId>kaptcha</artifactId>
             <version>${kaptcha.version}</version>
         </dependency>
-        <!--shiro end-->
         <!--Oracle依赖-->
         <dependency>
             <groupId>com.oracle</groupId>
@@ -326,6 +302,12 @@
             <version>${jquery-ui.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jQuery-Autocomplete</artifactId>
+            <version>${jQuery-Autocomplete.version}</version>
+        </dependency>
+
         <!--Bootstrap框架（前端） start-->
         <dependency>
             <groupId>org.webjars</groupId>
@@ -342,6 +324,11 @@
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap-select</artifactId>
             <version>${bootstrap.select.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap-multiselect</artifactId>
+            <version>${bootstrap.multiselect.version}</version>
         </dependency>
         <dependency>
             <groupId>org.webjars</groupId>
@@ -557,9 +544,30 @@
         </dependency>
         <dependency>
             <groupId>org.webjars</groupId>
+            <artifactId>source-map</artifactId>
+            <version>${source-map.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.webjars</groupId>
             <artifactId>slidebars</artifactId>
             <version>2.0.2</version>
         </dependency>
+        <!--tree table start-->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery-treetable</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+        <!--tree table end-->
+
+
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>Rest</artifactId>
+            <version>2.0.0</version>
+        </dependency>
+
         <!-- 引入webjars end -->
 
         <!-- 工作流组件 start -->
@@ -599,6 +607,19 @@
 
 
         <!--excel导出 end-->
+
+        <!--swagger2 start-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger2.version}</version>
+        </dependency>
+        <!--swagger2 end-->
     </dependencies>
 
     <build>

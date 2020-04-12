@@ -176,41 +176,41 @@ $(function () {
 
         // 当前元素处于活动状态
         if ($(this).parents('.J_menuTab').hasClass('active')) {
-
             // 当前元素后面有同辈元素，使后面的一个元素处于活动状态
-            if ($(this).parents('.J_menuTab').next('.J_menuTab').size()) {
+            if ($(this).parents('.J_menuTab').next('.J_menuTab')!=undefined) {
+                if ($(this).parents('.J_menuTab').next('.J_menuTab').length>0 ) {
 
-                var activeId = $(this).parents('.J_menuTab').next('.J_menuTab:eq(0)').data('id');
-                $(this).parents('.J_menuTab').next('.J_menuTab:eq(0)').addClass('active');
+                    var activeId = $(this).parents('.J_menuTab').next('.J_menuTab:eq(0)').data('id');
+                    $(this).parents('.J_menuTab').next('.J_menuTab:eq(0)').addClass('active');
 
-                $('.J_mainContent .J_iframe').each(function () {
-                    if ($(this).data('id') == activeId) {
-                        $(this).show().siblings('.J_iframe').hide();
-                        return false;
+                    $('.J_mainContent .J_iframe').each(function () {
+                        if ($(this).data('id') == activeId) {
+                            $(this).show().siblings('.J_iframe').hide();
+                            return false;
+                        }
+                    });
+
+                    var marginLeftVal = parseInt($('.page-tabs-content').css('margin-left'));
+                    if (marginLeftVal < 0) {
+                        $('.page-tabs-content').animate({
+                            marginLeft: (marginLeftVal + currentWidth) + 'px'
+                        }, "fast");
                     }
-                });
 
-                var marginLeftVal = parseInt($('.page-tabs-content').css('margin-left'));
-                if (marginLeftVal < 0) {
-                    $('.page-tabs-content').animate({
-                        marginLeft: (marginLeftVal + currentWidth) + 'px'
-                    }, "fast");
+                    //  移除当前选项卡
+                    $(this).parents('.J_menuTab').remove();
+
+                    // 移除tab对应的内容区
+                    $('.J_mainContent .J_iframe').each(function () {
+                        if ($(this).data('id') == closeTabId) {
+                            $(this).remove();
+                            return false;
+                        }
+                    });
                 }
-
-                //  移除当前选项卡
-                $(this).parents('.J_menuTab').remove();
-
-                // 移除tab对应的内容区
-                $('.J_mainContent .J_iframe').each(function () {
-                    if ($(this).data('id') == closeTabId) {
-                        $(this).remove();
-                        return false;
-                    }
-                });
             }
-
             // 当前元素后面没有同辈元素，使当前元素的上一个元素处于活动状态
-            if ($(this).parents('.J_menuTab').prev('.J_menuTab').size()) {
+            if ($(this).parents('.J_menuTab').prev('.J_menuTab').length>0 ) {
                 var activeId = $(this).parents('.J_menuTab').prev('.J_menuTab:last').data('id');
                 $(this).parents('.J_menuTab').prev('.J_menuTab:last').addClass('active');
                 $('.J_mainContent .J_iframe').each(function () {

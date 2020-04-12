@@ -9,8 +9,9 @@
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
     <!-- 引入bootstrap插件样式 -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-    <!-- 引入font-awesome icons CSS  -->
-    <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap-ext.css}"/>
+    <!-- 引入font-awesome icons CSS,webjars里面的样式少很多  -->
+    <link rel="stylesheet" th:href="@{/css/pluggins/font-awesome/css/font-awesome.min.css}"/>
     <!-- 引入bootstrap验证插件样式 -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrapvalidator/css/bootstrapValidator.min.css}"/>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap-glyphicons/css/bootstrap-glyphicons.css}"/>
@@ -20,6 +21,8 @@
     <link rel="stylesheet" th:href="@{/webjars/toastr/build/toastr.min.css}"/>
     <!-- 动画特性animate -->
     <link rel="stylesheet" th:href="@{/webjars/animate.css/animate.min.css}"/>
+    <!-- 动画特性animate -->
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <link rel="icon" th:href="@{/images/favicon.ico}">
     <!--/* Per-page placeholder for additional links */-->
     <th:block th:replace="${links}"/>

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.entity.Example;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -76,12 +77,13 @@ public class BaseServiceImpl<M extends BaseDao<T>, T extends DataEntity<T>> impl
         PageInfo<T> pageInfoUser = new PageInfo<T>(list);
         return pageInfoUser;
     }
+
     @Override
-    public PageInfo<T> getList(ParameterModelBean parameterModel) {
+    public PageInfo<T> getPageList(ParameterModelBean parameterModel) {
         PageInfo<T> pageInfo = null;
         if (parameterModel != null) {
             //获得超类的泛型参数的实际类型
-            Class<T> clazz = (Class<T>)((ParameterizedType)getClass().getGenericSuperclass()).getActualTypeArguments()[1];
+            Class<T> clazz = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1];
             Example example = ExampleUtil.getExample(clazz, parameterModel);
             if (parameterModel.getPage() != null && parameterModel.getRows() != null) {
                 PageHelper.startPage(parameterModel.getPage(), parameterModel.getRows());
@@ -92,4 +94,20 @@ public class BaseServiceImpl<M extends BaseDao<T>, T extends DataEntity<T>> impl
         return pageInfo;
     }
 
+    /**
+     * 查询所有数据
+     */
+    @Override
+    public List<T> getList(ParameterModelBean parameterModel) {
+        List<T> list;
+        if (parameterModel != null) {
+            //获得超类的泛型参数的实际类型
+            Class<T> clazz = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1];
+            Example example = ExampleUtil.getExample(clazz, parameterModel);
+            list = mapper.selectByExample(example);
+        } else {
+            list = new ArrayList<>();
+        }
+        return list;
+    }
 }

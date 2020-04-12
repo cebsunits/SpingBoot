@@ -10,7 +10,7 @@
 	</delete>
     <!-- 插入用户和角色关联表数据 -->
     <insert id="insertUserDept">
-        INSERT INTO sys_user_role(user_id, dept_id)
+        INSERT INTO sys_user_dept(user_id, dept_id)
         <foreach collection="deptList" item="dept" separator=" union all ">
             SELECT #{userId}, #{dept.deptId} FROM dual
         </foreach>

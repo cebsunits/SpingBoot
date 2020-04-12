@@ -3,22 +3,13 @@
 <!--引用通用head--->
 <head th:replace="common/commonHeader::common_header(~{::title},~{::link},~{})">
     <title>角色配置</title>
-    <link rel="stylesheet" th:href="@{/webjars/bootstrapvalidator/css/bootstrapValidator.min.css}"/>
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap-glyphicons/css/bootstrap-glyphicons.css}"/>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap-datepicker/css/bootstrap-datepicker3.css}"/>
 </head>
-<body>
-<!--引用通用JS-->
-<div th:replace="common/commonFoot::foot(~{::script})">
-    <script th:src="@{/webjars/bootstrapvalidator/js/bootstrapValidator.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
-    <script th:src="@{/webjars/jquery-validation/jquery.validate.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js}"></script>
-    <script th:src="@{/js/sys/role/role.js}"></script>
-</div>
-<div class="container-fluid panel-body">
-    <form class="form-horizontal validation-form" id="formAdd" action="#" th:action="@{/sys/role/save}" method="post">
+<body class="gray-bg">
+<div class="container-fluid panel-body animated fadeInRight">
+    <form class="form-horizontal validation-form" id="formAdd" action="/sys/role/save"  method="post">
         <input type="hidden" name="roleId" th:value="${role.roleId}">
+        <input type="hidden" name="oldRole" id="oldRole" th:value="${role.role}">
         <div class="panel panel-default" style="margin-bottom: 0px;">
             <h4 class="panel panel-heading h4font">
                 角色配置
@@ -33,7 +24,11 @@
                         <span style="color:red;font-weight:bold">角色英文名</span>
                     </label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control" name="role" placeholder="角色英文名" th:value="${role.role}">
+                        <!--roleId不为空时更新--->
+                        <input type="text" class="form-control" name="role" placeholder="角色英文名" th:value="${role.role}" readonly="true" th:if="${not #strings.isEmpty(role.roleId)}">
+                        <!--roleId为空时新增--->
+                        <input type="text" class="form-control" name="role" placeholder="角色英文名" th:value="${role.role}" th:if="${#strings.isEmpty(role.roleId)}">
+
                     </div>
                     <label class="control-label">（最长16位）</label>
                 </div>
@@ -72,8 +67,10 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">创建时间</label>
                     <div class="col-sm-4">
-                        <input type="text" readonly class="form-control" name="createTime" placeholder=""
-                               th:value="${#temporals.format(role.createDate, 'yyyy-MM-dd HH:mm:ss')}">
+<!--                        <input type="text" readonly class="form-control" name="createTime" placeholder="创建时间"-->
+<!--                               th:value="${#temporals.format(role.createDate, 'yyyy-MM-dd HH:mm:ss')}">-->
+                        <input type="text" class="form-control" name="createTime" placeholder="创建时间" th:value="${role.createDate}">
+
                     </div>
                     <label class="control-label">（系统自动生成）</label>
                 </div>
@@ -81,14 +78,21 @@
             </div>
 
             <div class="form-group">
-                    <button type="submit" class="btn btn-primary">保 存</button>
-                    <button type="button" href="javascript:void(0)" th:href="@{/sys/role/index}" class="btn btn-secondary">返 回</button>
+                    <button type="submit" id="save_btn" class="btn btn-primary">保 存</button>
+                    <button type="button" id="btn_back" name="btn_back" class="btn btn-secondary" onclick="windowClose()">返回</button>
             </div>
         </div>
 
 
     </form>
 
+</div>
+<!--引用通用JS-->
+<div th:replace="common/commonFoot::foot(~{::script})">
+    <script th:src="@{/webjars/bootstrap-datepicker/js/bootstrap-datepicker.min.js}"></script>
+    <script th:src="@{/webjars/jquery-validation/jquery.validate.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js}"></script>
+    <script th:src="@{/js/sys/role/add.js}"></script>
 </div>
 </body>
 </html>

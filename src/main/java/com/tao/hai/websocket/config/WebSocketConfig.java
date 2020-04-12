@@ -21,16 +21,18 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     private String userDestinationPrefix;
     @Value("${webSocket.applicationDestinationPrefixes}")
     private String applicationDestinationPrefixes;
+
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint(webSocketPath)//端点名称
                 .setAllowedOrigins("*")//跨域
                 .withSockJS(); //使用sockJS
     }
+
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
         //这里注册两个，主要是目的是将广播和队列分开。
-        registry.enableSimpleBroker(topicPath,userPath);
+        registry.enableSimpleBroker(topicPath, userPath);
         //定义websoket前缀
         registry.setApplicationDestinationPrefixes(applicationDestinationPrefixes);
         //定义一对一推送的时候前缀

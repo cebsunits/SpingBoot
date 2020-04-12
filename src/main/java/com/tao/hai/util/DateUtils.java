@@ -30,6 +30,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 
     /**
      * 获取下一天日期
+     *
      * @return
      */
     public static String getNextDate() {
@@ -41,6 +42,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 
     /**
      * 判断是否超过18点
+     *
      * @return
      */
     public static boolean isAfterSixHour() {
@@ -105,12 +107,13 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 
     /**
      * 从long时间转格式化日期串
+     *
      * @param time
      * @return
      */
-     public static String getDateTime(long time) {
+    public static String getDateTime(long time) {
         return formatDate(new Date(time), "yyyy-MM-dd HH:mm:ss");
-     }
+    }
 
     /**
      * 得到当前年份字符串 格式（yyyy）
@@ -267,11 +270,12 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 
     /**
      * 获取日期+1天date对象
+     *
      * @param date
      * @return
      */
     public static Date getNextDay(Date date) {
-        if(date == null) return null;
+        if (date == null) return null;
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         calendar.add(Calendar.DAY_OF_YEAR, 1);
@@ -280,6 +284,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 
     /**
      * 获取明天日期
+     *
      * @param today
      * @return
      */

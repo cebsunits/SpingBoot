@@ -15,27 +15,36 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
+
 @EqualsAndHashCode(callSuper = false)
 @Entity
 @Data
 @Table(name = "sys_log")
 public class Log extends DataEntity<Log> {
     @Id
-    @Column(name="log_Id")
+    @Column(name = "log_Id")
     private String logId;
-    @Column(name="user_name")
+    @Column(name = "user_name")
     private String userName;
-    @Column(name="host")
+    @Column(name = "host")
     private String host;
-    @Column(name="action")
+    @Column(name = "action")
     private String action;
-    @Column(name="event")
-    private String event;
+    /**
+     * 方法
+     */
+    @Column(name = "method")
+    private String method;
+    /**
+     * 参数
+     */
+    @Column(name = "params")
+    private String params;
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     //格式化前台页面收到的json时间格式，不指定的话会变成缺省的"yyyy-MM-dd'T'HH:mm:ss"
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Column(name="insert_Time")
+    @Column(name = "insert_Time")
     private LocalDateTime insertTime;
 }

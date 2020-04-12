@@ -1,20 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <!--引用通用head--->
 <head th:replace="/common/commonHeader::common_header(~{::title},~{::link},~{})">
     <title>角色管理</title>
-    <link rel="stylesheet" th:href="@{/webjars/datatables/css/jquery.dataTables.css}"/>
-    <link rel="stylesheet" th:href="@{/webjars/datatables/css/dataTables.bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap-table/bootstrap-table.min.css}"/>
 </head>
-<body>
-<!--引用通用JS-->
-<div th:replace="/common/commonFoot::foot(~{::script})">
-    <script th:src="@{/webjars/datatables/js/jquery.dataTables.min.js}" ></script>
-    <script th:src="@{/webjars/bootstrap-table/bootstrap-table.min.js}" ></script>
-    <script th:src="@{/webjars/bootstrap-table/locale/bootstrap-table-zh-CN.min.js}" ></script>
-<!--    <script th:src="@{/js/role.js}" ></script>-->
-</div>
+<body class="gray-bg">
+
 <div class="panel-body" style="padding-bottom: 0px">
     <!--查询-->
     <div class="panel panel-default" style="margin-bottom: 2px">
@@ -22,16 +15,20 @@
             <div class="form-group">
                 <label for="search">角色名称</label>
                 <input type="text" name="roleName" id="search" placeholder="角色名称">
-                <input type="button" id="btnQuery" class="btn btn-primary" value="查询">
+                <button id="btnQuery" type="button" class="btn btn-info btn-sm">
+                    <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>查询
+                </button>
             </div>
         </div>
     </div>
     <!--工具栏-->
     <div id="toolbar" class="btn-group">
-        <button id="btn_add" type="button" class="btn btn-default">
+        <button id="btn_add" shiro:hasPermission="sys:role:add"
+                type="button" class="btn btn-primary btn-sm">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
         </button>
-        <button id="btn_delete_tip" type="button" class="btn btn-default" data-target="#deleteModal" data-toggle="modal">
+        <button id="btn_delete_tip" shiro:hasPermission="sys:role:batchRemove"
+                type="button" class="btn btn-danger btn-sm" data-target="#deleteModal" data-toggle="modal">
             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
         </button>
     </div>
@@ -62,237 +59,38 @@
     </table>
 
 </div>
-</body>
-<script type="text/javascript">
-    var $roleTable=$("#roleTable");
-    $(function () {
-        //初始化bootstrap table
-        initTable();
-        //添加off("click")避免点击一次触发两次情况
-        $('#btnQuery').off("click").on("click",function () {
-            refresh();
-        });
-        $('#btn_add').off("click").on("click",function () {
-            add();
-        });
-        $('#btn_delete').off("click").on("click",function () {
-            toDelete();
-        });
-    });
-
-
-    function initTable() {
-        $roleTable.bootstrapTable({
-            url:"/sys/role/page",
-            cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
-            method: 'post',
-            contentType : "application/x-www-form-urlencoded;charset=UTF-8", //post方式必须设置,get方式设置application/json
-            dataType: 'json',
-            striped: true,                      //是否显示行间隔色
-            toolbar: '#toolbar',                //工具按钮用哪个容器
-            sidePagination: 'server',           //分页方式：client客户端分页，server服务端分页（*）
-            pagination: true,                   //是否显示分页（*）
-            pageNumber: 1,                      //初始化加载第一页，默认第一页
-            pageSize: 10,                        //每页的记录行数（*）
-            pageList: [10, 25, 50],          //可供选择的每页的行数（*）
-//            search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
-            showColumns: true,                  //是否显示所有的列（选择显示的列）
-            minimumCountColumns: 2,             //最少允许的列数
-            showRefresh: true,                  //是否显示刷新按钮
-            clickToSelect: true,                //是否启用点击选中行
-//            showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
-            sortable: true,                     //是否启用排序
-            sortOrder: "desc",                   //排序方式
-            sortName: 'createTime',             //排序字段
-            cardView: false,                    //是否显示详细视图
-            detailView: false,                  //是否显示父子表
-            idField: 'roleId',                  //id
-            showExport: true,                     //是否显示导出
-            exportDataType: "selected",              //basic', 'all', 'selected'.
-            exportTypes: ['txt','csv', 'excel','xlsx'],
-            exportOptions:{
-                //ignoreColumn: [0,0],            //忽略某一列的索引
-                fileName: '数据导出',              //文件名称设置
-                worksheetName: 'Sheet1',          //表格工作区名称
-                tableName: '角色列表',
-                excelstyles: ['background-color', 'color', 'font-size', 'font-weight'],
-                //onMsoNumberFormat: DoOnMsoNumberFormat
-            },
-            buttonsAlign:"right",  //按钮位置
-            columns: [
-                {
-                    field:'selected',
-                    checkbox: true,
-                    formatter: function (value, row, index) {
-                        if (row.role == 'admin')
-                            return {
-                                disabled:true,
-                                checked: false//设置选中
-                            };
-                        return value;
-                    }
-                }, {
-                    field:'role',
-                    title: '角色代码',
-                    align: 'center',
-                    sortable: true
-                }, {
-                    field: 'roleName',
-                    title: '角色名称',
-                    sortable: true
-                }, {
-                    field: 'description',
-                    title: '角色描述'
-                }, {
-                    field: 'createDate',
-                    title: '创建时间',
-                    sortable: true
-                },  {
-                    field: 'available',
-                    title: '状态',
-                    sortable: true,
-                    formatter:function (value,row,index) {
-                        if(row.role=='admin') return "锁定";
-                        if(value) return "正常";
-                        else return "禁用";
-                    }
-                },  {
-                    field: 'roleId',
-                    title: '操作',
-                    sortable: true,
-                    formatter:function (value,row,index) {
-                        var e = '<a class="btn btn-primary btn-sm" href="#" mce_href="#" title="编辑" onclick="edit(\''
-                            + row.roleId
-                            + '\')"><i class="fa fa-edit"></i>编辑</a> ';
-                        var d = '<a class="btn btn-warning btn-sm" href="#" title="删除"  mce_href="#" onclick="toDelete(\''
-                            + row.roleId
-                            + '\')"><i class="fa fa-remove"></i>删除</a> ';
-                        var grant = '<a class="btn btn-warning btn-sm" href="#" title="权限"  mce_href="#" onclick="authority(\''
-                            + row.roleId
-                            + '\')"><i class="fa fa-cog"></i>权限</a> ';
-                        return e + d+grant;
-                    }
-                }
-            ],
-            queryParamsType: '',
-            queryParams: function (params) {
-                console.log("queryParams---"+params)
-                //这里的键的名字和控制器的变量名必须一致，这边改动，控制器也需要改成一样的
-                var temp = {
-                    limit : params.limit, // 每页显示数量
-                    offset :params.offset,
-                    page: (params.offset / params.limit) + 1,   //当前页码
-                    sortName: params.sortName,      //排序列名
-                    sortOrder: params.sortOrder,  //排位命令（desc，asc）
-                    searchText: $('#search').val()
-                };
-                return temp;
-            },
-            responseHandler:function(result){
-                return {
-                    "total":result.recordsTotal,
-                    "rows":result.data
-                };
-            },
-            rowStyle: function (row, index) {
-                //这里有5个取值代表5中颜色['active', 'success', 'info', 'warning', 'danger'];
-                var strclass = "";
-                if (row.role == "admin") {
-                    strclass = 'danger';//
-                }
-                else {
-                    return {};
-                }
-                return { classes: strclass }
-            },
-            onLoadSuccess: function (result) {
-                console.log("数据加载成功！"+result);
-            },
-            onLoadError: function () {
-                console.log("数据加载失败！");
-            },
-            onDblClickRow: function (row, $element) {
-            }
-        });
-    }
-
-
-    //刷新
-    function refresh() {
-        $roleTable.bootstrapTable('refresh');
-    }
-    //新增
-    function add() {
-        var url = "/sys/role/roleAdd";
-        openDialog("角色新增",url,"800px","600px");
-        // $('#container').load(url);
-    }
-
-    //批量删除
-    function toDelete(){
-        var selectedLine = $roleTable.bootstrapTable('getSelections');
-        if (selectedLine.length < 1) {
-            toastr.warning("请选中一行数据");
-        }
-        else {
-            var idList = selectedLine[0].roleId;
-            for (var i = 1; i < selectedLine.length; i++) {
-                idList += ','+ selectedLine[i].roleId;
-            }
-            var deleteUrl = "/sys/role/batchDelete";
-            $.ajax({
-                type:"post",
-                url:deleteUrl,
-                data:{roleIdList:idList},
-                dataType:"json",
-                success:function (result) {
-                    // $('#container').load(result.url);
-                    toastr.success(result.message);
-                    parent.location.reload();
-                    $('.modal-backdrop').remove();//移除遮罩
-                    $("body").removeClass('modal-open'); //移除模态
-                    windowClose();
-                },
-                error:function (result) {
-                    toastr.warning(result.message);
-                }
-            });
-        }
-    }
-
-    //编辑
-    function edit(roleId) {
-        var url = "/sys/role/roleAdd?roleId="+roleId;
-        openDialog("角色编辑",url,"800px","600px");
-        // $('#container').load(url);
-    }
-    //删除
-    function toDelete(roleId){
-        var deleteUrl = "/sys/role/delete";
-        if(confirm("确认删除？")){
-            $.ajax({
-                type:"post",
-                url:deleteUrl,
-                data:{roleId:roleId},
-                dataType:"json",
-                success:function (result) {
-                    // $('#container').load(result.url);
-                    parent.location.reload();
-                    $('.modal-backdrop').remove();//移除遮罩
-                    $("body").removeClass('modal-open'); //移除模态
-                    windowClose();
-                },
-                error:function (result) {
-                    toastr.warning("删除失败！");
-                }
-            });
-        }
-    }
-    //角色
-    function authority(roleId) {
-        var url = "/sys/role/auth?roleId="+roleId;
-        openDialog("角色授权",url,"800px","600px");
-        // $('#container').load(url);
-    }
+<!--权限控制-->
+<script type="application/javascript">
+    let s_edit_h=false;
+    let s_remove_h=false;
+    let s_grant_h=false;
 </script>
+<shiro:hasPermission name="sys:role:add">
+    <script type="application/javascript">
+        s_edit_h=true;
+    </script>
+</shiro:hasPermission>
+<shiro:hasPermission name="sys:role:grant">
+    <script type="application/javascript">
+        s_grant_h=true;
+    </script>
+</shiro:hasPermission>
+<shiro:hasPermission name="sys:role:remove">
+    <script type="application/javascript">
+        s_remove_h=true;
+    </script>
+</shiro:hasPermission>
+<!--权限控制-->
+<!--引用通用JS-->
+<div th:replace="/common/commonFoot::foot(~{})">
+</div>
+<script th:src="@{/webjars/bootstrap-table/bootstrap-table.min.js}" ></script>
+<script th:src="@{/webjars/bootstrap-table/extensions/filter-control/bootstrap-table-filter-control.min.js}" ></script>
+<script th:src="@{/pluggins/tableExport/tableExport.min.js}" ></script>
+<script th:src="@{/webjars/bootstrap-table/extensions/export/bootstrap-table-export.min.js}" ></script>
+<script th:src="@{/webjars/bootstrap-table/extensions/toolbar/bootstrap-table-toolbar.min.js}" ></script>
+<script th:src="@{/webjars/bootstrap-table/locale/bootstrap-table-zh-CN.min.js}" ></script>
+<script th:src="@{/js/sys/role/role.js}" ></script>
+</body>
+
 </html>

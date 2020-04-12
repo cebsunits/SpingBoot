@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * 分页查询条件bean
+ *
  * @author sunits
  * @date 2019/7/18
  */

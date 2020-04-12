@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--引用通用head--->
+<head th:replace="common/commonHeader::common_header(~{::title},~{::link},~{})">
+    <title>500错误</title>
+    <!-- 引入bootstrap插件样式 -->
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body class="gray-bg">
+
+
+    <div class="middle-box text-center animated fadeInDown">
+        <h1>500</h1>
+        <h3 class="font-bold">服务器内部错误</h3>
+
+        <div class="error-desc">
+            服务器好像出错了...
+            <div th:text="${exception}"></div>
+            <br/>您可以返回主页看看
+            <br/><a href="/" class="btn btn-primary m-t">主页</a>
+        </div>
+    </div>
+
+    <!-- 全局js -->
+    <!--引用通用JS-->
+    <div th:replace="common/commonFoot::foot(~{})">
+
+    </div>
+
+  
+</body>
+
+</html>

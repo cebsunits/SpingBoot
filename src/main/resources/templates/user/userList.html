@@ -1,192 +1,89 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <!--引用通用head--->
-<head th:replace="common/commonHeader::common_header(~{::title},~{::link},~{})">
+<head th:replace="/common/commonHeader::common_header(~{::title},~{::link},~{})">
     <title>用户管理</title>
-    <link rel="stylesheet" th:href="@{/webjars/datatables/css/jquery.dataTables.css}"/>
     <link rel="stylesheet" th:href="@{/webjars/datatables/css/dataTables.bootstrap.min.css}"/>
 </head>
-<body>
-<div class="container panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title">
-            用户管理
-        </h3>
-        <div class="row">
-            <button class="btn btn-primary" onclick="toAdd()">新增</button>
+<body class="gray-bg">
+<div class="panel-body">
+    <div class="panel panel-default" style="margin-bottom: 2px">
+<!--        <h3 class="panel-title">-->
+<!--            用户管理-->
+<!--        </h3>-->
+        <!--查询-->
+        <div class="form-group">
+            <label for="search">用户名称</label>
+            <input type="text" name="userName" id="search" placeholder="用户名称">
+            <button id="btnQuery" type="button" class="btn btn-info btn-sm">
+                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>查询
+            </button>
+        </div>
+        <!--工具栏-->
+        <div id="toolbar" class="btn-group">
+            <button id="btn_add" shiro:hasPermission="sys:user:add"
+                    type="button" class="btn btn-primary btn-sm">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+            </button>
+            <button id="btn_delete_tip" shiro:hasPermission="sys:user:batchRemove"
+                    type="button" class="btn btn-danger btn-sm" data-target="#deleteModal" data-toggle="modal">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+            </button>
+        </div>
+        <!--删除模态框-->
+        <div class="modal fade" id="deleteModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">$times;</span>
+                        </button>
+                        <h3 class="modal-title">删除提示</h3>
+                    </div>
+                    <div class="modal-body">
+                        <p>确认删除选中数据？</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btn_delete">确认</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
-    <div class="panel-body">
-        <table id="table_user"  class="table table-striped table-bordered  table-hover dataTable" >
-            <thead>
-            <tr>
-                <th>用户ID</th>
-                <th>用户名</th>
-                <th>登录名</th>
-                <th>邮箱</th>
-                <th>电话</th>
-                <th>备注</th>
-                <th>操作</th>
-            </tr>
-            </thead>
-        </table>
-    </div>
+    <!--table数据显示-->
+    <table id="table_user">
+
+    </table>
 </div>
-<!--引用通用JS-->
-<div th:replace="common/commonFoot::foot(~{::script})">
-    <script th:src="@{/webjars/datatables/js/jquery.dataTables.min.js}" ></script>
-    <script type="text/javascript">
-
-        // 第三步初始化Datatables
-        $(document).ready(function () {
-            dataTable();
-        });
-
-        function dataTable() {
-
-            // 第三步初始化Datatables
-            $('#table_user').DataTable({
-                autoWidth: false,  //禁用自动调整列宽
-                stripeClasses: ["odd", "even"],  //为奇偶行加上样式，兼容不支持CSS伪类的场合
-                processing: true,  //隐藏加载提示,自行处理
-                serverSide: true,  //启用服务器端分页
-                searching: false,  //禁用原生搜索
-                orderMulti: false,  //启用多列排序
-                retrieve: true,
-                order: [],  //取消默认排序查询,否则复选框一列会出现小箭头
-                renderer: "bootstrap",  //渲染样式：Bootstrap和jquery-ui
-                paging: true,
-                pagingType: "full_numbers",  //分页样式：simple,simple_numbers,full,full_numbers
-                language: {
-                    // "lengthMenu": "每页 _MENU_ 条记录",
-                    "lengthMenu":
-                        '<div class="form-inline row">' +
-                        '  <label for="name" class="control-label">每页</label>'+
-                        '<select class="form-control">' +
-                        '<option value="5">5</option>' +
-                        '<option value="10">10</option>' +
-                        '<option value="20">20</option>' +
-                        '<option value="30">30</option>' +
-                        '<option value="40">40</option>' +
-                        '<option value="50">50</option>' +
-                        '</select>' +
-                        '  <label for="name" class="control-label">条记录</label>'+
-                        '</div>',
-
-                    "paginate": {
-                        "first": "首页",
-                        "previous": "上一页",
-                        "next": "下一页",
-                        "last": "尾页"
-                    },
-                    "zeroRecords": " ",
-                    "info": "当前 _START_ 条到 _END_ 条 共 _TOTAL_ 条",
-                    "infoEmpty": "0条记录",
-                    "infoFiltered": "(从 _MAX_ 条记录过滤)"
-                },
-
-                sAjaxSource: "/sys/user/page",//url请求的地址
-                fnServerData: retrieveData,
-                columnDefs: [{
-                    "targets": 'nosort',  //列的样式名
-                    "orderable": false    //包含上样式名‘nosort’的禁止排序
-                }],
-                //列表表头字段
-                columns: [
-                    {data: 'userId'},
-                    {data: 'userName'},
-                    {data: 'loginName'},
-                    {data: 'email'},
-                    {data: 'phone'},
-                    {data: 'remarks'},
-                    //新建列的 定义
-                    {
-                        className: "td-operation text-center",
-                        data: null,
-                        defaultContent: "",
-                        orderable: false,
-                        width: "160px"
-                    }
-                ],
-                //新建列的 数据内容
-                "createdRow": function (row, data, index) {
-                    var obj = JSON.stringify(data);
-                    //行渲染回调,在这里可以对该行dom元素进行任何操作
-                    var view = "<a href='#' class='btn btn-info  btn-xs' onclick='view(" + obj + ")'><i class='fa fa-search-plus'></i>查看</a>";
-                    var edit = "<a href='#' class='btn btn-success  btn-xs' onclick='edit(" + obj + ")'><i class='fa fa-edit'></i>编辑</a>";
-                    var del = "<a href='#' class='btn btn-danger  btn-xs' onclick='del(" + obj + ")'><i class='fa fa-trash'></i>删除</a>";
-                    var renderColumn=view+edit+del;
-                    //
-                    $('td', row).eq(6).append(renderColumn);
-                }
-            }).draw();
-        }
-
-        //渲染数据
-        function retrieveData(url, data, fnCallback) {
-            //封装请求参数
-            var param = {};
-            param.pageSize = data.length;//页面显示记录条数，在页面显示每页显示多少项的时候
-            param.start = data.start;//开始的记录序号
-            param.pageNum = (data.start / data.length);//当前页码
-            //ajax请求数据方法
-            $.ajax({
-                type: "POST",
-                url: url,//url请求的地址
-                cache: false,  //禁用缓存
-                data: param,  //传入组装的参数
-                dataType: "json",
-                success: function (result) {
-                    console.log("----"+JSON.stringify(result));
-                    var data=JSON.stringify(result);
-                    //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
-                    //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
-                    fnCallback(result);
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    alert("status:" + XMLHttpRequest.status + ",readyState:" + XMLHttpRequest.readyState + ",textStatus:" + textStatus);
-                }
-            });
-        }
-        //查看
-        function view(data){
-            var url="/sys/user/view?userId="+data.userId;
-            openDialog("查看用户",url,'800px', '600px');
-        }
-        //编辑
-        function edit(data){
-            var url="/sys/user/edit?userId="+data.userId;
-            openDialog("编辑用户",url,'800px', '600px');
-        }
-        //删除
-        function del(data){
-            //ajax请求数据方法
-            $.ajax({
-                type: "POST",
-                url: "/sys/user/delete",//url请求的地址
-                cache: false,  //禁用缓存
-                data: {
-                    userId:data.userId
-                },  //传入组装的参数
-                dataType: "json",
-                success: function (result) {
-                    if(result.success){
-                        toastr.success('删除成功！');
-                        window.location.reload();
-                    }
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    toastr.warning('删除失败！');
-                    alert("status:" + XMLHttpRequest.status + ",readyState:" + XMLHttpRequest.readyState + ",textStatus:" + textStatus);
-                }
-            });
-        }
-        //新增
-        function toAdd(){
-            openDialog("新增用户","/sys/user/add",'800px', '600px');
-        }
+<!--权限控制-->
+<script type="application/javascript">
+    let s_edit_h=false;
+    let s_remove_h=false;
+</script>
+<shiro:hasPermission name="sys:user:edit">
+    <script type="application/javascript">
+        s_edit_h=true;
     </script>
+</shiro:hasPermission>
+<shiro:hasPermission name="sys:user:remove">
+    <script type="application/javascript">
+        s_remove_h=true;
+    </script>
+</shiro:hasPermission>
+<!--权限控制-->
+<!--引用通用JS-->
+<div th:replace="/common/commonFoot::foot(~{})">
 </div>
+<script th:src="@{/webjars/bootstrap-table/bootstrap-table.min.js}" ></script>
+<script th:src="@{/webjars/bootstrap-table/extensions/filter-control/bootstrap-table-filter-control.min.js}" ></script>
+<script th:src="@{/pluggins/tableExport/tableExport.min.js}" ></script>
+<script th:src="@{/webjars/bootstrap-table/extensions/export/bootstrap-table-export.min.js}" ></script>
+<script th:src="@{/webjars/bootstrap-table/extensions/toolbar/bootstrap-table-toolbar.min.js}" ></script>
+<script th:src="@{/webjars/bootstrap-table/locale/bootstrap-table-zh-CN.min.js}" ></script>
+<script th:src="@{/js/sys/user/user.js}" ></script>
 
 </body>
 </html>

@@ -59,11 +59,11 @@
             }
         };
         /**获取数据*/
-        var menuListString=[[${menuList}]];
-        var menuList=JSON.parse(menuListString);
+        var menus=[[${menuList}]];
+        // var menus=JSON.parse(menuListString);
         var zNodes=new Array();
         /***value 内容值  index 下标  arr 所属数组 */
-        menuList.forEach(
+        menus.forEach(
             function (value,index,array) {
                 var zNode={};
                 zNode.id=value.menuId;
@@ -74,21 +74,18 @@
         );
         /**初始化树结构*/
         var tree = $.fn.zTree.init($("#menuTree"), settings, zNodes);
+        /**默认展开全部节点*/
+        tree.expandAll(true);
         // 默认选择节点
         var ids = [[${roleMenuList}]];
         if(ids!=null&&ids!=undefined&&ids.length>0){
             for(var i=0; i<ids.length; i++) {
-                var node = tree.getNodeByParam("id", ids[i]);
-                try{
-                    tree.checkNode(node, true, false);
-                }catch(e){
-
+                var node = tree.getNodeByParam("id", ids[i].menuId);
+                if(node!=null){
+                    tree.checkNode(node,true, false);
                 }
             }
         }
-        /**默认展开全部节点*/
-        tree.expandAll(true);
-
         /***监听按钮*/
         $("#btn_save").click(function () {
             /***获取选择的菜单信息*/
@@ -107,11 +104,10 @@
                     console.log(result);
                     //请求成功时
                     if(result.success){
-                        toastr.success(result.message);
-                        parent.location.reload();
+                        parent.reLoad(result.message);
                         windowClose();
                     }else{
-                        toastr.warning(result.message);
+                        NotifyWarning(result.message);
                     }
                 },
             });

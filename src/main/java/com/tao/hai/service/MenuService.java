@@ -1,20 +1,13 @@
 package com.tao.hai.service;
 
-import com.github.pagehelper.PageInfo;
-import com.tao.hai.base.BaseServiceImpl;
+import com.tao.hai.base.BaseService;
+import com.tao.hai.base.TreeNode;
 import com.tao.hai.bean.Menu;
 import com.tao.hai.bean.User;
-import com.tao.hai.dao.MenuDao;
-import com.tao.hai.util.menu.MenuTreeUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
-import java.util.UUID;
+import java.util.Set;
 
 
 /**
@@ -25,74 +18,29 @@ import java.util.UUID;
  * RedisConnectionFactory, StringRedisTemplate 和 RedisTemplate
  **/
 @Service
-public class MenuService extends BaseServiceImpl<MenuDao, Menu> {
-    /***缓存名称**/
-    private static final String CACHE_NAME = "menuCache";
-    @Autowired
-    MenuDao menuDao;
+public interface MenuService extends BaseService<Menu> {
     /**
      * 获取信息  第二次访问会取缓存
      */
-    @Cacheable(value=CACHE_NAME,key = "#menu.menuId")
-    public Menu getMenu(Menu menu) {
-        Menu menuInfo = super.get(menu);
-        return menuInfo;
-    }
-    /**
-     * 获取信息  第二次访问会取缓存
-     */
-    @Cacheable(value=CACHE_NAME,key="#user.userId")
-    public List<Menu> getUserList(User user){
-        /**是否查询全部菜单*/
-        boolean isMenuAll=user.isAdmin();
-        /**查询全部菜单*/
-        List<Menu> userMenuList;
-        if(isMenuAll){
-            userMenuList= super.findAll();
-        }else{
-            userMenuList= menuDao.getUserMenu(user.getUserId());
-        }
-        List menuTreeList= MenuTreeUtil.treeList(userMenuList);
-        return menuTreeList;
-    }
-    /**
-     * 获取信息  第二次访问会取缓存
-     */
-    @Cacheable(value=CACHE_NAME,key="#roleId")
-    public List<Menu> getRoleMenu(String roleId){
-        /**是否查询全部菜单*/
-        List<Menu> roleMenuList= menuDao.getRoleMenu(roleId);
-        List menuTreeList= MenuTreeUtil.treeList(roleMenuList);
-        return menuTreeList;
-    }
-    /**
-     * 添加redis缓存
-     */
-    @CachePut(value = CACHE_NAME, key = "#menu.getMenuId()")
-    public void save(Menu menu) {
-        if(StringUtils.isEmpty(menu.getMenuId())){
-            menu.setMenuId(UUID.randomUUID().toString());
-        }
-        super.save(menu);
-    }
+    Menu getMenu(Menu menu);
 
     /**
-     * 删除redis缓存
+     * 获取信息  第二次访问会取缓存
      */
-    @CacheEvict(value = CACHE_NAME)
-    public void delelte(Menu menu) {
-        super.del(menu);
-    }
+    List<TreeNode<Menu>> listMenuTree(User user);
 
-    @Cacheable(value=CACHE_NAME)
-    public List<Menu> findAll() {
-        return super.findAll();
-    }
     /**
-     * 查询全部
+     * 获取信息  第二次访问会取缓存
      */
-    @Cacheable(value=CACHE_NAME)
-    public PageInfo<Menu> queryByPage(Integer page, Integer rows,Menu menu) {
-        return super.queryByPage(page, rows,menu);
-    }
+    List<TreeNode<Menu>> getRoleMenuTree(String roleId);
+
+    /**
+     * 获取信息  第二次访问会取缓存
+     */
+    List<Menu> getRoleMenus(String roleId);
+
+    /**
+     * 获取用户菜单信息
+     */
+    Set<String> listPerms(String userId);
 }

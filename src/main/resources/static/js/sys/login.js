@@ -22,6 +22,11 @@ $.validator.setDefaults({
 //登录
 function login() {
     console.log("login------")
+    let loginName=$("#loginName").val();
+    let password=$("#password").val();
+    let md5Password = CryptoJS.MD5(password+loginName).toString();
+    /**更改密码*/
+    $("#password").val(md5Password);
     var data=$('#loginForm').serialize();
     $.ajax({
         type: "POST",
@@ -31,10 +36,16 @@ function login() {
             console.log(result);
             //请求成功时
             if(result.success){
-                toastr.success(result.message);
+                NotifySuccess(result.message);
                 parent.location.href="/index";
             }else{
-                toastr.warning(result.message);
+                //更改验证码
+                $("#imgVerify").click();
+                $("#verifyCode").val("");
+                $("#password").val("");
+                //定位到密码位置
+                $("#password").focus();
+                NotifyWarning(result.message);
             }
         },
     });

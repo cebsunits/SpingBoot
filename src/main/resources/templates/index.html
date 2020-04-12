@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <!--引用通用head--->
-<head th:replace="common/commonHeader::common_header(~{::title},~{::link},~{})">
+<head th:replace="common/commonHeader::common_header(~{::title},~{},~{})">
 	<title>首页</title>
-	<!-- 引入bootstrap插件样式 -->
-	<link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden">
 <input type="hidden" name="userName" id="userName" th:value="${user.loginName}">
@@ -76,30 +74,45 @@
 						</li>
 					</ul>
 				</li>
-				<li th:each="menu:${menuList}" th:if="${not menuList.isEmpty()}">
-					<!--存在下级菜单情况-->
-					<a href="#" th:if="${#strings.isEmpty(menu.menuUrl)}">
-						<i class="fa fa-bar-chart-o" th:class="${menu.menuIcon}"></i>
-						<span class="nav-label" th:text="${menu.menuName}">基础信息</span>
-						<span class="fa arrow"></span>
-					</a>
-					<!--不存在下级菜单情况-->
-					<a href="#" class="J_menuItem" th:href="${menu.menuUrl}" th:if="${not #strings.isEmpty(menu.menuUrl)}">
-						<i class="fa fa-bar-chart-o" th:class="${menu.menuIcon}"></i>
-						<span class="nav-label" th:text="${menu.menuName}">基础信息</span>
-						<span class="fa arrow"></span>
-					</a>
-					<!--下级菜单情况-->
-					<ul class="nav nav-second-level" aria-expanded="false">
-						<li th:each="subMenu:${menu.subMenuList}" th:if="${not menu.subMenuList.isEmpty()}">
-							<a class="J_menuItem" href="#" th:text="${subMenu.menuName}" th:href="${subMenu.menuUrl}">
-								<i class="fa fa-bar-chart-o" th:class="${subMenu.menuIcon}"></i>
-								<span class="nav-label" th:text="${subMenu.menuName}">基础信息</span>
-								<span class="fa arrow"></span>
-							</a>
-						</li>
+
+				<li th:each="menu : ${menuList}"><a href="#"> <i
+						class="fa fa fa-bar-chart-o" th:class="${menu.icon}"></i>
+					<span class="nav-label" th:text="${menu.text}">基础信息</span> <span
+							class="fa arrow"></span>
+				</a>
+					<ul class="nav nav-second-level">
+						<li th:each="cmenu : ${menu.nodes}"><a class="J_menuItem" href="graph_echarts.html"
+																  th:text="${cmenu.text}"
+																  th:href="${cmenu.href}">系统管理</a></li>
 					</ul>
 				</li>
+
+<!--				<li th:each="menu:${menuList}" th:if="${not menuList.isEmpty()}">-->
+<!--					&lt;!&ndash;存在下级菜单情况&ndash;&gt;-->
+<!--					<a href="#" th:if="${#strings.isEmpty(menu.menuUrl)}">-->
+<!--						<i class="fa fa-bar-chart-o" th:class="${menu.menuIcon}"></i>-->
+<!--						<span class="nav-label" th:text="${menu.menuName}">基础信息</span>-->
+<!--						<span class="fa arrow"></span>-->
+<!--					</a>-->
+<!--					&lt;!&ndash;不存在下级菜单情况&ndash;&gt;-->
+<!--					<a href="#" class="J_menuItem" th:href="${menu.menuUrl}" th:if="${not #strings.isEmpty(menu.menuUrl)}">-->
+<!--						<i class="fa fa-bar-chart-o" th:class="${menu.menuIcon}"></i>-->
+<!--						<span class="nav-label" th:text="${menu.menuName}">基础信息</span>-->
+<!--						<span class="fa arrow"></span>-->
+<!--					</a>-->
+<!--					&lt;!&ndash;下级菜单情况&ndash;&gt;-->
+<!--					<ul class="nav nav-second-level" aria-expanded="false">-->
+<!--						<li th:each="subMenu:${menu.subMenuList}" th:if="${not menu.subMenuList.isEmpty()}">-->
+<!--							<a class="J_menuItem" href="#" th:text="${subMenu.menuName}" th:href="${subMenu.menuUrl}">-->
+<!--								<i class="fa fa-bar-chart-o" th:class="${subMenu.menuIcon}"></i>-->
+<!--								<span class="nav-label" th:text="${subMenu.menuName}">基础信息</span>-->
+<!--								<span class="fa arrow"></span>-->
+<!--							</a>-->
+<!--						</li>-->
+<!--					</ul>-->
+<!--				</li>-->
+
+
 			</ul>
 		</div>
 	</nav>
@@ -108,10 +121,7 @@
 	<div id="page-wrapper" class="gray-bg dashboard-1">
 		<!--首页-->
 		<div class="row content-tabs" >
-			<button class="roll-nav roll-left J_tabLeft navbar-minimalize">
-				<i class="fa fa-bars"></i>
-			</button>
-			<button class="roll-nav roll-left J_tabLeft" style="left: 40px;">
+			<button class="roll-nav roll-left J_tabLeft">
 				<i class="fa fa-backward"></i>
 			</button>
 			<nav class="page-tabs J_menuTabs">
@@ -121,9 +131,9 @@
 					</a>
 				</div>
 			</nav>
-			<button class="roll-nav roll-right J_tabRight" style="right: 200px;" ><i class="fa fa-forward"></i></button>
+			<button class="roll-nav roll-right J_tabRight" ><i class="fa fa-forward"></i></button>
 			<!--关闭选项卡组件-->
-			<div class="btn-group roll-nav roll-right" style="right: 120px;">
+			<div class="btn-group roll-nav roll-right">
 				<button class="dropdown J_tabClose" data-toggle="dropdown">
 					关闭操作<span class="caret"></span>
 				</button>
@@ -140,10 +150,6 @@
 					</li>
 				</ul>
 			</div>
-			<!--主题-->
-			<a class="right-sidebar-toggle roll-nav roll-right" style="right: 60px;width:60px" aria-expanded="false">
-				<i class="fa fa-tasks"></i> 主题
-			</a>
 			<!--关闭选项卡组件-->
 			<a href="/logout" class="roll-nav roll-right J_tabExit">
 				<i class="fa fa fa-sign-out"></i> 退出
@@ -183,6 +189,7 @@
 				<li class="">
 					<a data-toggle="tab" href="#tab-2"> 通知 </a>
 				</li>
+				<li><a data-toggle="tab" href="#tab-3"> 项目进度 </a></li>
 			</ul>
 			<div class="tab-content">
 				<!--主题 start--->
@@ -265,6 +272,16 @@
 					</div>
 				</div>
 				<!--通知 end--->
+				<!--项目进度 start--->
+				<div id="tab-3" class="tab-pane">
+					<div class="sidebar-title">
+						<h3>
+							<i class="fa fa-cube"></i> 最新任务
+						</h3>
+						<small><i class="fa fa-tim"></i> 您当前有14个任务，10个已完成</small>
+					</div>
+				</div>
+				<!--项目进度 end--->
 			</div>
 		</div>
 	</div>
@@ -274,11 +291,13 @@
 
 <!--引用通用JS-->
 <div th:replace="common/commonFoot::foot(~{::script})">
-<!--	<script th:src="@{/webjars/metisMenu/metisMenu.min.js}"></script>-->
 	<script th:src="@{/js/metisMenu/jquery.metisMenu.js}"></script>
 	<script th:src="@{/js/contabs.js}"></script>
+	<script th:src="@{/webjars/pace/pace/coffee/pace.min.js}"></script>
 	<script th:src="@{/webjars/sockjs-client/sockjs.min.js}"></script>
 	<script th:src="@{/webjars/stomp-websocket/stomp.min.js}"></script>
+	<!-- 消息提醒框JS -->
+	<script th:src="@{/webjars/toastr/build/toastr.min.js}" ></script>
 	<script th:src="@{/js/websocket/StompUtil.js}"></script>
 	<script th:src="@{/js/sys/index.js}"></script>
 	<script type="text/javascript">

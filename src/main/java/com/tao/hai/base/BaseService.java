@@ -58,5 +58,9 @@ public interface BaseService<T> {
     /**
      *分页查询list
      */
-    PageInfo<T> getList(ParameterModelBean parameterModel);
+    PageInfo<T> getPageList(ParameterModelBean parameterModel);
+    /**
+     *分页查询list
+     */
+    List<T> getList(ParameterModelBean parameterModel);
 }
