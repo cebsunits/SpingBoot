@@ -20,11 +20,11 @@ public class BaseServiceImpl<M extends BaseDao<T>, T extends DataEntity<T>> impl
     /**
      * 保存或更新方法
      */
-    public void save(T t) {
+    public int save(T t) {
         if (t.isNewRecord()) {
-            create(t);
+            return create(t);
         } else {
-            update(t);
+            return update(t);
         }
     }
 
@@ -49,25 +49,29 @@ public class BaseServiceImpl<M extends BaseDao<T>, T extends DataEntity<T>> impl
     }
 
     @Override
-    public void create(T t) {
-        mapper.insertSelective(t);
+    public int create(T t) {
+        return mapper.insertSelective(t);
     }
 
     @Override
-    public void delete(String... ids) {
+    public int delete(String... ids) {
+        int num = 0;
         for (String id : ids) {
-            mapper.deleteByPrimaryKey(id);
+            int thisNum = mapper.deleteByPrimaryKey(id);
+            num = num + thisNum;
         }
+        return num;
     }
 
     @Override
-    public void update(T t) {
-        mapper.updateByPrimaryKeySelective(t);
+    public int update(T t) {
+        return mapper.updateByPrimaryKeySelective(t);
     }
 
     @Override
-    public void del(T t) {
-        mapper.delete(t);
+    public int del(T t) {
+
+        return mapper.delete(t);
     }
 
     @Override

@@ -8,7 +8,7 @@ public interface BaseService<T> {
     /**
      * 保存或更新方法
      */
-    void save(T t);
+    int save(T t);
 
     /**
      * 查询所有
@@ -29,26 +29,25 @@ public interface BaseService<T> {
      * 根据ID查询
      */
     T get(T t);
-
     /**
      * 添加
      */
-    void create(T t);
+    int create(T t);
 
     /**
      * 修改
      */
-    void update(T t);
+    int update(T t);
 
     /**
      * 根据id批量删除
      */
-    void delete(String... ids);
+    int delete(String... ids);
 
     /**
      * 删除
      */
-    void del(T t);
+    int del(T t);
 
     /**
      * 查询分页数据

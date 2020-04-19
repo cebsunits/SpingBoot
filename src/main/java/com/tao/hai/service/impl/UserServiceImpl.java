@@ -73,7 +73,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao, User> implements U
      * 添加redis缓存
      */
     @CachePut(value = CACHE_NAME, key = "#user.getUserId()")
-    public void save(User user) {
+    public int save(User user) {
         if (StringUtils.isEmpty(user.getUserId())) {
             user.setUserId(UUID.randomUUID().toString());
             user.setCreateId(ShiroUtils.getUserId());
@@ -81,7 +81,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao, User> implements U
         }
         user.setUpdateId(ShiroUtils.getUserId());
         user.setUpdateDate(new Date());
-        super.save(user);
+        int num = super.save(user);
         /**删除部门信息**/
         userDao.deleteUserDept(user);
         /**删除角色信息**/
@@ -94,12 +94,14 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao, User> implements U
         if (!user.getRoleList().isEmpty()) {
             userDao.insertUserRole(user);
         }
+        return num;
     }
 
     /**
      * 删除用户信息
      */
-    public void delete(String... ids) {
+    public int delete(String... ids) {
+        int num = 0;
         for (String id : ids) {
             User user = userDao.selectByPrimaryKey(id);
             if (user != null) {
@@ -108,17 +110,20 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao, User> implements U
                 /**删除角色信息**/
                 userDao.deleteUserRole(user);
                 /**删除用户*/
-                userDao.deleteByPrimaryKey(id);
+                int thisNum = userDao.deleteByPrimaryKey(id);
+                num = num + thisNum;
             }
         }
+        return num;
     }
 
     /**
      * 删除redis缓存
      */
     @CacheEvict(value = CACHE_NAME, key = "#user.getUserId()")
-    public void delelte(User user) {
-        super.del(user);
+    public int delelte(User user) {
+
+        return super.del(user);
     }
 
     @Cacheable(value = CACHE_NAME)

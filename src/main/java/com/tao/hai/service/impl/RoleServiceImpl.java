@@ -51,7 +51,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleDao, Role> implements R
     /**
      * 添加redis缓存
      */
-    public void save(Role role) {
+    public int save(Role role) {
         if (StringUtils.isEmpty(role.getRoleId())) {
             role.setRoleId(UUID.randomUUID().toString());
             role.setCreateId(ShiroUtils.getUserId());
@@ -61,21 +61,21 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleDao, Role> implements R
         }
         role.setUpdateDate(new Date());
         role.setUpdateId(ShiroUtils.getUserId());
-        super.save(role);
+        return super.save(role);
     }
 
     /**
      * 添加redis缓存
      */
-    public void delete(String... ids) {
-        super.delete(ids);
+    public int delete(String... ids) {
+        return super.delete(ids);
     }
 
     /**
      * 添加redis缓存
      */
-    public void del(Role role) {
-        super.del(role);
+    public int del(Role role) {
+        return super.del(role);
     }
 
 

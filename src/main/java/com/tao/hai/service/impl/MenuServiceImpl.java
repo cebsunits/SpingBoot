@@ -101,7 +101,7 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuDao, Menu> implements M
      * 添加redis缓存
      */
     @CachePut(value = CACHE_NAME)
-    public void save(Menu menu) {
+    public int save(Menu menu) {
         if (StringUtils.isEmpty(menu.getMenuId())) {
             menu.setMenuId(UUID.randomUUID().toString());
             menu.setCreateDate(new Date());
@@ -109,15 +109,16 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuDao, Menu> implements M
         }
         menu.setUpdateDate(new Date());
         menu.setUpdateId(ShiroUtils.getUserId());
-        super.save(menu);
+        return super.save(menu);
     }
 
     /**
      * 删除redis缓存
      */
     @CacheEvict(value = CACHE_NAME)
-    public void delelte(Menu menu) {
-        super.del(menu);
+    public int delelte(Menu menu) {
+
+        return super.del(menu);
     }
 
     @Cacheable(value = CACHE_NAME)

@@ -24,7 +24,7 @@ public class DeptServiceImpl extends BaseServiceImpl<DeptDao, Dept> implements D
     /**
      * 保存方法
      */
-    public void save(Dept dept) {
+    public int save(Dept dept) {
         if (StringUtils.isEmpty(dept.getDeptId())) {
             dept.setDeptId(UUID.randomUUID().toString());
             dept.setCreateDate(new Date());
@@ -34,7 +34,7 @@ public class DeptServiceImpl extends BaseServiceImpl<DeptDao, Dept> implements D
         }
         dept.setUpdateDate(new Date());
         dept.setUpdateId(ShiroUtils.getUserId());
-        super.save(dept);
+        return super.save(dept);
     }
 
     /**

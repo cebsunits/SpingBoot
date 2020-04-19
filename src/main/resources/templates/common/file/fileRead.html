@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<!--引用通用head--->
+<head th:replace="common/commonHeader::common_header(~{::title},~{::link},~{})">
+    <title>文件管理</title>
+    <link rel="stylesheet" th:href="@{/webjars/datatables/css/dataTables.bootstrap.min.css}"/>
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content" id="app">
+    <div class="col-sm-12">
+        <form id="fileForm" class="form-horizontal validation-form" action="/common/fileUpload/upload" method="post"
+            enctype="multipart/form-data">
+            <div class="row">
+                <input type="file" multiple name="files" id="files">
+                <input type="submit" value="上传">
+            </div>
+            <div class="row">
+                 <div id="fileNames" >
+
+                 </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-sm-12">
+        <div class="row">
+            <label for="fileName">文件名</label>
+            <div class="col-sm-8">
+                <input type="text" name="fileName" id="fileName">
+            </div>
+            <div class="columns pull-right">
+                <button class="btn btn-success" onclick="refresh()">查询</button>
+            </div>
+        </div>
+    </div>
+
+    <table id="fileTable" data-mobile-responsive="true">
+
+    </table>
+</div>
+<!--权限控制-->
+<script type="application/javascript">
+    let s_add_h=false;
+    let s_edit_h=false;
+    let s_remove_h=false;
+</script>
+<shiro:hasPermission name="sys:dept:add">
+    <script type="application/javascript">
+        s_add_h=true;
+    </script>
+</shiro:hasPermission>
+<shiro:hasPermission name="sys:dept:edit">
+    <script type="application/javascript">
+        s_edit_h=true;
+    </script>
+</shiro:hasPermission>
+<shiro:hasPermission name="common:file:remove">
+    <script type="application/javascript">
+        s_remove_h=true;
+    </script>
+</shiro:hasPermission>
+<!--权限控制-->
+<div th:replace="common/commonFoot::foot(~{})">
+</div>
+<script th:src="@{/webjars/bootstrap-table/bootstrap-table.min.js}" ></script>
+<script th:src="@{/webjars/bootstrap-table/extensions/filter-control/bootstrap-table-filter-control.min.js}" ></script>
+<script th:src="@{/pluggins/tableExport/tableExport.min.js}" ></script>
+<script th:src="@{/webjars/bootstrap-table/extensions/export/bootstrap-table-export.min.js}" ></script>
+<script th:src="@{/webjars/bootstrap-table/extensions/toolbar/bootstrap-table-toolbar.min.js}" ></script>
+<script th:src="@{/webjars/bootstrap-table/locale/bootstrap-table-zh-CN.min.js}" ></script>
+<script th:src="@{/js/common/file/file.js}" ></script>
+</body>

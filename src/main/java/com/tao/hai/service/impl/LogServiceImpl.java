@@ -16,12 +16,12 @@ public class LogServiceImpl extends BaseServiceImpl<LogDao, Log> implements LogS
     /**
      * 保存方法
      */
-    public void save(Log log) {
+    public int save(Log log) {
         if (StringUtils.isEmpty(log.getLogId())) {
             log.setLogId(UUID.randomUUID().toString());
         } else {
             log.setNewRecord(false);
         }
-        super.save(log);
+        return super.save(log);
     }
 }
