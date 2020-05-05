@@ -33,7 +33,7 @@
         and u.table_name = #{tableName}
     </select>
     <!--查询表的字段信息-->
-    <select id="tableColumns" resultMap="columnMap" parameterType="String">
+    <select id="listColumns" resultMap="columnMap" parameterType="String">
         select u.table_name tableName,u.column_name columnName,u.data_type dataType,c.comments
         columnComment,decode((select a.column_name
         from user_cons_columns a, user_constraints b
@@ -61,7 +61,7 @@
         and table_name = #{tableName}
     </select>
     <!--查询表的字段信息-->
-    <select id="mysqlTableColumns" resultMap="columnMap" parameterType="String">
+    <select id="mysqlListColumns" resultMap="columnMap" parameterType="String">
         select table_name tableName,column_name columnName, data_type dataType, column_comment columnComment,
         column_key columnKey, extra from information_schema.columns
         where table_name = #{tableName}

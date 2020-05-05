@@ -56,8 +56,7 @@ function validateRule() {
 							message:"字符长度必须在1位到255位之间"
 						}
 					}
-				}
-				#if $velocityCount!=$columns.size()
+				}#if($velocityCount!=$columns.size())
 					,
 				#end
 				#end

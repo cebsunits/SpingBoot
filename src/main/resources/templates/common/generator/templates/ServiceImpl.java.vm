@@ -22,8 +22,8 @@ public class ${className}ServiceImpl extends BaseServiceImpl<${className}Dao, ${
     */
 	@Override
 	public int save(${className} ${classname}) {
-		if (StringUtils.isEmpty(${pk.attrname})) {
-			${classname}.set${pk.attrname}(UUID.randomUUID().toString());
+		if (StringUtils.isEmpty(${classname}.${pk.humpAttrName})) {
+			${classname}.set${pk.attrName}(UUID.randomUUID().toString());
 			${classname}.setCreateDate(new Date());
 			${classname}.setCreateId(ShiroUtils.getUserId());
 		} else {
@@ -36,10 +36,10 @@ public class ${className}ServiceImpl extends BaseServiceImpl<${className}Dao, ${
 
 	@Override
 	public ${className} get(${pk.attrType} ${pk.humpAttrName}){
-		${className}  ${classname} = new ${className} ();
+		${className} ${classname} = new ${className}();
 		${classname}.set${pk.attrName}(${pk.humpAttrName});
 		${classname} = super.getByKey(${classname});
-		return${classname};
+		return ${classname};
 	}
 	
 }

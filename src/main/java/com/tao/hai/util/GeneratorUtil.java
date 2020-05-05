@@ -81,7 +81,7 @@ public class GeneratorUtil {
             columnDO.setAttrName(attrName);
             columnDO.setHumpAttrName(StringUtils.uncapitalize(attrName));
             //列的数据类型，转换成Java类型
-            String attrType = configuration.getString(columnDO.getDataType(), "unknowType");
+            String attrType = configuration.getString(columnDO.getDataType().toLowerCase(), "unknowType");
             columnDO.setAttrType(attrType);
             //是否主键
             String columnKey = column.getColumnKey();
@@ -166,7 +166,7 @@ public class GeneratorUtil {
         }
 
         if (template.contains("domain.java.vm")) {
-            return packagePath + "domain" + File.separator + className + "DO.java";
+            return packagePath + "domain" + File.separator + className + ".java";
         }
 
         if (template.contains("Dao.java.vm")) {
