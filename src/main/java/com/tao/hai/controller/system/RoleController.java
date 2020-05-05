@@ -1,11 +1,9 @@
 package com.tao.hai.controller.system;
 
-import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageInfo;
 import com.tao.hai.annotation.Log;
 import com.tao.hai.base.BaseController;
 import com.tao.hai.base.DataTablePage;
-import com.tao.hai.base.JsonModelBean;
 import com.tao.hai.base.ParameterModelBean;
 import com.tao.hai.bean.Menu;
 import com.tao.hai.bean.Role;
@@ -16,12 +14,14 @@ import com.tao.hai.json.AjaxSuccess;
 import com.tao.hai.service.MenuService;
 import com.tao.hai.service.RoleService;
 import com.tao.hai.util.JSONUtils;
+import com.tao.hai.util.ParameterModelBeanUtil;
 import com.tao.hai.util.ShiroUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -45,7 +45,7 @@ public class RoleController extends BaseController {
 
 
     @RequiresPermissions("sys:role:role")
-    @RequestMapping("/index")
+    @GetMapping("")
     public String index() {
         return "/role/roleList";
     }
@@ -68,21 +68,13 @@ public class RoleController extends BaseController {
     @RequiresPermissions("sys:role:role")
     @RequestMapping("/list")
     @ResponseBody
-    public Object list(HttpServletRequest request, HttpServletResponse response) {
-
-        JSONArray json = new JSONArray();
-        String roleName = request.getParameter("searchText") == null ? "" : request.getParameter("searchText");
-        if (StringUtils.isNotEmpty(roleName)) {
-            json.add(JSONUtils.toJsonObject(new JsonModelBean("roleName", roleName, "like")));
+    public Object list(Role role,HttpServletRequest request) {
+        ParameterModelBean bean = ParameterModelBeanUtil.getParameterModelBean(role);
+        bean = parmeterPage(request,bean);
+        if(StringUtils.isEmpty(bean.getOrder())){
+            bean.setOrder("roleId" );
+            bean.setSort("asc");
         }
-        String sortName = request.getParameter("sortName") == null ? "roleId" : request.getParameter("sortName");
-        String sortOrder = request.getParameter("sortOrder") == null ? "asc" : request.getParameter("sortOrder");
-        /**Sort对象初始化错误，需要更换方法解决*/
-//        Pageable pageable = PageRequest.of(pageNumber, pageSize, sortOrder.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC,sortName);
-        ParameterModelBean bean = parmeterPage(request);
-        bean.setOrder(sortName);
-        bean.setSort(sortOrder);
-        bean.setQuerystr(json.toJSONString());
         PageInfo<Role> pageInfo = roleService.getPageList(bean);
         return pageInfo;
     }

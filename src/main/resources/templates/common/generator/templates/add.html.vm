@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<!--引用通用head--->
+<head th:replace="/common/commonHeader::common_header(~{::title},~{},~{})">
+	<title>${comments}新增</title>
+</head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal validation-form m-t" id="signupForm">
+							<input type="hidden" name="flag" id="flag" th:value="${readOnly}">
+							<input id="${pk.columnName}" name="${pk.columnName}" th:value="${${classname}.${pk.columnName}}"  type="hidden">
+#foreach($column in $columns)
+#if($column.columnName != $pk.columnName)
+<div class="form-group">	
+								<label class="col-sm-3 control-label">${column.comments}：</label>
+								<div class="col-sm-8">
+									<input id="${column.humpAttrName}" name="${column.humpAttrName}" th:value="${${classname}.${column.humpAttrName}}" class="form-control" type="text">
+								</div>
+							</div>
+							#end
+							#end
+							<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" id="btn_save" name="btn_save" class="btn btn-primary" th:if="${readOnly} ne true" >保存</button>
+									<button type="button" id="btn_back" name="btn_back" class="btn btn-secondary" onclick="windowClose()">返回</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<!--引用通用JS-->
+	<div th:replace="/common/commonFoot::foot(~{::script})">
+		<script type="text/javascript" src="/js/appjs/${pathName}/${classname}/add.js">
+		</script>
+	</div>
+</body>
+</html>

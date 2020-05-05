@@ -1,6 +1,8 @@
 package com.tao.hai.bean;
 
+import com.tao.hai.annotation.FieldQuery;
 import com.tao.hai.base.BaseDataEntity;
+import com.tao.hai.constants.SqlParamConstant;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -26,6 +28,7 @@ public class Role extends BaseDataEntity<Role> {
     /**
      * 角色名称
      */
+    @FieldQuery(SqlParamConstant.LIKE)
     @Column(name = "role_name")
     private String roleName;
     /**

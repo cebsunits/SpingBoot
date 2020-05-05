@@ -1,0 +1,45 @@
+package ${package}.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import org.springframework.util.StringUtils;
+import com.tao.hai.base.BaseServiceImpl;
+import com.tao.hai.util.ShiroUtils;
+import ${package}.dao.${className}Dao;
+import ${package}.bean.${className};
+import ${package}.service.${className}Service;
+
+
+
+@Service
+public class ${className}ServiceImpl extends BaseServiceImpl<${className}Dao, ${className}> implements ${className}Service {
+	@Autowired
+	private ${className}Dao ${classname}Dao;
+
+	/**
+    * 保存方法
+    */
+	@Override
+	public int save(${className} ${classname}) {
+		if (StringUtils.isEmpty(${pk.attrname})) {
+			${classname}.set${pk.attrname}(UUID.randomUUID().toString());
+			${classname}.setCreateDate(new Date());
+			${classname}.setCreateId(ShiroUtils.getUserId());
+		} else {
+			${classname}.setNewRecord(false);
+		}
+		${classname}.setUpdateDate(new Date());
+		${classname}.setUpdateId(ShiroUtils.getUserId());
+		return super.save(${classname});
+	}
+
+	@Override
+	public ${className} get(${pk.attrType} ${pk.humpAttrName}){
+		${className}  ${classname} = new ${className} ();
+		${classname}.set${pk.attrName}(${pk.humpAttrName});
+		${classname} = super.getByKey(${classname});
+		return${classname};
+	}
+	
+}

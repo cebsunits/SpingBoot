@@ -1,0 +1,19 @@
+package ${package}.service;
+
+import com.tao.hai.base.BaseService;
+import ${package}.bean.${className};
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * ${comments}
+ * 
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+public interface ${className}Service extends BaseService<${className}>  {
+	
+	${className} get(${pk.attrType} ${pk.humpAttrName});
+}

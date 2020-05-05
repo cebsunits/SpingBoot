@@ -1,0 +1,17 @@
+package ${package}.dao;
+
+import com.tao.hai.base.BaseDao;
+import ${package}.bean.${className};
+
+/**
+ * ${comments}
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+@Mapper
+public interface ${className}Dao extends BaseDao<${className}> {
+
+	${className}DO get(${pk.attrType} ${pk.humpAttrName});
+
+}

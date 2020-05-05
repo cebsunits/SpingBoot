@@ -1,0 +1,153 @@
+package ${package}.controller;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import javax.servlet.http.HttpServletRequest;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageInfo;
+import com.tao.hai.annotation.Log;
+import com.tao.hai.base.BaseController;
+import com.tao.hai.base.DataTablePage;
+import com.tao.hai.base.JsonModelBean;
+import com.tao.hai.base.ParameterModelBean;
+import com.tao.hai.json.AjaxError;
+import com.tao.hai.json.AjaxJson;
+import com.tao.hai.json.AjaxSuccess;
+import com.tao.hai.util.JSONUtils;
+import ${package}.bean.${className};
+import ${package}.service.${className}Service;
+
+
+/**
+ * ${comments}
+ * 
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+ 
+@Controller
+@RequestMapping("/${pathName}/${classname}")
+public class ${className}Controller extends BaseController {
+	@Autowired
+	private ${className}Service ${classname}Service;
+	
+	@GetMapping()
+	@RequiresPermissions("${pathName}:${classname}:${classname}")
+	String ${className}(){
+	    return "${pathName}/${classname}/${classname}";
+	}
+	
+	@ResponseBody
+	@GetMapping("/list")
+	@RequiresPermissions("${pathName}:${classname}:${classname}")
+	public Object list(${className} ${classname},HttpServletRequest request) {
+		/**Sort对象初始化错误，需要更换方法解决*/
+		ParameterModelBean bean = ParameterModelBeanUtil.getParameterModelBean(role);
+		bean = parmeterPage(request,bean);
+		PageInfo<${className}> pageInfo = ${classname}Service.getPageList(bean);
+		return pageInfo;
+	}
+	
+	@GetMapping("/add")
+	@RequiresPermissions("${pathName}:${classname}:add")
+	String add(){
+		/**只读属性*/
+		model.addAttribute("readOnly", false);
+		model.addAttribute("${classname}", new ${className}());
+	    return "${pathName}/${classname}/add";
+	}
+
+	@GetMapping("/edit/{${pk.humpAttrName}}")
+	@RequiresPermissions("${pathName}:${classname}:edit")
+	String edit(@PathVariable("${pk.humpAttrName}") ${pk.attrType} ${pk.humpAttrName},Model model){
+		${className} ${classname} = ${classname}Service.get(${pk.humpAttrName});
+		model.addAttribute("${classname}", ${classname});
+		/**只读属性*/
+		model.addAttribute("readOnly", false);
+		return "${pathName}/${classname}/add";
+	}
+
+	/**
+	 * 保存
+	 */
+	@ResponseBody
+	@PostMapping("/save")
+	public AjaxJson save( ${className} ${classname}){
+		AjaxJson ajaxJson;
+		try {
+			//保存用户信息
+			int num=${classname}Service.save(${classname});
+			if(num>0){
+				ajaxJson = new AjaxSuccess();
+				ajaxJson.setData(role);
+			}else{
+				ajaxJson = new AjaxError();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			ajaxJson = new AjaxError();
+		}
+		return ajaxJson;
+	}
+
+	
+	/**
+	 * 删除
+	 */
+	@PostMapping( "/remove")
+	@ResponseBody
+	@RequiresPermissions("${pathName}:${classname}:remove")
+	public AjaxJson remove( ${pk.attrType} ${pk.humpAttrName}){
+		AjaxJson ajaxJson;
+		try {
+			int delNum=${classname}Service.delete(${pk.humpAttrName});
+			if(delNum>0){
+				ajaxJson = new AjaxSuccess();
+				ajaxJson.setMessage("删除成功！");
+				return ajaxJson;
+			}else{
+				ajaxJson = new AjaxError();
+				ajaxJson.setMessage("删除失败！");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			ajaxJson = new AjaxError();
+			ajaxJson.setMessage("删除失败！"+e.getMessage());
+		}
+		return ajaxJson;
+	}
+	
+	/**
+	 * 删除
+	 */
+	@PostMapping( "/batchRemove")
+	@ResponseBody
+	@RequiresPermissions("${pathName}:${classname}:batchRemove")
+	public R remove(@RequestParam("ids[]") ${pk.attrType}[] ${pk.humpAttrName}s){
+		AjaxJson ajaxJson;
+		if (deptIds != null && deptIds.length > 0) {
+				${classname}Service.delete(${pk.humpAttrName}s);
+			ajaxJson = new AjaxSuccess();
+			ajaxJson.setMessage("删除成功！");
+		} else {
+			ajaxJson = new AjaxError();
+			ajaxJson.setMessage("删除失败！");
+		}
+		return ajaxJson;
+	}
+	
+}

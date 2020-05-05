@@ -19,6 +19,7 @@ import com.tao.hai.service.DeptService;
 import com.tao.hai.service.RoleService;
 import com.tao.hai.service.UserService;
 import com.tao.hai.util.JSONUtils;
+import com.tao.hai.util.ParameterModelBeanUtil;
 import com.tao.hai.util.ShiroUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -26,10 +27,7 @@ import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,7 +50,7 @@ public class UserController extends BaseController {
     RoleService roleService;
 
     @RequiresPermissions("sys:user:user")
-    @RequestMapping(value = {"", "/index"})
+    @GetMapping("")
     public String userList() {
         return "/user/userList";
     }
@@ -81,20 +79,14 @@ public class UserController extends BaseController {
     @RequiresPermissions("sys:user:user")
     @RequestMapping("/list")
     @ResponseBody
-    public Object list(HttpServletRequest request, HttpServletResponse response) {
-
-        JSONArray json = new JSONArray();
-        String roleName = request.getParameter("userName") == null ? "" : request.getParameter("userName");
-        if (StringUtils.isNotEmpty(roleName)) {
-            json.add(JSONUtils.toJsonObject(new JsonModelBean("userName", roleName, "like")));
-        }
-        String sortName = request.getParameter("sortName") == null ? "userId" : request.getParameter("sortName");
-        String sortOrder = request.getParameter("sortOrder") == null ? "asc" : request.getParameter("sortOrder");
+    public Object list(User user,HttpServletRequest request) {
         /**Sort对象初始化错误，需要更换方法解决*/
-        ParameterModelBean bean = parmeterPage(request);
-        bean.setOrder(sortName);
-        bean.setSort(sortOrder);
-        bean.setQuerystr(json.toJSONString());
+        ParameterModelBean bean = ParameterModelBeanUtil.getParameterModelBean(user);
+        bean = parmeterPage(request,bean);
+        if(StringUtils.isEmpty(bean.getOrder())){
+            bean.setOrder("userId" );
+            bean.setSort("asc");
+        }
         PageInfo<User> pageInfo = userService.getPageList(bean);
         return pageInfo;
     }

@@ -46,8 +46,6 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuDao, Menu> implements M
      * 获取信息  第二次访问会取缓存
      */
     public List<TreeNode<Menu>> listMenuTree(User user) {
-        /**是否查询全部菜单*/
-        boolean isMenuAll = user.isAdmin();
         /**查询全部菜单*/
         List<Menu> userMenuList = menuDao.getUserMenu(user.getUserId());
         /**组装树结构*/

@@ -89,8 +89,6 @@ public class User extends BaseDataEntity<User> {
     }
 
     @Transient
-    /**是否管理员*/
-    private boolean isAdmin;
     /**
      * 是否可用
      */

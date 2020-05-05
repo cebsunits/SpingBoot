@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tao.hai.dao.common.GeneratorDao">
+
+    <resultMap id="tableMap" type="com.tao.hai.bean.common.Table">
+        <id column="tableName" property="tableName" jdbcType="VARCHAR"/>
+        <result column="tableComment" property="tableComment" jdbcType="VARCHAR"/>
+        <result column="createTime" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <resultMap id="columnMap" type="com.tao.hai.bean.common.Column">
+        <id column="columnName" property="columnName" jdbcType="VARCHAR"/>
+        <result column="dataType" property="dataType" jdbcType="VARCHAR"/>
+        <result column="columnComment" property="columnComment" jdbcType="VARCHAR"/>
+        <result column="columnKey" property="columnKey" jdbcType="VARCHAR"/>
+        <result column="extra" property="extra" jdbcType="VARCHAR"/>
+    </resultMap>
+    <!--查询数据库表名信息，默认执行语句，如果更换数据库，则把select id更换即可-->
+    <!--oracle start-->
+    <select id="queryTables" resultMap="tableMap" parameterType="String">
+        select u.table_name tableName,t.comments tableComment,u.last_analyzed createTime from user_tables u left
+        join user_tab_comments t on u.table_name=t.table_name
+        where u.status='VALID'
+        <if test="tableName!=null and tableName!=''">
+            and u.table_name = #{tableName}
+        </if>
+    </select>
+    <select id="get" resultMap="tableMap" parameterType="String">
+        select u.table_name tableName,t.comments tableComment,u.last_analyzed createTime from user_tables u left
+        join user_tab_comments t on u.table_name=t.table_name
+        where u.status='VALID'
+        and u.table_name = #{tableName}
+    </select>
+    <!--查询表的字段信息-->
+    <select id="tableColumns" resultMap="columnMap" parameterType="String">
+        select u.table_name tableName,u.column_name columnName,u.data_type dataType,c.comments
+        columnComment,decode((select a.column_name
+        from user_cons_columns a, user_constraints b
+        where a.constraint_name = b.constraint_name
+        and b.constraint_type = 'P'
+        and u.column_name=a.column_name
+        and u.table_name=a.table_name
+        ),null,'','PRI') columnKey,'' extra from user_tab_columns u left join user_col_comments c
+        on u.table_name=c.table_name and u.column_name=c.column_name
+        where u.table_name = #{tableName}
+    </select>
+    <!--oracle end-->
+    <!--mysql start-->
+    <!--查询数据库表名信息-->
+    <select id="mysqlQueryTables" resultMap="tableMap" parameterType="String">
+        select table_name tableName, table_comment tableComment, create_time createTime from information_schema.tables
+        where table_schema = (select database())
+        <if test="tableName!=null and tableName!=''">
+            and table_name = #{tableName}
+        </if>
+    </select>
+    <select id="mysqlGet" resultMap="tableMap" parameterType="String">
+        select table_name tableName, table_comment tableComment, create_time createTime from information_schema.tables
+        where table_schema = (select database())
+        and table_name = #{tableName}
+    </select>
+    <!--查询表的字段信息-->
+    <select id="mysqlTableColumns" resultMap="columnMap" parameterType="String">
+        select table_name tableName,column_name columnName, data_type dataType, column_comment columnComment,
+        column_key columnKey, extra from information_schema.columns
+        where table_name = #{tableName}
+        and table_schema = (select database()) order by ordinal_position;
+    </select>
+    <!--mysql end-->
+</mapper>

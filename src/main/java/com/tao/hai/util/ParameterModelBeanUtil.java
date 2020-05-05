@@ -7,6 +7,7 @@ import com.tao.hai.base.ParameterModelBean;
 import com.tao.hai.constants.SqlParamConstant;
 import org.apache.commons.lang3.ObjectUtils;
 
+import javax.persistence.Transient;
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
@@ -27,6 +28,11 @@ public class ParameterModelBeanUtil {
             for (Field field : fields) {
                 //字段名称
                 String fieldName = field.getName();
+                /**跳过忽略部分*/
+                Transient transients=field.getAnnotation(Transient.class);
+                if(transients!=null){
+                    continue;
+                }
                 /***/
                 String query = "";
                 /**获取sql查询注解*/
@@ -48,9 +54,21 @@ public class ParameterModelBeanUtil {
                 try {
                     Method method = propertyDescriptor.getReadMethod();
                     Object objectValue = method.invoke(t);
+
+                    Class<?> type=propertyDescriptor.getPropertyType();
+                    String typeName=type.getSimpleName();
+                    if(typeName.equals("Boolean")){
+                        if((Boolean)objectValue){
+                            objectValue="1";
+                        }else{
+                            objectValue="0";
+                        }
+                    }
                     if (ObjectUtils.isNotEmpty(objectValue)) {
                         jsonArray.add(JSONUtils.toJsonObject(new JsonModelBean(fieldName, objectValue.toString(), query)));
                     }
+
+
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 } catch (InvocationTargetException e) {

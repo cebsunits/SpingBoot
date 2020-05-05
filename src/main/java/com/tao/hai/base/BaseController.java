@@ -51,10 +51,11 @@ public class BaseController {
     }
 
     /***获取分页信息*/
-    public ParameterModelBean parmeterPage(HttpServletRequest request) {
-
+    public ParameterModelBean parmeterPage(HttpServletRequest request,ParameterModelBean bean) {
+        /**获取分页信息*/
         String pageSizeStr = request.getParameter("pageSize");
         String pageNumberStr = request.getParameter("pageNumber");
+        //默认为10条每页
         Integer pageSize = 10;
         Integer pageNumber = 0;
         if (StringUtils.isNotEmpty(pageSizeStr) && StringUtils.isNotEmpty(pageNumberStr)) {
@@ -69,8 +70,17 @@ public class BaseController {
                 e.printStackTrace();
             }
         }
-
-        ParameterModelBean bean = new ParameterModelBean();
+        /**排序字段*/
+        String sortName = request.getParameter("sortName");
+        /**排序顺序*/
+        String sortOrder = request.getParameter("sortOrder");
+        if(StringUtils.isNotEmpty(sortName)){
+            bean.setOrder(sortName);
+            if(StringUtils.isEmpty(sortOrder)){
+                sortOrder="asc";
+            }
+        }
+        /**分页*/
         bean.setPage(pageNumber);
         bean.setRows(pageSize);
         return bean;

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<!--引用通用head--->
+<head th:replace="/common/commonHeader::common_header(~{::title},~{::link},~{})">
+	<title>代码生成</title>
+	<link rel="stylesheet" th:href="@{/webjars/datatables/css/dataTables.bootstrap.min.css}"/>
+</head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="col-sm-12">
+			<div class="ibox">
+				<div class="ibox-body">
+					<div  id="exampleToolbar" role="group" >
+						<button type="button" class="btn  btn-primary"
+							onclick="batchCode()">
+							<i class="" aria-hidden="true"></i>批量生成
+						</button>
+						<button type="button" class="btn  btn-success"
+							onclick="edit()">
+							<i class="" aria-hidden="true"></i>生成策略
+						</button>
+					</div>
+					<table id="exampleTable" data-mobile-responsive="true">
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--引用通用JS-->
+	<div th:replace="/common/commonFoot::foot(~{})">
+	</div>
+	<script th:src="@{/webjars/bootstrap-table/bootstrap-table.min.js}" ></script>
+	<script th:src="@{/webjars/bootstrap-table/locale/bootstrap-table-zh-CN.min.js}" ></script>
+	<script th:src="@{/js/common/gennerator/list.js}"></script>
+</body>
+</html>
