@@ -1,20 +1,34 @@
 package com.tao.hai.config;
 
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
+import com.tao.hai.listener.ShiroSessionListener;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.cache.CacheManager;
+import org.apache.shiro.cache.MemoryConstrainedCacheManager;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.mgt.SessionsSecurityManager;
+import org.apache.shiro.session.SessionListener;
+import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition;
 import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @description: shiro配置文件
@@ -64,6 +78,7 @@ public class ShiroConfig {
     public SpringBootShrioRealm customRealm() {
         SpringBootShrioRealm customRealm = new SpringBootShrioRealm();
         customRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+        customRealm.setCacheManager(cacheManager());
         customRealm.setCachingEnabled(true);
         return customRealm;
     }
@@ -149,27 +164,31 @@ public class ShiroConfig {
     public SessionsSecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(customRealm());
-//        securityManager.setSessionManager(sessionManager());
+        securityManager.setSessionManager(sessionManager());
         return securityManager;
     }
 
-//    /**
-//     * session监听
-//     */
-//    @Bean
-//    public ShiroSessionListener shiroSessionListener() {
-//        return new ShiroSessionListener();
-//    }
-//
-//    @Bean
-//    public SessionManager sessionManager() {
-//        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
-//        Collection<SessionListener> listeners = new ArrayList<>();
-//        listeners.add(shiroSessionListener());
-//        sessionManager.setSessionListeners(listeners);
-//        return sessionManager;
-//    }
+    /**
+     * session监听
+     */
+    @Bean
+    public ShiroSessionListener shiroSessionListener() {
+        return new ShiroSessionListener();
+    }
 
+    @Bean
+    public SessionManager sessionManager() {
+        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+        Collection<SessionListener> listeners = new ArrayList<>();
+        listeners.add(shiroSessionListener());
+        sessionManager.setSessionListeners(listeners);
+        return sessionManager;
+    }
+    /**解决重复验证授权问题，注意名字更换，与spring-boot-autoconfig里面的名字重复，需要重命名*/
+    @Bean(value="memoryConstrainedCacheManager")
+    protected CacheManager cacheManager() {
+        return new MemoryConstrainedCacheManager();
+    }
     /**
      * 未授权异常处理
      *
@@ -180,6 +199,43 @@ public class ShiroConfig {
         HandlerExceptionResolver handlerExceptionResolver = new UnauthorizedExceptionResolver();
         return handlerExceptionResolver;
     }
+    /**注册跨域过滤器**/
+    @Bean
+    public FilterRegistrationBean<CorsFilter> corsFilter(){
+        final UrlBasedCorsConfigurationSource source=new UrlBasedCorsConfigurationSource();
+        final CorsConfiguration configuration=new CorsConfiguration();
+        //运行跨域
+        configuration.setAllowCredentials(true);
+        // 允许向该服务器提交请求的URI，*表示全部允许，在SpringMVC中，如果设成*，会自动转成当前请求头中的Origin
+        List<String> allowedOrigins=new ArrayList<>();
+        allowedOrigins.add("*");
+        configuration.setAllowedOrigins(allowedOrigins);
+        // 允许访问的头信息,*表示全部
+        List<String> allowedHeaders=new ArrayList<>();
+        allowedHeaders.add("*");
+        configuration.setAllowedHeaders(allowedHeaders);
+        // 预检请求（options请求）的缓存时间（秒），即在这个时间段里，对于相同的跨域请求不会再预检了
+        configuration.setMaxAge(1L);
+        // 允许提交请求的方法，*表示全部允许
+        List<String> allowedMethods=new ArrayList<>();
+        allowedMethods.add("*");
 
+        /**可指定方法 start*/
+//        allowedMethods.add("OPTIONS");
+//        allowedMethods.add("HEAD");
+//        allowedMethods.add("GET");
+//        allowedMethods.add("PUT");
+//        allowedMethods.add("POST");
+//        allowedMethods.add("DELETE");
+//        allowedMethods.add("PATCH");
+        /**可指定方法 end*/
+        configuration.setAllowedMethods(allowedMethods);
+        //设置允许跨域的路径
+        source.registerCorsConfiguration("/*",configuration);
+        FilterRegistrationBean<CorsFilter> bean=new FilterRegistrationBean<CorsFilter>(new CorsFilter(source));
+        // 设过滤器的优先级
+        bean.setOrder(0);
+        return bean;
+    }
 
 }
