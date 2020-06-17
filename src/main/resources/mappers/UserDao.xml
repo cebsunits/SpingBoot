@@ -22,12 +22,19 @@
 	</delete>
 
     <!-- 插入用户和角色关联表数据 -->
-    <insert id="insertUserRole">
+    <!--oracle-->
+    <insert id="insertUserRole" databaseId="oracle">
         INSERT INTO sys_user_role(user_id, role_id)
         <foreach collection="roleList" item="role" separator=" union all ">
             SELECT #{userId}, #{role.roleId} FROM dual
         </foreach>
     </insert>
-
+    <!--mysql-->
+    <insert id="insertUserRole" databaseId="mysql">
+        INSERT INTO sys_user_role(user_id, role_id) values
+        <foreach collection="roleList" item="role" separator=",">
+            (SELECT )#{userId}, #{role.roleId})
+        </foreach>
+    </insert>
 
 </mapper>

@@ -24,6 +24,14 @@ function login() {
     console.log("login------")
     let loginName=$("#loginName").val();
     let password=$("#password").val();
+    if(loginName==""||loginName=="undefined"){
+        NotifyWarning("用户名为空");
+        return;
+    }
+    if(password==""||password=="undefined"){
+        NotifyWarning("密码为空");
+        return;
+    }
     let md5Password = CryptoJS.MD5(password+loginName).toString();
     /**更改密码*/
     $("#password").val(md5Password);

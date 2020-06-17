@@ -92,7 +92,7 @@ function initTable() {
                     //
                     let download = '<a class="btn btn-danger btn-sm" href="#" title="删除" onclick="downloadFile(\''
                         + row.fileId
-                        + '\')"><i class="fa fa-remove"></i>下载</a> ';
+                        + '\')"><i class="fa fa-download"></i>下载</a> ';
                     let display="";
 
                     if(s_view_h!=undefined&&s_view_h){

@@ -13,11 +13,15 @@ public class ShiroSessionListener implements SessionListener {
     WebSocketServiceImpl webSocketService;
 
     public void onStart(Session session) {
+        String userName = (String) session.getAttribute("userName");
 
     }
 
     public void onStop(Session session) {
-
+        String userName = (String) session.getAttribute("userName");
+        if (StringUtils.isNotEmpty(userName)) {
+            webSocketService.convertAndSendToUser(userName, WEBSOCKET_LOGOUT_USER, true);
+        }
     }
 
     /**

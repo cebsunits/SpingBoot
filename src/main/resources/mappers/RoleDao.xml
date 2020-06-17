@@ -27,10 +27,18 @@
     </select>
 
     <!-- 插入菜单和角色关联表数据 -->
-    <insert id="insertRoleMenu">
+    <!--oracle-->
+    <insert id="insertRoleMenu" databaseId="oracle">
         INSERT INTO sys_role_menu(role_id, menu_Id)
         <foreach collection="menuList" item="menu" separator=" union all ">
             SELECT #{roleId}, #{menu.menuId} FROM dual
+        </foreach>
+    </insert>
+    <!--mysql-->
+    <insert id="insertRoleMenu" databaseId="mysql">
+        INSERT INTO sys_role_menu(role_id, menu_Id) values
+        <foreach collection="menuList" item="menu" separator=",">
+           (#{roleId}, #{menu.menuId})
         </foreach>
     </insert>
     <!-- 删除用户和角色关联表数据 -->

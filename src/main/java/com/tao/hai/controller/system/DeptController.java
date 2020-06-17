@@ -79,7 +79,7 @@ public class DeptController {
         //获取父节点信息
         Dept parent = new Dept();
         parent.setDeptId(dept.getParentId());
-        if (StringUtils.isNotEmpty(parent.getParentId())) {
+        if (StringUtils.isNotEmpty(parent.getDeptId())) {
             parent = deptService.get(parent);
         }
         dept.setParent(parent);

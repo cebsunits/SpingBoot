@@ -1,9 +1,7 @@
 package com.tao.hai.util;
 
-import com.tao.hai.bean.common.FileBean;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
