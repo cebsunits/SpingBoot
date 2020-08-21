@@ -27,10 +27,10 @@ function load() {
 //            showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
 		sortable: true,                     //是否启用排序
 		sortOrder: "desc",                   //排序方式
-		sortName: 'createTime',             //排序字段
+		sortName: 'createDate',             //排序字段
 		cardView: false,                    //是否显示详细视图
 		detailView: false,                  //是否显示父子表
-		idField: '${pk.columnName}',                  //id
+		idField: '${pk.humpAttrName}',                  //id
 		showExport: true,                     //是否显示导出
 		exportDataType: "all",              //basic', 'all', 'selected'.
 		// exportTypes: ['txt','csv', 'excel','xlsx'],
@@ -38,7 +38,7 @@ function load() {
 			ignoreColumn: [0,6],            //忽略某一列的索引
 			fileName: '数据导出',              //文件名称设置
 			worksheetName: 'Sheet1',          //表格工作区名称
-			tableName: '角色列表',
+			tableName: '${comments}列表}',
 			excelstyles: ['background-color', 'color', 'font-size', 'font-weight'],
 			//onMsoNumberFormat: DoOnMsoNumberFormat
 		},
@@ -83,7 +83,15 @@ function load() {
 								+ '\')"><i class="fa fa-remove"></i></a> ';
 						return e + d ;
 					}
-				} ]
+				} ],
+		//当后台返回不是标准的json对象时，需要转换属性
+		responseHandler:function(result){
+			console.log(result);
+			return {
+				"total":result.recordsTotal,
+				"rows":result.data
+			};
+		}
 	});
 }
 /**查询**/

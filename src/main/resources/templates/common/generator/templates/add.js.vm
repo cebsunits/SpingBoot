@@ -45,10 +45,10 @@ function validateRule() {
 		fields:{
 			#foreach($column in $columns)
 				#if($column.columnName != $pk.columnName)
-					${column.humpAttrName}:{
+			${column.humpAttrName}:{
 					validators:{
 						notEmpty:{
-							message:{column.comments}'不能为空'
+							message:'$column.comments}不能为空'
 						},
 						stringLength:{
 							min:1,
@@ -57,7 +57,7 @@ function validateRule() {
 						}
 					}
 				}#if($velocityCount!=$columns.size())
-					,
+,
 				#end
 				#end
 			#end

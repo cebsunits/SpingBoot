@@ -1,8 +1,5 @@
 package ${package}.controller;
 
-import java.util.List;
-import java.util.Map;
-
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -10,15 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
-import com.tao.hai.annotation.Log;
 import com.tao.hai.base.BaseController;
 import com.tao.hai.base.DataTablePage;
 import com.tao.hai.base.JsonModelBean;
@@ -26,7 +19,6 @@ import com.tao.hai.base.ParameterModelBean;
 import com.tao.hai.json.AjaxError;
 import com.tao.hai.json.AjaxJson;
 import com.tao.hai.json.AjaxSuccess;
-import com.tao.hai.util.JSONUtils;
 import ${package}.bean.${className};
 import ${package}.service.${className}Service;
 
@@ -52,19 +44,23 @@ public class ${className}Controller extends BaseController {
 	}
 	
 	@ResponseBody
-	@GetMapping("/list")
+	@PostMapping("/list")
 	@RequiresPermissions("${pathName}:${classname}:${classname}")
-	public Object list(${className} ${classname},HttpServletRequest request) {
-		/**Sort对象初始化错误，需要更换方法解决*/
-		ParameterModelBean bean = ParameterModelBeanUtil.getParameterModelBean(role);
-		bean = parmeterPage(request,bean);
-		PageInfo<${className}> pageInfo = ${classname}Service.getPageList(bean);
-		return pageInfo;
+	public DataTablePage page(HttpServletRequest request) {
+		//组装成DataTables分页对象
+		DataTablePage<${className}> dataTablePage = new DataTablePage<${className}>(request);
+		//开始分页：PageHelper会处理接下来的第一个查询
+		PageInfo<${className}> pageInfo = ${classname}Service.queryByPage(dataTablePage.getPageNum(), dataTablePage.getPageSize(), new ${className}());
+		//封装数据给DataTables
+		dataTablePage.setData(pageInfo.getList());
+		dataTablePage.setRecordsTotal((int) pageInfo.getTotal());
+		dataTablePage.setRecordsFiltered(dataTablePage.getRecordsTotal());
+		return dataTablePage;
 	}
 	
 	@GetMapping("/add")
 	@RequiresPermissions("${pathName}:${classname}:add")
-	String add(){
+	String add(Model model){
 		/**只读属性*/
 		model.addAttribute("readOnly", false);
 		model.addAttribute("${classname}", new ${className}());
@@ -93,7 +89,7 @@ public class ${className}Controller extends BaseController {
 			int num=${classname}Service.save(${classname});
 			if(num>0){
 				ajaxJson = new AjaxSuccess();
-				ajaxJson.setData(role);
+				ajaxJson.setData(${classname});
 			}else{
 				ajaxJson = new AjaxError();
 			}
@@ -137,10 +133,10 @@ public class ${className}Controller extends BaseController {
 	@PostMapping( "/batchRemove")
 	@ResponseBody
 	@RequiresPermissions("${pathName}:${classname}:batchRemove")
-	public R remove(@RequestParam("ids[]") ${pk.attrType}[] ${pk.humpAttrName}s){
+	public AjaxJson remove(@RequestParam("ids[]") ${pk.attrType}[] ${pk.humpAttrName}s){
 		AjaxJson ajaxJson;
-		if (deptIds != null && deptIds.length > 0) {
-				${classname}Service.delete(${pk.humpAttrName}s);
+		if (${pk.humpAttrName}s != null && ${pk.humpAttrName}s.length > 0) {
+			${classname}Service.delete(${pk.humpAttrName}s);
 			ajaxJson = new AjaxSuccess();
 			ajaxJson.setMessage("删除成功！");
 		} else {

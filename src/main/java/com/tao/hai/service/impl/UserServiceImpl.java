@@ -207,4 +207,8 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao, User> implements U
     public void updatePassword(User user) {
         super.save(user);
     }
+    /**获取不同的用户名称信息*/
+    public List listUsers(){
+        return userDao.listUsers();
+    }
 }

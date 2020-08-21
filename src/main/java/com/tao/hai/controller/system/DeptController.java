@@ -16,10 +16,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -41,13 +38,13 @@ public class DeptController {
     }
 
     @RequiresPermissions("sys:dept:dept")
-    @RequestMapping(value = "/deptTreeTable")
+    @GetMapping(value = "/deptTreeTable")
     public String deptTreeTable() {
         return "/dept/deptTreeTableList";
     }
 
     @RequiresPermissions("sys:dept:dept")
-    @RequestMapping(value = "/list")
+    @PostMapping(value = "/list")
     @ResponseBody
     public List<Dept> list(Dept dept) {
         /**Sort对象初始化错误，需要更换方法解决*/
@@ -61,7 +58,7 @@ public class DeptController {
 
     @RequiresPermissions(value = {"sys:dept:add", "sys:dept:edit"})
     @Log("新增菜单")
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @GetMapping(value = "/add")
     public String toAdd(Dept dept, Model model, HttpServletRequest request) {
         /**只读属性*/
         String readOnly = request.getParameter("readOnly");
@@ -91,7 +88,7 @@ public class DeptController {
     }
 
     @Log("保持菜单")
-    @RequestMapping(value = "/save")
+    @PostMapping(value = "/save")
     @ResponseBody
     public AjaxJson save(Dept dept, HttpServletRequest request) {
         AjaxJson ajaxJson;
@@ -108,7 +105,7 @@ public class DeptController {
         return ajaxJson;
     }
 
-    @RequestMapping("/checkExists")
+    @GetMapping("/checkExists")
     @ResponseBody
     public Object checkExists(String deptCode, String oldDeptCode) {
         AjaxJson ajaxJson;
@@ -136,7 +133,7 @@ public class DeptController {
 
     @RequiresPermissions("sys:dept:remove")
     @Log("删除菜单")
-    @RequestMapping(value = "/delete")
+    @GetMapping(value = "/delete")
     @ResponseBody
     public Object delete(String deptId) {
         AjaxJson ajaxJson;
@@ -153,7 +150,7 @@ public class DeptController {
 
     @Log("批量删除菜单")
     @RequiresPermissions("sys:dept:batchRemove")
-    @RequestMapping(value = "/batchDelete")
+    @GetMapping(value = "/batchDelete")
     @ResponseBody
     public Object batchDelete(String[] deptIds) {
         AjaxJson ajaxJson;
@@ -168,13 +165,13 @@ public class DeptController {
         return ajaxJson;
     }
 
-    @RequestMapping(value = "/deptTreeView")
+    @GetMapping(value = "/deptTreeView")
     public String deptTreeView(HttpServletRequest request) {
 
         return "/dept/deptTreeView";
     }
 
-    @RequestMapping(value = "/deptTree")
+    @PostMapping(value = "/deptTree")
     @ResponseBody
     public Object deptTree(Dept dept, HttpServletRequest request, Model model) {
         List<TreeNode<Dept>> list = deptService.buildDeptTree(dept);

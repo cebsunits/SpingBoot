@@ -13,17 +13,17 @@
 					<div class="ibox-content">
 						<form class="form-horizontal validation-form m-t" id="signupForm">
 							<input type="hidden" name="flag" id="flag" th:value="${readOnly}">
-							<input id="${pk.columnName}" name="${pk.columnName}" th:value="${${classname}.${pk.columnName}}"  type="hidden">
+							<input id="${pk.humpAttrName}" name="${pk.humpAttrName}" th:value="${${classname}.${pk.humpAttrName}}"  type="hidden">
 #foreach($column in $columns)
 #if($column.columnName != $pk.columnName)
-<div class="form-group">	
-								<label class="col-sm-3 control-label">${column.comments}：</label>
-								<div class="col-sm-8">
-									<input id="${column.humpAttrName}" name="${column.humpAttrName}" th:value="${${classname}.${column.humpAttrName}}" class="form-control" type="text">
-								</div>
-							</div>
-							#end
-							#end
+<div class="form-group">
+	<label class="col-sm-3 control-label">${column.comments}：</label>
+	<div class="col-sm-8">
+		<input id="${column.humpAttrName}" name="${column.humpAttrName}" th:value="${${classname}.${column.humpAttrName}}" class="form-control" type="text">
+	</div>
+</div>
+#end
+#end
 							<div class="form-group">
 								<div class="col-sm-8 col-sm-offset-3">
 									<button type="submit" id="btn_save" name="btn_save" class="btn btn-primary" th:if="${readOnly} ne true" >保存</button>

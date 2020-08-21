@@ -42,7 +42,7 @@ public class MenuController extends BaseController {
         //组装成DataTables分页对象
         DataTablePage<Menu> dataTablePage = new DataTablePage<Menu>(request);
         //开始分页：PageHelper会处理接下来的第一个查询
-        PageInfo<Menu> pageInfo = menuService.queryByPage(dataTablePage.getPageNum(), dataTablePage.getPageSize(), null);
+        PageInfo<Menu> pageInfo = menuService.queryByPage(dataTablePage.getPageNum(), dataTablePage.getPageSize(), new Menu());
         //封装数据给DataTables
         dataTablePage.setData(pageInfo.getList());
         dataTablePage.setRecordsTotal((int) pageInfo.getTotal());

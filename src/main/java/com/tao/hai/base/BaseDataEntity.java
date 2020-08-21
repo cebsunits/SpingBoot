@@ -10,7 +10,17 @@ import java.util.Date;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class BaseDataEntity<T> extends DataEntity<T> {
+    /**
+     * 删除标记（0：正常；1：删除；2：审核；）
+     */
+    @JSONField(serialize = false)
+    public static final String DEL_FLAG_NORMAL = "0";
+    @JSONField(serialize = false)
+    public static final String DEL_FLAG_DELETE = "1";
 
+    public BaseDataEntity(){
+        this.delFlag=DEL_FLAG_NORMAL;
+    }
     /**
      * 创建人
      */

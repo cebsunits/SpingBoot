@@ -10,6 +10,8 @@
     <!-- 引入popper插件样式 JS umd--Universal Module Definition统一的模块定义,同时支持浏览器和服务端-->
     <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
     <!-- 引入bootstrap插件样式 JS-->
+    <!--Popover依赖于第三方库Popper.js进行定位。您必须在bootstrap.js之前包含popper.min.js或使用包含Popper.js的bootstrap.bundle.min.js / bootstrap.bundle.js才能使弹出窗口起作用！-->
+<!--    <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>-->
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     <!-- 引入bootstrap验证插件样式 JS-->
     <script th:src="@{/webjars/bootstrapvalidator/js/bootstrapValidator.min.js}"></script>
@@ -18,6 +20,10 @@
 <!--    <script th:src="@{/webjars/layui/lay/modules/layer.js}"></script>-->
     <!-- 消息提醒框JS -->
     <script th:src="@{/webjars/toastr/build/toastr.min.js}" ></script>
+    <!--动画的js-->
+    <script th:src="@{/webjars/pace/pace.min.js}"></script>
+    <!--jquery UI-->
+    <script th:src="@{/webjars/jquery-ui/jquery-ui.min.js}" ></script>
     <!--公用js-->
     <script th:src="@{/js/common/common.js}"></script>
     <!-- 引入支持多种浏览器的JS -->

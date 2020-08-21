@@ -1,6 +1,7 @@
 package com.tao.hai.quartz.service;
 
-import com.tao.hai.quartz.bean.ScheduleJob;
+import com.tao.hai.quartz.bean.QuartzJob;
+import com.tao.hai.quartz.utils.QuartzManager;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,10 +13,10 @@ import javax.annotation.Resource;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class QuartzServiceTest {
     @Resource
-    QuartzService quartzService;
+    QuartzManager quartzService;
     @Test
     public void jobTest(){
-        ScheduleJob job=new ScheduleJob();
+        QuartzJob job=new QuartzJob();
         job.setJobId("0001");
         job.setJobName("job");
         job.setJobGroup("DEFAULT");
@@ -28,7 +29,7 @@ public class QuartzServiceTest {
     }
     @Test
     public void jobPauseTest(){
-        ScheduleJob job=new ScheduleJob();
+        QuartzJob job=new QuartzJob();
         job.setJobId("0001");
         job.setJobName("job");
         job.setJobGroup("DEFAULT");
@@ -39,7 +40,7 @@ public class QuartzServiceTest {
     }
     @Test
     public void jobResumeTest(){
-        ScheduleJob job=new ScheduleJob();
+        QuartzJob job=new QuartzJob();
         job.setJobId("0001");
         job.setJobName("job");
         job.setJobGroup("DEFAULT");
@@ -50,7 +51,7 @@ public class QuartzServiceTest {
     }
     @Test
     public void jobDeleteTest(){
-        ScheduleJob job=new ScheduleJob();
+        QuartzJob job=new QuartzJob();
         job.setJobId("0001");
         job.setJobName("job");
         job.setJobGroup("DEFAULT");

@@ -3,16 +3,28 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tao.hai.dao.UserDao">
 
+
+    <!--获取不同的用户信息 listUsers-->
+    <select id="listUsers" resultType="java.lang.String">
+      select distinct USER_NAME from SYS_USER
+    </select>
     <!-- 删除用户和部门关联表数据 -->
     <delete id="deleteUserDept">
 		DELETE FROM sys_user_dept
 		WHERE user_id = #{userId}
 	</delete>
     <!-- 插入用户和角色关联表数据 -->
-    <insert id="insertUserDept">
+    <insert id="insertUserDept" databaseId="oracle">
         INSERT INTO sys_user_dept(user_id, dept_id)
         <foreach collection="deptList" item="dept" separator=" union all ">
             SELECT #{userId}, #{dept.deptId} FROM dual
+        </foreach>
+    </insert>
+    <!-- 插入用户和角色关联表数据 -->
+    <insert id="insertUserDept" databaseId="mysql">
+        INSERT INTO sys_user_dept(user_id, dept_id) values
+        <foreach collection="deptList" item="dept" index="index" separator=",">
+            (#{userId}, #{dept.deptId})
         </foreach>
     </insert>
     <!-- 删除用户和角色关联表数据 -->
@@ -33,7 +45,7 @@
     <insert id="insertUserRole" databaseId="mysql">
         INSERT INTO sys_user_role(user_id, role_id) values
         <foreach collection="roleList" item="role" separator=",">
-            (SELECT )#{userId}, #{role.roleId})
+            (#{userId}, #{role.roleId})
         </foreach>
     </insert>
 

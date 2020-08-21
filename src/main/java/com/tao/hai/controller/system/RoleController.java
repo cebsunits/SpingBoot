@@ -57,7 +57,7 @@ public class RoleController extends BaseController {
         //组装成DataTables分页对象
         DataTablePage<Role> dataTablePage = new DataTablePage<Role>(request);
         //开始分页：PageHelper会处理接下来的第一个查询
-        PageInfo<Role> pageInfo = roleService.queryByPage(dataTablePage.getPageNum(), dataTablePage.getPageSize(), null);
+        PageInfo<Role> pageInfo = roleService.queryByPage(dataTablePage.getPageNum(), dataTablePage.getPageSize(), new Role());
         //封装数据给DataTables
         dataTablePage.setData(pageInfo.getList());
         dataTablePage.setRecordsTotal((int) pageInfo.getTotal());

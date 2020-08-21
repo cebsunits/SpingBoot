@@ -9,8 +9,8 @@ import com.tao.hai.util.ShiroUtils;
 import ${package}.dao.${className}Dao;
 import ${package}.bean.${className};
 import ${package}.service.${className}Service;
-
-
+import java.util.UUID;
+import java.util.Date;
 
 @Service
 public class ${className}ServiceImpl extends BaseServiceImpl<${className}Dao, ${className}> implements ${className}Service {
@@ -22,7 +22,7 @@ public class ${className}ServiceImpl extends BaseServiceImpl<${className}Dao, ${
     */
 	@Override
 	public int save(${className} ${classname}) {
-		if (StringUtils.isEmpty(${classname}.${pk.humpAttrName})) {
+		if (StringUtils.isEmpty(${classname}.get${pk.attrName})) {
 			${classname}.set${pk.attrName}(UUID.randomUUID().toString());
 			${classname}.setCreateDate(new Date());
 			${classname}.setCreateId(ShiroUtils.getUserId());

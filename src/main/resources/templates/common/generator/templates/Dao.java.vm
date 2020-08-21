@@ -2,6 +2,7 @@ package ${package}.dao;
 
 import com.tao.hai.base.BaseDao;
 import ${package}.bean.${className};
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * ${comments}
@@ -12,6 +13,6 @@ import ${package}.bean.${className};
 @Mapper
 public interface ${className}Dao extends BaseDao<${className}> {
 
-	${className}DO get(${pk.attrType} ${pk.humpAttrName});
+	${className} get(${pk.attrType} ${pk.humpAttrName});
 
 }

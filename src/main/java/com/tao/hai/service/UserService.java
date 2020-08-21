@@ -69,4 +69,6 @@ public interface UserService extends BaseService<User> {
      * 添加redis缓存
      */
     void updatePassword(User user);
+    /**获取不同的用户名称信息*/
+    List listUsers();
 }

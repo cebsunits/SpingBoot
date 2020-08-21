@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:replace="/common/commonHeader::common_header(~{::title},~{::link},~{})">
+	<title>列表</title>
+	<link rel="stylesheet" th:href="@{/webjars/datatables/css/dataTables.bootstrap.min.css}"/>
+</head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="col-sm-12">
+			<div class="ibox">
+				<div class="ibox-body">
+					<div class="fixed-table-toolbar">
+						<div class="columns pull-left">
+							<button shiro:hasPermission="quartz:quartzJob:add" type="button" class="btn  btn-primary" onclick="add()">
+								<i class="fa fa-plus" aria-hidden="true"></i>添加
+							</button>
+							<button shiro:hasPermission="quartz:quartzJob:batchRemove" type="button" class="btn btn-danger"
+								onclick="batchRemove()">
+								<i class="fa fa-trash" aria-hidden="true"></i>删除
+							</button>
+						</div>
+						<div class="columns pull-right">
+							<button class="btn btn-success" onclick="refresh()">查询</button>
+						</div>
+						<div class="columns pull-right col-md-2 nopadding">
+							<input id="searchName" type="text" class="form-control"
+								placeholder="">
+						</div>
+					</div>
+					<table id="exampleTable" data-mobile-responsive="true">
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+		<div>
+			<script type="text/javascript">
+				let s_edit_h='hidden';
+				let s_remove_h='hidden';
+			</script>
+		</div>
+		<div shiro:hasPermission="quartz:quartzJob:edit">
+			<script type="text/javascript">
+				s_edit_h='';
+			</script>
+		</div>
+		<div shiro:hasPermission="quartz:quartzJob:remove">
+			<script type="text/javascript">
+				s_remove_h='';
+			</script>
+		</div>
+	</div>
+	<!--引用通用JS-->
+	<div th:replace="/common/commonFoot::foot(~{})">
+	</div>
+	<script th:src="@{/webjars/bootstrap-table/bootstrap-table.min.js}" ></script>
+	<script th:src="@{/webjars/bootstrap-table/extensions/filter-control/bootstrap-table-filter-control.min.js}" ></script>
+	<script th:src="@{/pluggins/tableExport/tableExport.min.js}" ></script>
+	<script th:src="@{/webjars/bootstrap-table/extensions/export/bootstrap-table-export.min.js}" ></script>
+	<script th:src="@{/webjars/bootstrap-table/extensions/toolbar/bootstrap-table-toolbar.min.js}" ></script>
+	<script th:src="@{/webjars/bootstrap-table/locale/bootstrap-table-zh-CN.min.js}" ></script>
+	<script type="text/javascript" src="/js/common/quartzJob/quartzJob.js"></script>
+</body>
+</html>

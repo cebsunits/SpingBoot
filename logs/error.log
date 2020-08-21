@@ -1,0 +1,14 @@
+[lf-1][SERVER_NAME_IS_UNDEFINED][2020-07-14 15:23:29.409][ERROR][restartedMain][LoggingFailureAnalysisReporter.java:40] - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+端口号：8080被占用！
+
+Action:
+
+PortInUseException
+

@@ -1,0 +1,3 @@
+org.springframework.boot.diagnostics.FailureAnalyzer=\
+com.tao.hai.exception.PortInUseFailureAnalyzer,\
+com.tao.hai.exception.ProjectRuntimeException

@@ -1,0 +1,203 @@
+15:23:05.158 [INFO ] o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+15:23:05.165 [INFO ] o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+15:23:09.169 [WARN ] o.m.s.mapper.ClassPathMapperScanner - Skipping MapperFactoryBean with name 'quartzJobDao' and 'com.tao.hai.quartz.dao.QuartzJobDao' mapperInterface. Bean already defined with the same name!
+15:23:09.174 [WARN ] o.m.s.mapper.ClassPathMapperScanner - No MyBatis mapper was found in '[com.tao.hai]' package. Please check your configuration.
+15:23:09.475 [INFO ] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+15:23:09.476 [INFO ] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+15:23:09.600 [INFO ] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 107ms. Found 0 JPA repository interfaces.
+15:23:09.628 [INFO ] o.s.d.r.c.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode!
+15:23:09.630 [INFO ] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+15:23:09.696 [INFO ] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 50ms. Found 0 Redis repository interfaces.
+15:23:10.401 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.apache.shiro.spring.boot.autoconfigure.ShiroBeanAutoConfiguration' of type [org.apache.shiro.spring.boot.autoconfigure.ShiroBeanAutoConfiguration$$EnhancerBySpringCGLIB$$b1db0967] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:10.866 [INFO ] o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - Autowired annotation is not supported on static fields: public static final java.lang.String com.tao.hai.config.ShiroConfig.shiroServerUrlPrefix
+15:23:10.867 [INFO ] o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - Autowired annotation is not supported on static fields: public static final java.lang.String com.tao.hai.config.ShiroConfig.casFilterUrlPattern
+15:23:10.871 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'shiroConfig' of type [com.tao.hai.config.ShiroConfig$$EnhancerBySpringCGLIB$$fac0711a] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:11.117 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'hashedCredentialsMatcher' of type [org.apache.shiro.authc.credential.HashedCredentialsMatcher] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:11.130 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'memoryConstrainedCacheManager' of type [org.apache.shiro.cache.MemoryConstrainedCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:11.191 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration' of type [org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:11.196 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'stringOrNumberMigrationVersionConverter' of type [org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration$StringOrNumberToMigrationVersionConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:11.329 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'mybatis-tk.mybatis.mapper.autoconfigure.MybatisProperties' of type [tk.mybatis.mapper.autoconfigure.MybatisProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:11.345 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'dataSourceConfig' of type [com.tao.hai.config.DataSourceConfig$$EnhancerBySpringCGLIB$$516445d8] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:11.351 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'databaseIdProvider' of type [org.apache.ibatis.mapping.VendorDatabaseIdProvider] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:11.356 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'tk.mybatis.mapper.autoconfigure.MapperAutoConfiguration' of type [tk.mybatis.mapper.autoconfigure.MapperAutoConfiguration$$EnhancerBySpringCGLIB$$54b2d350] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:11.376 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'druidConfiguration' of type [com.tao.hai.config.DruidConfiguration$$EnhancerBySpringCGLIB$$b153f445] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:11.854 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'dataSource' of type [com.alibaba.druid.pool.DruidDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:11.928 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.datasource-org.springframework.boot.autoconfigure.jdbc.DataSourceProperties' of type [org.springframework.boot.autoconfigure.jdbc.DataSourceProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:11.942 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.boot.autoconfigure.jdbc.DataSourceInitializerInvoker' of type [org.springframework.boot.autoconfigure.jdbc.DataSourceInitializerInvoker] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:13.215 [INFO ] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+15:23:13.579 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sqlSessionFactory' of type [org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:13.607 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sqlSessionTemplate' of type [org.mybatis.spring.SqlSessionTemplate] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:13.787 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'userDao' of type [tk.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:13.793 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'userDao' of type [com.sun.proxy.$Proxy104] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:13.993 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'menuDao' of type [tk.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:13.997 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'menuDao' of type [com.sun.proxy.$Proxy105] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.159 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'roleDao' of type [tk.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.163 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'roleDao' of type [com.sun.proxy.$Proxy107] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.180 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'userServiceImpl' of type [com.tao.hai.service.impl.UserServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.289 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'menuServiceImpl' of type [com.tao.hai.service.impl.MenuServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.301 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'customRealm' of type [com.tao.hai.config.SpringBootShrioRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.345 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'webSocketConfig' of type [com.tao.hai.websocket.config.WebSocketConfig$$EnhancerBySpringCGLIB$$e74900f7] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.353 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonObjectMapperConfiguration' of type [org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonObjectMapperConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.358 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonObjectMapperBuilderConfiguration' of type [org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonObjectMapperBuilderConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.365 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$Jackson2ObjectMapperBuilderCustomizerConfiguration' of type [org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$Jackson2ObjectMapperBuilderCustomizerConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.377 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.jackson-org.springframework.boot.autoconfigure.jackson.JacksonProperties' of type [org.springframework.boot.autoconfigure.jackson.JacksonProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.383 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'standardJacksonObjectMapperBuilderCustomizer' of type [org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$Jackson2ObjectMapperBuilderCustomizerConfiguration$StandardJackson2ObjectMapperBuilderCustomizer] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.388 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$ParameterNamesModuleConfiguration' of type [org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$ParameterNamesModuleConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.408 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'parameterNamesModule' of type [com.fasterxml.jackson.module.paramnames.ParameterNamesModule] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.418 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration' of type [org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.434 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'jsonComponentModule' of type [org.springframework.boot.jackson.JsonComponentModule] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.437 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.data.web.config.SpringDataJacksonConfiguration' of type [org.springframework.data.web.config.SpringDataJacksonConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.444 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'jacksonGeoModule' of type [org.springframework.data.geo.GeoModule] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.449 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'jacksonObjectMapperBuilder' of type [org.springframework.http.converter.json.Jackson2ObjectMapperBuilder] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.489 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'jacksonObjectMapper' of type [com.fasterxml.jackson.databind.ObjectMapper] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.534 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.boot.autoconfigure.websocket.servlet.WebSocketMessagingAutoConfiguration$WebSocketMessageConverterConfiguration' of type [org.springframework.boot.autoconfigure.websocket.servlet.WebSocketMessagingAutoConfiguration$WebSocketMessageConverterConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.539 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration' of type [org.springframework.web.socket.config.annotation.DelegatingWebSocketMessageBrokerConfiguration$$EnhancerBySpringCGLIB$$8facec8a] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.577 [INFO ] o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'clientInboundChannelExecutor'
+15:23:14.579 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'clientInboundChannelExecutor' of type [org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.594 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'clientInboundChannel' of type [org.springframework.messaging.support.ExecutorSubscribableChannel] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.602 [INFO ] o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'clientOutboundChannelExecutor'
+15:23:14.604 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'clientOutboundChannelExecutor' of type [org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.606 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'clientOutboundChannel' of type [org.springframework.messaging.support.ExecutorSubscribableChannel] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.608 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'brokerChannel' of type [org.springframework.messaging.support.ExecutorSubscribableChannel] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.623 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'brokerMessageConverter' of type [org.springframework.messaging.converter.CompositeMessageConverter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.631 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'brokerMessagingTemplate' of type [org.springframework.messaging.simp.SimpMessagingTemplate] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.635 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'webSocketServiceImpl' of type [com.tao.hai.websocket.service.impl.WebSocketServiceImpl] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.637 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'shiroSessionListener' of type [com.tao.hai.listener.ShiroSessionListener] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.645 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'sessionManager' of type [org.apache.shiro.web.session.mgt.DefaultWebSessionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.655 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'securityManager' of type [org.apache.shiro.web.mgt.DefaultWebSecurityManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.678 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'authorizationAttributeSourceAdvisor' of type [org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.681 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'eventBus' of type [org.apache.shiro.event.support.DefaultEventBus] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.689 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'shiroFilterChainDefinition' of type [org.apache.shiro.spring.web.config.DefaultShiroFilterChainDefinition] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.696 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'requestContextFilter' of type [org.springframework.boot.web.servlet.filter.OrderedRequestContextFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.707 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration' of type [org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.713 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'formContentFilter' of type [org.springframework.boot.web.servlet.filter.OrderedFormContentFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.752 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'server-org.springframework.boot.autoconfigure.web.ServerProperties' of type [org.springframework.boot.autoconfigure.web.ServerProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.758 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.boot.autoconfigure.web.servlet.HttpEncodingAutoConfiguration' of type [org.springframework.boot.autoconfigure.web.servlet.HttpEncodingAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.763 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'characterEncodingFilter' of type [org.springframework.boot.web.servlet.filter.OrderedCharacterEncodingFilter] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:14.805 [INFO ] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.apache.shiro.spring.config.web.autoconfigure.ShiroWebFilterConfiguration' of type [org.apache.shiro.spring.config.web.autoconfigure.ShiroWebFilterConfiguration$$EnhancerBySpringCGLIB$$8e1cf08] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+15:23:15.609 [INFO ] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+15:23:15.682 [INFO ] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+15:23:15.683 [INFO ] o.a.catalina.core.StandardService - Starting service [Tomcat]
+15:23:15.683 [INFO ] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.35]
+15:23:15.980 [INFO ] o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+15:23:15.980 [DEBUG] o.s.web.context.ContextLoader - Published root WebApplicationContext as ServletContext attribute with name [org.springframework.web.context.WebApplicationContext.ROOT]
+15:23:15.981 [INFO ] o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 10816 ms
+15:23:16.131 [DEBUG] o.s.w.s.r.ResourceUrlEncodingFilter - Filter 'resourceUrlEncodingFilter' configured for use
+15:23:16.151 [DEBUG] o.s.web.filter.CorsFilter - Filter 'corsFilter' configured for use
+15:23:16.553 [INFO ] o.f.c.i.license.VersionPrinter - Flyway Community Edition 6.4.4 by Redgate
+15:23:16.770 [INFO ] o.f.c.i.database.DatabaseFactory - Database: jdbc:mysql://localhost:3306/root (MySQL 8.0)
+15:23:16.941 [INFO ] o.f.core.internal.command.DbValidate - Successfully validated 3 migrations (execution time 00:00.065s)
+15:23:16.953 [INFO ] o.f.core.internal.command.DbMigrate - Current version of schema `root`: 2020061903
+15:23:16.954 [INFO ] o.f.core.internal.command.DbMigrate - Schema `root` is up to date. No migration necessary.
+15:23:17.436 [INFO ] o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+15:23:17.536 [INFO ] org.hibernate.Version - HHH000412: Hibernate ORM core version 5.4.15.Final
+15:23:17.811 [INFO ] o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+15:23:18.012 [INFO ] org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+15:23:19.775 [INFO ] o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+15:23:19.813 [INFO ] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+15:23:20.023 [WARN ] t.m.m.m.resolve.DefaultEntityResolve - 通用 Mapper 警告信息: <[EntityColumn{table=sys_file, property='fileSize', column='file_size', javaType=long, jdbcType=null, typeHandler=null, id=false, identity=false, blob=false, generator='null', orderBy='null', orderPriority='0', insertable=true, updatable=true, order=DEFAULT}]> 使用了基本类型，基本类型在动态 SQL 中由于存在默认值，因此任何时候都不等于 null，建议修改基本类型为对应的包装类型!
+15:23:20.683 [INFO ] org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+15:23:20.688 [INFO ] o.s.s.q.SimpleThreadPoolTaskExecutor - Job execution threads will use class loader of thread: restartedMain
+15:23:20.705 [INFO ] o.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+15:23:20.705 [INFO ] org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+15:23:20.712 [INFO ] o.s.s.quartz.LocalDataSourceJobStore - Using db table-based data access locking (synchronization).
+15:23:20.715 [INFO ] o.s.s.quartz.LocalDataSourceJobStore - JobStoreCMT initialized.
+15:23:20.716 [INFO ] org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'DESKTOP-HTITVG21594711400686'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.springframework.scheduling.quartz.SimpleThreadPoolTaskExecutor' - with 25 threads.
+  Using job-store 'org.springframework.scheduling.quartz.LocalDataSourceJobStore' - which supports persistence. and is clustered.
+
+15:23:20.716 [INFO ] org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+15:23:20.717 [INFO ] org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+15:23:20.717 [INFO ] org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@7423ca86
+15:23:21.481 [WARN ] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+15:23:21.682 [DEBUG] o.s.w.s.m.m.a.RequestMappingHandlerMapping - 78 mappings in 'requestMappingHandlerMapping'
+15:23:22.167 [INFO ] s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+15:23:22.257 [INFO ] o.s.s.c.ThreadPoolTaskScheduler - Initializing ExecutorService 'messageBrokerTaskScheduler'
+15:23:22.398 [DEBUG] o.s.w.s.s.s.WebSocketHandlerMapping - Patterns [/websocket/**] in 'stompWebSocketHandlerMapping'
+15:23:22.426 [INFO ] o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'brokerChannelExecutor'
+15:23:22.479 [DEBUG] o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.t.h.b.BaseController:
+	
+15:23:22.480 [DEBUG] o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.t.h.c.c.FileUploadController:
+	
+15:23:22.480 [DEBUG] o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.t.h.c.c.GeneratorController:
+	
+15:23:22.481 [DEBUG] o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.t.h.c.d.BootStrapTreeTableController:
+	
+15:23:22.481 [DEBUG] o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.t.h.c.s.DeptController:
+	
+15:23:22.481 [DEBUG] o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.t.h.c.s.LoginController:
+	
+15:23:22.482 [DEBUG] o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.t.h.c.s.MenuController:
+	
+15:23:22.482 [DEBUG] o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.t.h.c.s.RoleController:
+	
+15:23:22.483 [DEBUG] o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.t.h.c.s.TagIconController:
+	
+15:23:22.483 [DEBUG] o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.t.h.c.s.UserController:
+	
+15:23:22.484 [DEBUG] o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	c.t.h.q.c.QuartzJobController:
+	
+15:23:22.485 [DEBUG] o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	s.d.s.w.ApiResourceController:
+	
+15:23:22.487 [DEBUG] o.s.w.s.m.WebSocketAnnotationMethodMessageHandler - 
+	o.s.b.a.w.s.e.BasicErrorController:
+	
+15:23:22.951 [INFO ] o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+15:23:22.998 [DEBUG] o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+15:23:23.315 [INFO ] o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page template: index
+15:23:25.607 [DEBUG] o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+15:23:25.730 [DEBUG] o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice
+15:23:25.994 [INFO ] t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.util.MsUtil CLASS_CACHE cache.
+15:23:25.995 [INFO ] t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.genid.GenIdUtil CACHE cache.
+15:23:25.996 [INFO ] t.m.m.a.MapperCacheDisabler - Clear tk.mybatis.mapper.version.VersionUtil CACHE cache.
+15:23:25.997 [INFO ] t.m.m.a.MapperCacheDisabler - Clear EntityHelper entityTableMap cache.
+15:23:28.860 [INFO ] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+15:23:28.986 [WARN ] o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+15:23:29.284 [INFO ] o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'brokerChannelExecutor'
+15:23:29.290 [INFO ] o.s.s.c.ThreadPoolTaskScheduler - Shutting down ExecutorService 'messageBrokerTaskScheduler'
+15:23:29.293 [INFO ] o.s.s.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+15:23:29.294 [INFO ] org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_DESKTOP-HTITVG21594711400686 shutting down.
+15:23:29.294 [INFO ] org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_DESKTOP-HTITVG21594711400686 paused.
+15:23:29.295 [INFO ] org.quartz.core.QuartzScheduler - Scheduler quartzScheduler_$_DESKTOP-HTITVG21594711400686 shutdown complete.
+15:23:29.295 [INFO ] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+15:23:29.330 [INFO ] o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'clientOutboundChannelExecutor'
+15:23:29.330 [INFO ] o.s.s.c.ThreadPoolTaskExecutor - Shutting down ExecutorService 'clientInboundChannelExecutor'
+15:23:29.339 [INFO ] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+15:23:29.364 [INFO ] c.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+15:23:29.367 [INFO ] o.a.coyote.http11.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-8080"]
+15:23:29.370 [INFO ] o.a.catalina.core.StandardService - Stopping service [Tomcat]
+15:23:29.377 [INFO ] o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8080"]
+15:23:29.378 [INFO ] o.a.coyote.http11.Http11NioProtocol - Destroying ProtocolHandler ["http-nio-8080"]
+15:23:29.396 [INFO ] o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+15:23:29.409 [ERROR] o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+端口号：8080被占用！
+
+Action:
+
+PortInUseException
+

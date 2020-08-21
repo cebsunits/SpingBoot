@@ -32,7 +32,7 @@
         <thymeleaf.extras.shiro.version>2.0.0</thymeleaf.extras.shiro.version>
         <!-- webjars start -->
         <!-- bootstrap start -->
-        <bootstrap.version>4.3.1</bootstrap.version>
+        <bootstrap.version>3.3.7</bootstrap.version>
         <bootstrap.table.version>1.9.1-1</bootstrap.table.version>
         <bootstrap.select.version>1.9.4</bootstrap.select.version>
         <bootstrap.multiselect.version>0a857a085d</bootstrap.multiselect.version>

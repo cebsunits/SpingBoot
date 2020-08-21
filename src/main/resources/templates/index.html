@@ -23,7 +23,7 @@
 							</i>管理系统
 						</h3>
 					</div>
-					<div class="dropdown profile-element hidden">
+					<div class="dropdown profile-element">
 						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 							<span class="clear">
                             <span class="block m-t-xs">
@@ -81,38 +81,12 @@
 							class="fa arrow"></span>
 				</a>
 					<ul class="nav nav-second-level">
-						<li th:each="cmenu : ${menu.nodes}"><a class="J_menuItem" href="graph_echarts.html"
-																  th:text="${cmenu.text}"
-																  th:href="${cmenu.href}">系统管理</a></li>
+						<li th:each="cmenu : ${menu.nodes}">
+							<a class="J_menuItem" href="graph_echarts.html"
+							   th:text="${cmenu.text}" th:href="${cmenu.href}">系统管理</a>
+						</li>
 					</ul>
 				</li>
-
-<!--				<li th:each="menu:${menuList}" th:if="${not menuList.isEmpty()}">-->
-<!--					&lt;!&ndash;存在下级菜单情况&ndash;&gt;-->
-<!--					<a href="#" th:if="${#strings.isEmpty(menu.menuUrl)}">-->
-<!--						<i class="fa fa-bar-chart-o" th:class="${menu.menuIcon}"></i>-->
-<!--						<span class="nav-label" th:text="${menu.menuName}">基础信息</span>-->
-<!--						<span class="fa arrow"></span>-->
-<!--					</a>-->
-<!--					&lt;!&ndash;不存在下级菜单情况&ndash;&gt;-->
-<!--					<a href="#" class="J_menuItem" th:href="${menu.menuUrl}" th:if="${not #strings.isEmpty(menu.menuUrl)}">-->
-<!--						<i class="fa fa-bar-chart-o" th:class="${menu.menuIcon}"></i>-->
-<!--						<span class="nav-label" th:text="${menu.menuName}">基础信息</span>-->
-<!--						<span class="fa arrow"></span>-->
-<!--					</a>-->
-<!--					&lt;!&ndash;下级菜单情况&ndash;&gt;-->
-<!--					<ul class="nav nav-second-level" aria-expanded="false">-->
-<!--						<li th:each="subMenu:${menu.subMenuList}" th:if="${not menu.subMenuList.isEmpty()}">-->
-<!--							<a class="J_menuItem" href="#" th:text="${subMenu.menuName}" th:href="${subMenu.menuUrl}">-->
-<!--								<i class="fa fa-bar-chart-o" th:class="${subMenu.menuIcon}"></i>-->
-<!--								<span class="nav-label" th:text="${subMenu.menuName}">基础信息</span>-->
-<!--								<span class="fa arrow"></span>-->
-<!--							</a>-->
-<!--						</li>-->
-<!--					</ul>-->
-<!--				</li>-->
-
-
 			</ul>
 		</div>
 	</nav>
@@ -121,7 +95,10 @@
 	<div id="page-wrapper" class="gray-bg dashboard-1">
 		<!--首页-->
 		<div class="row content-tabs" >
-			<button class="roll-nav roll-left J_tabLeft">
+			<button class="roll-nav roll-left J_tabLeft navbar-minimalize">
+				<i class="fa fa-bars"></i>
+			</button>
+			<button class="roll-nav roll-left J_tabLeft" style="left: 40px;">
 				<i class="fa fa-backward"></i>
 			</button>
 			<nav class="page-tabs J_menuTabs">
@@ -293,11 +270,9 @@
 <div th:replace="common/commonFoot::foot(~{::script})">
 	<script th:src="@{/js/metisMenu/jquery.metisMenu.js}"></script>
 	<script th:src="@{/js/contabs.js}"></script>
-	<script th:src="@{/webjars/pace/pace/coffee/pace.min.js}"></script>
 	<script th:src="@{/webjars/sockjs-client/sockjs.min.js}"></script>
 	<script th:src="@{/webjars/stomp-websocket/stomp.min.js}"></script>
 	<!-- 消息提醒框JS -->
-	<script th:src="@{/webjars/toastr/build/toastr.min.js}" ></script>
 	<script th:src="@{/js/websocket/StompUtil.js}"></script>
 	<script th:src="@{/js/sys/index.js}"></script>
 	<script type="text/javascript">

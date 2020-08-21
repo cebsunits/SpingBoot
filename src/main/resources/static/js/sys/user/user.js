@@ -12,6 +12,30 @@ $(function () {
     $('#btn_delete').off("click").on("click",function () {
         batchRemove();
     });
+    /**autocomplete*/
+    $("#search").autocomplete({
+        source:function(request,response){
+            $.ajax({
+                type:"post",
+                url:"/sys/user/listUsers",
+                data:{},
+                dataType:"json",
+                success:function (result) {
+                    var matcher=new RegExp("^"+$.ui.autocomplete.escapeRegex(request.term),"i");
+                    /**匹配数据*/
+                    response(
+                        $.grep(result,function(item){
+                            return matcher.test(item);
+                        })
+                    );
+                },
+                error:function (result) {
+                }
+            });
+        },
+        minChars:2
+    });
+
 });
 function initTable() {
     $userTable.bootstrapTable({
@@ -128,6 +152,7 @@ function initTable() {
             };
             return temp;
         },
+        //当后台返回不是标准的json对象时，需要转换属性
         responseHandler:function(result){
             console.log(result);
             return {

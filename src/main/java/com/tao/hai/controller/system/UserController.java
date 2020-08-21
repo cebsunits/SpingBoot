@@ -68,7 +68,7 @@ public class UserController extends BaseController {
         //组装成DataTables分页对象
         DataTablePage<User> dataTablePage = new DataTablePage<User>(request);
         //开始分页：PageHelper会处理接下来的第一个查询
-        PageInfo<User> pageInfo = userService.queryByPage(dataTablePage.getPageNum(), dataTablePage.getPageSize(), null);
+        PageInfo<User> pageInfo = userService.queryByPage(dataTablePage.getPageNum(), dataTablePage.getPageSize(), new User());
         //封装数据给DataTables
         dataTablePage.setData(pageInfo.getList());
         dataTablePage.setRecordsTotal((int) pageInfo.getTotal());
@@ -90,7 +90,13 @@ public class UserController extends BaseController {
         PageInfo<User> pageInfo = userService.getPageList(bean);
         return pageInfo;
     }
-
+    @RequiresPermissions("sys:user:user")
+    @RequestMapping("/listUsers")
+    @ResponseBody
+    public Object listUsers(User user,HttpServletRequest request) {
+        List list = userService.listUsers();
+        return list;
+    }
     /***跳转到添加页面*/
     @RequiresPermissions("sys:user:add")
     @Log(value = "添加用户")
