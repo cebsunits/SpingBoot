@@ -193,7 +193,7 @@ public class FileUploadController {
     @RequiresPermissions("common:file:downloads")
     public void batchDownload(String[] ids, String zipFileName,HttpServletRequest request, HttpServletResponse response) {
         if (ids != null && ids.length > 0) {
-            List<String> filePaths = new ArrayList<>();
+            List<String> filePaths = new ArrayList<String>();
             for (String fileId : ids) {
                 FileBean file = new FileBean();
                 file.setFileId(fileId);

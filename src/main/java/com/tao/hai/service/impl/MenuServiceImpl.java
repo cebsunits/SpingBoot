@@ -137,7 +137,7 @@ public class MenuServiceImpl extends BaseServiceImpl<MenuDao, Menu> implements M
      */
     public Set<String> listPerms(String userId) {
         List<String> perms = menuDao.listUserPerms(userId);
-        Set<String> permsSet = new HashSet<>();
+        Set<String> permsSet = new HashSet<String>();
         for (String perm : perms) {
             if (org.apache.commons.lang3.StringUtils.isNotBlank(perm)) {
                 permsSet.addAll(Arrays.asList(perm.trim().split(",")));

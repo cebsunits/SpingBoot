@@ -152,7 +152,7 @@ public class UserServiceImpl extends BaseServiceImpl<UserDao, User> implements U
      */
     public Set<String> findUserRole(String userId) {
         List<Role> roles = roleDao.userRoles(userId);
-        Set<String> rolesSet = new HashSet<>();
+        Set<String> rolesSet = new HashSet<String>();
         List list = new ArrayList();
         if (roles != null) {
             for (Role role : roles) {

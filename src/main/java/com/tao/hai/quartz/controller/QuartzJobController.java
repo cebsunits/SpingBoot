@@ -167,7 +167,7 @@ public class QuartzJobController extends BaseController {
 	@GetMapping("/nextTriggerTime")
 	@ResponseBody
 	public AjaxJson nextTriggerTime(String cron){
-		List<String> list=new ArrayList<>();
+		List<String> list=new ArrayList<String>();
 		try {
 			CronExpression cronExpression=new CronExpression(cron);
 			Date lastTime=new Date();

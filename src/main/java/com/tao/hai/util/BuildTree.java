@@ -16,7 +16,7 @@ public class BuildTree {
         if (StringUtils.isEmpty(idParam)) {
             idParam = "";
         }
-        List<TreeNode<T>> topNodes = new ArrayList<>();
+        List<TreeNode<T>> topNodes = new ArrayList<TreeNode<T>>();
         for (TreeNode<T> children : nodes) {
             /**父节点*/
             String parentId = children.getParentId();

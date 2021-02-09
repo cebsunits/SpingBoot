@@ -180,7 +180,7 @@ public class ShiroConfig {
     @Bean
     public SessionManager sessionManager() {
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
-        Collection<SessionListener> listeners = new ArrayList<>();
+        Collection<SessionListener> listeners = new ArrayList<SessionListener>();
         listeners.add(shiroSessionListener());
         sessionManager.setSessionListeners(listeners);
         return sessionManager;
@@ -208,17 +208,17 @@ public class ShiroConfig {
         //运行跨域
         configuration.setAllowCredentials(true);
         // 允许向该服务器提交请求的URI，*表示全部允许，在SpringMVC中，如果设成*，会自动转成当前请求头中的Origin
-        List<String> allowedOrigins=new ArrayList<>();
+        List<String> allowedOrigins=new ArrayList<String>();
         allowedOrigins.add("*");
         configuration.setAllowedOrigins(allowedOrigins);
         // 允许访问的头信息,*表示全部
-        List<String> allowedHeaders=new ArrayList<>();
+        List<String> allowedHeaders=new ArrayList<String>();
         allowedHeaders.add("*");
         configuration.setAllowedHeaders(allowedHeaders);
         // 预检请求（options请求）的缓存时间（秒），即在这个时间段里，对于相同的跨域请求不会再预检了
         configuration.setMaxAge(1L);
         // 允许提交请求的方法，*表示全部允许
-        List<String> allowedMethods=new ArrayList<>();
+        List<String> allowedMethods=new ArrayList<String>();
         allowedMethods.add("*");
 
         /**可指定方法 start*/

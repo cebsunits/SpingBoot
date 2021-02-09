@@ -1,13 +1,11 @@
 package com.tao.hai.controller.system;
 
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import com.tao.hai.annotation.Log;
 import com.tao.hai.base.BaseController;
 import com.tao.hai.base.DataTablePage;
-import com.tao.hai.base.JsonModelBean;
 import com.tao.hai.base.ParameterModelBean;
 import com.tao.hai.bean.Dept;
 import com.tao.hai.bean.Role;
@@ -18,7 +16,6 @@ import com.tao.hai.json.AjaxSuccess;
 import com.tao.hai.service.DeptService;
 import com.tao.hai.service.RoleService;
 import com.tao.hai.service.UserService;
-import com.tao.hai.util.JSONUtils;
 import com.tao.hai.util.ParameterModelBeanUtil;
 import com.tao.hai.util.ShiroUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -168,7 +165,7 @@ public class UserController extends BaseController {
         }
         try {
             //更新部门信息
-            List<Dept> deptList = new ArrayList<>();
+            List<Dept> deptList = new ArrayList<Dept>();
             String[] deptIds = user.getDeptIds();
             if (deptIds != null && deptIds.length > 0) {
                 for (String deptId : deptIds) {
@@ -180,7 +177,7 @@ public class UserController extends BaseController {
             }
             user.setDeptList(deptList);
             //更新角色信息
-            List<Role> roleList = new ArrayList<>();
+            List<Role> roleList = new ArrayList<Role>();
             String[] roleIds = request.getParameterValues("role");
             if (roleIds != null && roleIds.length > 0) {
                 for (String roleId : roleIds) {

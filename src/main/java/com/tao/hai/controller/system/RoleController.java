@@ -233,7 +233,7 @@ public class RoleController extends BaseController {
             return ajaxJson;
         }
         /**看是否能够查询到数据*/
-        List<Menu> menuList = new ArrayList<>();
+        List<Menu> menuList = new ArrayList<Menu>();
         for (String menuId : role.getMenuIds()) {
             Menu queryMenu = new Menu();
             queryMenu.setMenuId(menuId);

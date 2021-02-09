@@ -192,7 +192,7 @@ public class QuartzManager {
 
     /***获取所有计划任务*/
     public List<QuartzJob> queryAllJob() {
-        List<QuartzJob> list = new ArrayList<>();
+        List<QuartzJob> list = new ArrayList<QuartzJob>();
         try {
             GroupMatcher<JobKey> matcher = GroupMatcher.anyJobGroup();
             Set<JobKey> jobKeys = scheduler.getJobKeys(matcher);
@@ -225,7 +225,7 @@ public class QuartzManager {
 
     /***获取所有正在运行的计划任务*/
     public List<QuartzJob> queryAllRunningJob() {
-        List<QuartzJob> list = new ArrayList<>();
+        List<QuartzJob> list = new ArrayList<QuartzJob>();
         try {
             List<JobExecutionContext> jobExecutionContexts = scheduler.getCurrentlyExecutingJobs();
             for (JobExecutionContext jobExecutionContext : jobExecutionContexts) {

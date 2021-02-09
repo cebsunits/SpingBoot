@@ -110,7 +110,7 @@ public class BaseServiceImpl<M extends BaseDao<T>, T extends DataEntity<T>> impl
             Example example = ExampleUtil.getExample(clazz, parameterModel);
             list = mapper.selectByExample(example);
         } else {
-            list = new ArrayList<>();
+            list = new ArrayList<T>();
         }
         return list;
     }

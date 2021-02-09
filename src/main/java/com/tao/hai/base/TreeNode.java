@@ -44,9 +44,9 @@ public class TreeNode<T> implements Serializable {
     //节点的背景色，覆盖全局的背景色选项。
     private String backColor;
     //子节点信息
-    private List<TreeNode<T>> nodes = new ArrayList<>();
+    private List<TreeNode<T>> nodes = new ArrayList<TreeNode<T>>();
     //通过结合全局showTags选项来在列表树节点的右边添加额外的信息。
-    private List<String> tags = new ArrayList<>();
+    private List<String> tags = new ArrayList<String>();
     /**
      * 是否有父节点
      */

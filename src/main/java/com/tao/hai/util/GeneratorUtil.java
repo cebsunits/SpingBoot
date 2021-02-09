@@ -68,8 +68,8 @@ public class GeneratorUtil {
         tableDO.setClassName(className);
         tableDO.setHumpClassName(StringUtils.uncapitalize(className));
         //列信息
-        List<ColumnDO> columnDOS = new ArrayList<>();
-        List<ColumnDO> columnKeys = new ArrayList<>();
+        List<ColumnDO> columnDOS = new ArrayList<ColumnDO>();
+        List<ColumnDO> columnKeys = new ArrayList<ColumnDO>();
         for (Column column : columns) {
             ColumnDO columnDO = new ColumnDO();
             columnDO.setColumnName(column.getColumnName());
@@ -101,7 +101,7 @@ public class GeneratorUtil {
         properties.put("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
         Velocity.init(properties);
         //封装模板数据
-        Map<String, Object> map = new HashMap<>(16);
+        Map<String, Object> map = new HashMap<String, Object>(16);
         map.put("tableName", tableDO.getTableName());
         map.put("comments", tableDO.getComments());
         map.put("pk", tableDO.getPk());

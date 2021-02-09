@@ -20,7 +20,7 @@ import java.util.List;
 @Configuration
 public class FastJsonWebMvcConfig {
 
-    private static List<MediaType> supportedMediaTypes = new ArrayList<>(17);
+    private static List<MediaType> supportedMediaTypes = new ArrayList<MediaType>(17);
 
     static {
         supportedMediaTypes.add(MediaType.APPLICATION_JSON);
@@ -57,7 +57,7 @@ public class FastJsonWebMvcConfig {
     @Bean
     public RestTemplate restTemplate() {
         RestTemplate template = new RestTemplate();
-        List<HttpMessageConverter<?>> converters = new ArrayList<>();
+        List<HttpMessageConverter<?>> converters = new ArrayList<HttpMessageConverter<?>>();
         FastJsonHttpMessageConverter converter = new FastJsonHttpMessageConverter();
         FastJsonConfig config = new FastJsonConfig();
         SerializerFeature[] features = new SerializerFeature[]{SerializerFeature.BrowserSecure, SerializerFeature.DisableCircularReferenceDetect};

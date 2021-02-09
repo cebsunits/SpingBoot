@@ -120,7 +120,7 @@ public class FileUtil {
                         bufferedInputStream.close();
                     } else {//如果是文件夹，则使用穷举的方法获取文件，写入zip
                         File[] listFiles = inputFile.listFiles();
-                        List<String> paths = new ArrayList<>();
+                        List<String> paths = new ArrayList<String>();
                         for (File fileItem : listFiles) {
                             paths.add(fileItem.toString());
                         }

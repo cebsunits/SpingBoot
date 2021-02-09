@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.0.RELEASE</version>
+        <version>2.4.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.tao</groupId>
@@ -19,6 +19,7 @@
         <mybatis.generator.version>1.4.0</mybatis.generator.version>
         <mybatis.version>2.0.1</mybatis.version>
         <oracle.version>11.2.0.1.0</oracle.version>
+        <mysql.version>8.0.17</mysql.version>
         <pagehelper.version>1.2.13</pagehelper.version>
         <tk.mybatis.mapper.version>2.1.5</tk.mybatis.mapper.version>
         <druid.version>1.1.21</druid.version>
@@ -100,6 +101,8 @@
         <!--excel导出 start-->
         <!--swagger2-->
         <swagger2.version>2.9.2</swagger2.version>
+        <!--方便执行自动化语句管理-->
+        <flywaydb.version>6.4.4</flywaydb.version>
     </properties>
 
     <dependencies>
@@ -208,12 +211,6 @@
             <artifactId>kaptcha</artifactId>
             <version>${kaptcha.version}</version>
         </dependency>
-        <!--Oracle依赖-->
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc8</artifactId>
-            <version>${oracle.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -231,6 +228,17 @@
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
         </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>com.fasterxml.jackson.core</groupId>-->
+            <!--<artifactId>jackson-core</artifactId>-->
+            <!--<version>${jackson-annotations.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.fasterxml.jackson.core</groupId>-->
+            <!--<artifactId>jackson-databind</artifactId>-->
+            <!--<version>${jackson-annotations.version}</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
@@ -642,33 +650,39 @@
             <version>1.7</version>
         </dependency>
         <!--commons configuration管理配置文件 end-->
-
+        <!--数据库依赖 start-->
+        <!--Oracle依赖-->
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc8</artifactId>
+            <version>${oracle.version}</version>
+        </dependency>
         <!--mysql jar包-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.17</version>
+            <version>${mysql.version}</version>
         </dependency>
         <!--mysql jar包-->
-
+        <!--数据库依赖 end-->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-web</artifactId>
             <version>2.13.3</version>
         </dependency>
-        <!--数据库脚本-->
+        <!--数据库脚本，自动执行 start -->
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
-            <version>6.4.4</version>
+            <version>${flywaydb.version}</version>
         </dependency>
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-maven-plugin</artifactId>
-            <version>6.4.4</version>
+            <version>${flywaydb.version}</version>
             <type>maven-plugin</type>
         </dependency>
-
+        <!--数据库脚本，自动执行 end -->
     </dependencies>
 
     <build>
