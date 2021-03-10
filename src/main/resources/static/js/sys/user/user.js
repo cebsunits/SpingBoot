@@ -51,12 +51,12 @@ function initTable() {
         pageNumber: 1,                      //初始化加载第一页，默认第一页
         pageSize: 10,                        //每页的记录行数（*）
         pageList: [10, 25, 50],          //可供选择的每页的行数（*）
-//            search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+//    search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
         showColumns: true,                  //是否显示所有的列（选择显示的列）
         minimumCountColumns: 2,             //最少允许的列数
         showRefresh: true,                  //是否显示刷新按钮
         clickToSelect: true,                //是否启用点击选中行
-//            showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
+//    showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
         sortable: true,                     //是否启用排序
         sortOrder: "desc",                   //排序方式
         sortName: 'createTime',             //排序字段

@@ -1,5 +1,10 @@
 package com.tao.hai.algo;
 
+import org.w3c.dom.Element;
+
+import java.io.DataOutputStream;
+import java.io.StringWriter;
+
 /**
  * 最大公约数算法
  */
@@ -69,4 +74,5 @@ public class GcdAlgo {
         System.out.println("getGcdMinus=" + getGcdMinus(a, b));
         System.out.println("getGcdBest=" + getGcdBest(a, b));
     }
+
 }
