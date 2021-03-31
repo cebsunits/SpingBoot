@@ -25,7 +25,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint(webSocketPath)//端点名称
-                .setAllowedOrigins("*")//跨域
+                .setAllowedOriginPatterns("*")//跨域
                 .withSockJS(); //使用sockJS
     }
 

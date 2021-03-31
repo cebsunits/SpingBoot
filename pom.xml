@@ -197,7 +197,11 @@
             <artifactId>spring-batch-test</artifactId>
             <scope>test</scope>
         </dependency>
-
+        <!--监控功能-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
         <!--shiro start-->
         <dependency>
             <groupId>org.apache.shiro</groupId>
