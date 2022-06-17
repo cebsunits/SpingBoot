@@ -23,7 +23,7 @@
         <pagehelper.version>1.2.13</pagehelper.version>
         <tk.mybatis.mapper.version>2.1.5</tk.mybatis.mapper.version>
         <druid.version>1.1.21</druid.version>
-        <fastjson.version>1.2.62</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <jackson-annotations.version>2.9.9</jackson-annotations.version>
         <shiro.version>1.5.2</shiro.version>
         <ehcache.version>2.9.1</ehcache.version>
