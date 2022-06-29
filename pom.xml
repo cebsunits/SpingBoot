@@ -97,7 +97,7 @@
         <activiti.spring-boot.version>5.17.0</activiti.spring-boot.version>
         <!--工作流组件 end-->
         <!--excel导出 start-->
-        <poi.version>4.1.0</poi.version>
+        <poi.version>4.1.1</poi.version>
         <!--excel导出 start-->
         <!--swagger2-->
         <swagger2.version>2.9.2</swagger2.version>
